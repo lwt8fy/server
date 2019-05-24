@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.connectUser">
+	<select id="front.connectUser.selectPageList" parameterType="net.jeeshop.services.common.ConnectUser"
+		resultType="net.jeeshop.services.common.ConnectUser">
+		select * from t_connectuser where 1=1
+		<if test="id!=null and id!=''">and id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+		<if test="source!=null and source!=''">and source=#{source}</if>
+		<if test="account!=null and account!=''">and account=#{account}</if>
+		<if test="userName!=null and userName!=''">and userName=#{userName}</if>
+		<if test="password!=null and password!=''">and password=#{password}</if>
+		order by id desc limit #{offset},#{pageSize}
+	</select>
+	<select id="front.connectUser.selectPageCount" parameterType="net.jeeshop.services.common.ConnectUser"
+		resultType="Integer">
+		select count(*) from( select 1 from t_connectuser where 1=1
+		<if test="id!=null and id!=''">and id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+		<if test="source!=null and source!=''">and source=#{source}</if>
+		<if test="account!=null and account!=''">and account=#{account}</if>
+		<if test="userName!=null and userName!=''">and userName=#{userName}</if>
+		<if test="password!=null and password!=''">and password=#{password}</if>
+		)a
+	</select>
+	<select id="front.connectUser.selectList" parameterType="net.jeeshop.services.common.ConnectUser"
+		resultType="net.jeeshop.services.common.ConnectUser">
+		select * from t_connectuser where 1=1
+		<if test="id!=null and id!=''">and id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+		<if test="source!=null and source!=''">and source=#{source}</if>
+		<if test="account!=null and account!=''">and account=#{account}</if>
+		<if test="userName!=null and userName!=''">and userName=#{userName}</if>
+		<if test="password!=null and password!=''">and password=#{password}</if>
+		order by id
+	</select>
+	<select id="front.connectUser.selectOne" parameterType="net.jeeshop.services.common.ConnectUser"
+		resultType="net.jeeshop.services.common.ConnectUser">
+		select * from t_connectuser where 1=1
+		<if test="id!=null and id!=''">and id=#{id}</if>
+		<if test="source!=null and source!=''">and source=#{source}</if>
+		<if test="userName!=null and userName!=''">and userName=#{userName}</if>
+		<if test="password!=null and password!=''">and password=#{password}</if>
+		<if test="account !=null and account !=''">and account=#{account}</if>
+	</select>
+	<select id="front.connectUser.selectById" parameterType="String"
+		resultType="net.jeeshop.services.common.ConnectUser">select * from t_connectuser where 1=1 and id=#{id}</select>
+	<delete id="front.connectUser.deleteById" parameterType="Integer">delete
+		from t_connectuser where 1=1 and id=#{id}</delete>
+	<delete id="front.connectUser.delete" parameterType="net.jeeshop.services.common.ConnectUser">delete from
+		t_connectuser where 1=1 and id=#{id}</delete>
+	<insert id="front.connectUser.insert" parameterType="net.jeeshop.services.common.ConnectUser"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into t_connectuser(id
+		<if test="createTime!=null and createTime!=''">,createTime</if>
+		<if test="source!=null and source!=''">,source</if>
+		<if test="account!=null and account!=''">,account</if>
+		<if test="userName!=null and userName!=''">,userName</if>
+		<if test="password!=null and password!=''">,password</if>
+		<if test="area1!=null and area1!=''">
+			,area1
+</if>
+		<if test="area2!=null and area2!=''">
+			,area2
+</if>
+		<if test="area3!=null and area3!=''">
+			,area3
+</if>
+		<if test="area4!=null and area4!=''">
+			,area4
+</if>
+		)values(id
+		<if test="createTime!=null and createTime!=''">,#{createTime}</if>
+		<if test="source!=null and source!=''">,#{source}</if>
+		<if test="account!=null and account!=''">,#{account}</if>
+		<if test="userName!=null and userName!=''">,#{userName}</if>
+		<if test="password!=null and password!=''">,#{password}</if>
+		<if test="area1!=null and area1!=''">
+			,#{area1}
+</if>
+		<if test="area2!=null and area2!=''">
+			,#{area2}
+</if>
+		<if test="area3!=null and area3!=''">
+			,#{area3}
+</if>
+		<if test="area4!=null and area4!=''">
+			,#{area4}
+</if>
+		)
+	</insert>
+	<update id="front.connectUser.update" parameterType="net.jeeshop.services.common.ConnectUser">
+		update t_connectuser set id=#{id}
+		<if test="id!=null and id!=''">, id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">, createTime=#{createTime}</if>
+		<if test="source!=null and source!=''">, source=#{source}</if>
+		<if test="account!=null and account!=''">, account=#{account}</if>
+		<if test="userName!=null and userName!=''">, userName=#{userName}</if>
+		<if test="password!=null and password!=''">, password=#{password}</if>
+		<if test="area1!=null and area1!=''">
+			,area1=#{area1}
+</if>
+		<if test="area2!=null and area2!=''">
+			,area2=#{area2}
+</if>
+		<if test="area3!=null and area3!=''">
+			,area3=#{area3}
+</if>
+		<if test="area4!=null and area4!=''">
+			,area4=#{area4}
+</if>
+		where 1=1 and id=#{id}
+	</update>
+</mapper>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="manage.order"> 
+	<select id="manage.order.selectPageList" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="net.jeeshop.services.manage.order.bean.Order">
+	 select * 
+	 from t_order t where 1=1 and (isParent!='y' or isParent is null) 
+	 <if test="id!=null and id!=''">
+		and id=#{id}
+	 </if>
+	 <if test="account!=null and account!=''">
+		and account=#{account}
+	 </if>
+	 <if test="status!=null and status!=''">
+		and status=#{status}
+	 </if>
+	 <if test="refundStatus!=null and refundStatus!=''">
+		and refundStatus=#{refundStatus}
+	 </if>
+	 <if test="paystatus!=null and paystatus!=''">
+		and paystatus=#{paystatus}
+	 </if>
+	 <if test="startDate!=null and startDate!=''">
+		and createdate &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createdate &lt;= #{endDate}
+	 </if>
+	 <if test="compID !=null and compID !=''">
+		 and compID=#{compID}
+	 </if>
+ order by id desc 
+ limit #{offset},#{pageSize} 
+	</select>
+	
+ 
+	<select id="manage.order.selectPageCount" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="java.lang.Integer">
+	 select count(*) from t_order where 1=1 and (isParent!='y' or isParent is null) 
+	 <if test="id!=null and id!=''">
+		and id=#{id}
+	 </if>
+	 <if test="account!=null and account!=''">
+		and account=#{account}
+	 </if>
+	 <if test="status!=null and status!=''">
+		and status=#{status}
+	 </if>
+	 <if test="refundStatus!=null and refundStatus!=''">
+		and refundStatus=#{refundStatus}
+	 </if>
+	 <if test="paystatus!=null and paystatus!=''">
+		and paystatus=#{paystatus}
+	 </if>
+	 <if test="startDate!=null and startDate!=''">
+		and createdate &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createdate &lt;= #{endDate}
+	 </if>
+	 <if test="compID !=null and compID !=''">
+		 and compID=#{compID}
+	 </if>
+	</select>
+	
+	<select id="manage.order.countJye" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="java.lang.Double">
+	 select sum(amount) 
+	 from t_order t where 1=1 and (isParent!='y' or isParent is null) 
+	 
+	 <if test="account!=null and account!=''">
+		and account=#{account}
+	 </if>
+	 <if test="status!=null and status!=''">
+		and status=#{status}
+	 </if>
+	 <if test="refundStatus!=null and refundStatus!=''">
+		and refundStatus=#{refundStatus}
+	 </if>
+	 <if test="paystatus!=null and paystatus!=''">
+		and paystatus=#{paystatus}
+	 </if>
+	 <if test="startDate!=null and startDate!=''">
+		and createdate &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createdate &lt;= #{endDate}
+	 </if>
+	 <if test="compID !=null and compID !=''">
+		 and compID=#{compID}
+	 </if>
+	</select>
+	<select id="manage.order.selectList" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="net.jeeshop.services.manage.order.bean.Order">
+	 select * from t_order t where 1=1 and (isParent!='y' or isParent is null) 
+	 <if test="id!=null and id!=''">
+		and id=#{id}
+	 </if>
+	 <if test="account!=null and account!=''">
+		and account=#{account}
+	 </if>
+	 <if test="status!=null and status!=''">
+		and status=#{status}
+	 </if>
+	 <if test="refundStatus!=null and refundStatus!=''">
+		and refundStatus=#{refundStatus}
+	 </if>
+	 <if test="paystatus!=null and paystatus!=''">
+		and paystatus=#{paystatus}
+	 </if>
+	 <if test="startDate!=null and startDate!=''">
+		and createdate &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createdate &lt;= #{endDate}
+	 </if>
+	 <if test="compID !=null and compID !=''">
+		 and compID=#{compID}
+	 </if>
+	</select>
+	
+	<select id="manage.order.selectCancelList" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="net.jeeshop.services.manage.order.bean.Order">
+	 select t.id from t_order t where 1=1 and status='init' and paystatus='n' and createdate &lt;= #{startDate} and (isParent!='y' or isParent is null) 
+	</select>
+	
+	<select id="manage.order.selectOrderSales" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="net.jeeshop.web.action.manage.report.ReportInfo">
+	SELECT date_format(t.createdate,'%Y%m') createdate,sum(t.amount) sumAmount FROM t_order t 
+	where 1=1 and t.paystatus='y'  and t.createdate &gt;= #{startDate}  and  t.createdate &lt;= #{endDate}  and (isParent!='y' or isParent is null) 
+	group by date_format(t.createdate,'%Y%m')
+	</select>
+	
+	<select id="manage.order.selectProductSales" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="net.jeeshop.web.action.manage.report.ReportInfo">
+	SELECT od.productID,od.productName,sum(od.number) productSellCount FROM t_order o,t_orderdetail od 
+	where 1=1 and o.id=od.orderid and o.paystatus='y'  and o.createdate &gt;= #{startDate}  and  o.createdate &lt;= #{endDate}  
+    group by od.productID 
+    order by sum(od.number) desc 
+	</select>
+ 
+	<update id="manage.order.update" parameterType="net.jeeshop.services.manage.order.bean.Order">
+		update t_order
+		  set id=#{id}
+		<if test="status !=null and status !=''">
+		,status=#{status}
+		</if>
+		<if test="refundStatus !=null and refundStatus !=''">
+		,refundStatus=#{refundStatus}
+		</if>
+		 <if test="paystatus !=null and paystatus !=''">
+		,paystatus=#{paystatus}
+		</if>
+		<if test="amount !=null and amount !=''">
+		,amount=#{amount}
+		</if>
+		<if test="updateAmount !=null and updateAmount !=''">
+		,updateAmount=#{updateAmount}
+		</if>
+		 <if test="fee !=null and fee !=''">
+		,fee=#{fee}
+		</if>
+		<if test="account !=null and account !=''">
+		,account=#{account}
+		</if>
+		<if test="rebate !=null and rebate !=''">
+		,rebate=#{rebate}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark=#{remark}
+		</if>
+		<if test="expressCode !=null and expressCode !=''">
+		,expressCode=#{expressCode}
+		</if>
+		<if test="expressName !=null and expressName !=''">
+		,expressName=#{expressName}
+		</if>
+		<if test="expressNo !=null and expressNo !=''">
+		,expressNo=#{expressNo}
+		</if>
+		<if test="expressCompanyName !=null and expressCompanyName !=''">
+		,expressCompanyName=#{expressCompanyName}
+		</if>
+		<if test="confirmSendProductRemark !=null and confirmSendProductRemark !=''">
+		,confirmSendProductRemark=#{confirmSendProductRemark}
+		</if>
+		<if test="closedComment!=null and closedComment!=''">
+		,closedComment=#{closedComment}
+		</if>
+		<if test="returnReason!=null and returnReason!=''">
+		,returnReason=#{returnReason}
+		</if>
+		<if test="returnExpressName!=null and returnExpressName!=''">
+		,returnExpressName=#{returnExpressName}
+		</if>
+		<if test="returnExpressNo!=null and returnExpressNo!=''">
+		,returnExpressNo=#{returnExpressNo}
+		</if>
+		<if test="isParent!=null and isParent!=''">
+		,isParent=#{isParent}
+		</if>
+		<if test="parentId!=null and parentId!=''">
+		,parentId=#{parentId}
+		</if>
+		<if test="receiveTime !=null and receiveTime !=''">
+		,receiveTime=#{receiveTime}
+		</if>
+		 where 1=1 and id=#{id}
+	</update>
+	<select id="manage.order.selectOne" parameterType="net.jeeshop.services.manage.order.bean.Order" resultType="net.jeeshop.services.manage.order.bean.Order">
+	 select * from t_order t where 1=1 and id=#{id}
+	</select>
+	<select id="manage.order.selectById" parameterType="string" resultType="net.jeeshop.services.manage.order.bean.Order">
+	 select * from t_order t where 1=1 and id=#{id}
+	</select>
+	<delete id="manage.order.deleteById" parameterType="net.jeeshop.services.manage.order.bean.Order">
+		delete from t_order where 1=1 and id=#{id}
+	</delete>
+
+	<update id="manage.order.updatePayMonery" parameterType="net.jeeshop.services.manage.order.bean.Order">
+		update t_order set id=#{id},amount=#{amount},updateAmount=#{updateAmount},ptotal=#{ptotal},fee=#{fee} where 1=1 and id=#{id}
+	</update>
+
+	<select id="manage.order.loadOrdersReport" resultType="net.jeeshop.services.manage.order.bean.OrdersReport">
+		SELECT 
+		(SELECT count(*) FROM t_order where status='cancel')  cancelCount,
+		(SELECT count(*) FROM t_order where paystatus='n' and status!='cancel' and status!='tikuan')  notPayCount,
+		(SELECT count(*) FROM t_order where paystatus='y' and status='init')  payButNotPassCount,
+		(SELECT count(*) FROM t_order where paystatus='y' and status='pass')  waitSendGoodsCount,
+		
+		(SELECT count(*) FROM t_order where refundStatus='WAIT_SELLER_AGREE')  WAIT_SELLER_AGREE,
+		(SELECT count(*) FROM t_order where refundStatus='SELLER_REFUSE_BUYER')  SELLER_REFUSE_BUYER,
+		(SELECT count(*) FROM t_order where refundStatus='WAIT_BUYER_RETURN_GOODS')  WAIT_BUYER_RETURN_GOODS,
+		(SELECT count(*) FROM t_order where refundStatus='WAIT_SELLER_CONFIRM_GOODS')  WAIT_SELLER_CONFIRM_GOODS
+		
+		FROM t_systemsetting
+	</select>
+	<select id="manage.order.loadOrdersReport2"  parameterType="string" resultType="net.jeeshop.services.manage.order.bean.OrdersReport">
+		SELECT 
+		(SELECT count(*) FROM t_order where status='cancel' and compID=#{compid})  cancelCount,
+		(SELECT count(*) FROM t_order where paystatus='n' and status!='cancel' and compID=#{compid} and status!='tikuan')  notPayCount,
+		(SELECT count(*) FROM t_order where paystatus='y' and status='init' and compID=#{compid})  payButNotPassCount,
+		(SELECT count(*) FROM t_order where paystatus='y' and status='pass' and compID=#{compid})  waitSendGoodsCount,
+		
+		(SELECT count(*) FROM t_order where refundStatus='WAIT_SELLER_AGREE' and compID=#{compid})  WAIT_SELLER_AGREE,
+		(SELECT count(*) FROM t_order where refundStatus='SELLER_REFUSE_BUYER' and compID=#{compid})  SELLER_REFUSE_BUYER,
+		(SELECT count(*) FROM t_order where refundStatus='WAIT_BUYER_RETURN_GOODS' and compID=#{compid})  WAIT_BUYER_RETURN_GOODS,
+		(SELECT count(*) FROM t_order where refundStatus='WAIT_SELLER_CONFIRM_GOODS' and compID=#{compid})  WAIT_SELLER_CONFIRM_GOODS
+		
+		FROM t_systemsetting
+	</select>
+		<insert id="manage.order.insert" parameterType="net.jeeshop.services.manage.order.bean.Order" useGeneratedKeys="true" keyProperty="id">
+		insert into t_order
+		(
+		id,createdate,status,paystatus
+		<if test="account!=null and account!=''">
+		,account
+		</if>
+		<if test="compID">
+		,compID
+		</if>
+		<if test="compName!=null and compName!=''">
+		,compName
+		</if>
+		<if test="rebate!=null and rebate!=''">
+		,rebate
+		</if>
+		<if test="remark!=null and remark!=''">
+		,remark
+		</if>
+		<if test="amount!=null and amount!=''">
+		,amount
+		</if>
+		<if test="amountExchangeScore!=0">
+		,amountExchangeScore
+		</if>
+		<if test="ptotal!=null and ptotal !=''">
+		,ptotal
+		</if>
+		<if test="quantity!=0">
+		,quantity
+		</if>
+		<if test="fee!=null">
+		,fee
+		</if>
+		<if test="expressCode!=null and expressCode!=''">
+		,expressCode
+		</if>
+		<if test="expressName!=null and expressName!=''">
+		,expressName
+		</if>
+		<if test="otherRequirement!=null and otherRequirement!=''">
+		,otherRequirement
+		</if>
+		<if test="closedComment!=null and closedComment!=''">
+		,closedComment
+		</if>
+		<if test="score!=0">
+		,score
+		</if>
+		<if test="isParent!=null and isParent!=''">
+		,isParent
+		</if>
+		<if test="parentId!=null and parentId!=''">
+		,parentId
+		</if>
+		<if test="confirmSendProductRemark!=null and confirmSendProductRemark!=''">
+		,confirmSendProductRemark
+		</if>
+		)
+		values
+		(
+		id,now(),#{status},#{paystatus}
+		<if test="account !=null and account !=''">
+		,#{account}
+		</if>
+		<if test="compID">
+		,#{compID}
+		</if>
+		<if test="compName!=null and compName!=''">
+		,#{compName}
+		</if>
+		<if test="rebate !=null and rebate !=''">
+		,#{rebate}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,#{remark}
+		</if>
+		<if test="amount!=null and amount!=''">
+		,#{amount}
+		</if>
+		<if test="amountExchangeScore!=0">
+		,#{amountExchangeScore}
+		</if>
+		<if test="ptotal!=null and ptotal !=''">
+		,#{ptotal}
+		</if>
+		<if test="quantity!=0">
+		,#{quantity}
+		</if>
+		<if test="fee!=null">
+		,#{fee}
+		</if>
+		<if test="expressCode!=null and expressCode!=''">
+		,#{expressCode}
+		</if>
+		<if test="expressName!=null and expressName!=''">
+		,#{expressName}
+		</if>
+		<if test="otherRequirement!=null and otherRequirement!=''">
+		,#{otherRequirement}
+		</if>
+		<if test="closedComment!=null and closedComment!=''">
+		,#{closedComment}
+		</if>
+		<if test="score!=0">
+		,#{score}
+		</if>
+		<if test="isParent!=null and isParent!=''">
+		,#{isParent}
+		</if>
+		<if test="parentId!=null and parentId!=''">
+		,#{parentId}
+		</if>
+		<if test="confirmSendProductRemark!=null and confirmSendProductRemark!=''">
+		,#{confirmSendProductRemark}
+		</if>
+	)</insert>
+	
+	
+</mapper>

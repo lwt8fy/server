@@ -1,0 +1,1 @@
+package net.jeeshop.services.manage.coupon;import java.util.List;import net.jeeshop.core.Services;import net.jeeshop.services.manage.coupon.bean.Coupon;public interface CouponService extends Services<Coupon> {	List selectAccCoupon(Coupon c);}

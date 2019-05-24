@@ -1,0 +1,1 @@
+package net.jeeshop.services.manage.company;import net.jeeshop.core.Services;import net.jeeshop.services.manage.company.bean.Company;public interface CompanyService extends Services<Company> {}

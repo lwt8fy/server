@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://xfire.codehaus.org/config/1.0">
+
+	<service>
+		<name>QuickPayService</name>
+		<serviceClass>net.jeeshop.core.pay.quickpay.service.IQuickPayService
+		</serviceClass>
+		<implementationClass>
+			net.jeeshop.core.pay.quickpay.service.QuickPayServiceImpl
+		</implementationClass>
+		<style>wrapped</style>
+		<use>literal</use>
+		<scope>application</scope>
+	</service>
+</beans>

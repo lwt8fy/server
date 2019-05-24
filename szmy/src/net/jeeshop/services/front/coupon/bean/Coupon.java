@@ -1,0 +1,1 @@
+package net.jeeshop.services.front.coupon.bean;import java.io.Serializable;/** * 卖家 *  * @author penguin *  */public class Coupon extends net.jeeshop.services.common.Coupon implements		Serializable {	private static final long serialVersionUID = 1L;}

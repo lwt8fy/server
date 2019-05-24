@@ -1,0 +1,26 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/*主体右侧*/
+.basic{width:730px;overflow:hidden;border:1px solid #e9e9e9;}
+.basic_top{padding:15px 0 20px 20px; overflow:hidden;}
+.basic_img{display:block;width:110px;height:110px;border-radius:55px;border:1px solid #e2e2e2; float:left;}
+.basic_top_rt{float:left;padding-left:20px;overflow:hidden;margin-top:20px;}
+.basic_top_rt h3{font-size:22px;font-weight:normal;max-width:280px;display:block; overflow:hidden;line-height:32px;height:32px;float:left;}
+.credit{float:left;width:150px;padding:10px 0 0 26px;}
+.credit p{float:left;}
+.credit span{background:url(../images/credit_bg.png) repeat-y 0 0;width:81px;height:13px;display:block; float:left;margin-top:4px;}
+.credit span i{background:url(../images/credit_bg.png) repeat-y 0 18px;width:72%;height:13px;display:block;}
+.basic_tit{ clear:both; line-height:40px;} 
+.basic_tit p{float:left;display:block;font-size:14px;padding-right:60px;}
+.basic_tit a{float:left;display:block;font-size:14px;margin:0 20px;}
+.basic_tit a:hover{color:#ff6600;text-decoration:underline;}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="appProductFront"   namespace="/" extends="struts-jeeshop-front">
+		<action name="appProduct" class="appProductActionFront">
+			<result name="json">/app/json.jsp</result>
+		</action>
+	</package>
+	<!-- 农行支付接口 -->
+	<package name="szmyOrdersActionFront"   namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyOrdersActionFront" class="szmyOrdersActionFront">
+			<result name="json">/app/json.jsp</result>
+		</action>
+	</package>
+		<!-- 地址接口 -->
+	<package name="szmyAddressActionFront"   namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyAddressActionFront" class="szmyAddressActionFront">
+			<result name="json">/app/json.jsp</result>
+		</action>
+	</package>
+		<!-- 咨询接口 -->
+	<package name="szmyAppNewsActionFront"   namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyAppNewsActionFront" class="szmyAppNewsActionFront">
+			<result name="json">/app/json.jsp</result>
+		</action>
+	</package>
+		<!-- 咨询接口 -->
+	<package name="szmyFavoriteAction"   namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyFavoriteAction" class="szmyFavoriteAction">
+			<result name="json">/app/json.jsp</result>
+		</action>
+	</package>
+</struts>

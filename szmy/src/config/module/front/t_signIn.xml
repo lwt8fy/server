@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.signIn">
+    <select id="front.signIn.selectPageList" parameterType="net.jeeshop.services.common.SignIn" resultType="net.jeeshop.services.common.SignIn">select * from t_signIn where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="num!=null and num!=''">and num=#{num}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.signIn.selectPageCount" parameterType="net.jeeshop.services.common.SignIn" resultType="Integer">select count(*) from( select 1 from t_signIn where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="num!=null and num!=''">and num=#{num}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>)a
+    </select>
+    <select id="front.signIn.selectList" parameterType="net.jeeshop.services.common.SignIn" resultType="net.jeeshop.services.common.SignIn">select * from t_signIn where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="num!=null and num!=''">and num=#{num}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>order by id
+    </select>
+    <select id="front.signIn.selectOne" parameterType="net.jeeshop.services.common.SignIn" resultType="net.jeeshop.services.common.SignIn">select * from t_signIn where 1=1 and id=#{id}</select>
+    <select id="front.signIn.selectById" parameterType="String" resultType="net.jeeshop.services.common.SignIn">select * from t_signIn where 1=1 and id=#{id}</select>
+    <delete id="front.signIn.deleteById" parameterType="Integer">delete from t_signIn where 1=1 and id=#{id}</delete>
+    <delete id="front.signIn.delete" parameterType="net.jeeshop.services.common.SignIn">delete from t_signIn where 1=1 and id=#{id}</delete>
+    <insert id="front.signIn.insert" parameterType="net.jeeshop.services.common.SignIn" useGeneratedKeys="true" keyProperty="id">insert into t_signIn(id 
+        <if test="createTime!=null and createTime!=''">,createTime</if>
+        <if test="num!=null and num!=''">,num</if>
+        <if test="userName!=null and userName!=''">,userName</if>)values(id
+        <if test="createTime!=null and createTime!=''">,#{createTime}</if>
+        <if test="num!=null and num!=''">,#{num}</if>
+        <if test="userName!=null and userName!=''">,#{userName}</if>)
+    </insert>
+    <update id="front.signIn.update" parameterType="net.jeeshop.services.common.SignIn">update t_signIn set id=#{id} 
+        <if test="id!=null and id!=''">, id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">, createTime=#{createTime}</if>
+        <if test="num!=null and num!=''">, num=#{num}</if>
+        <if test="userName!=null and userName!=''">, userName=#{userName}</if>where 1=1 and id=#{id}
+    </update>
+</mapper>

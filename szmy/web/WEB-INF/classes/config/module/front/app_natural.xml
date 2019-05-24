@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.appNatural">
+	<select id="front.appNatural.selectPageList" parameterType="net.jeeshop.services.common.AppNatural"
+		resultType="net.jeeshop.services.common.AppNatural">
+		select * from app_natural where 1=1
+		<if test="id!=null and id!=''">and id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+		<if test="username!=null and username!=''">and username=#{username}</if>
+		<if test="idCard!=null and idCard!=''">and idCard=#{idCard}</if>
+		<if test="phone!=null and phone!=''">and phone=#{phone}</if>
+		<if test="area!=null and area!=''">and area=#{area}</if>
+		<if test="status!=null and status!=''">and status=#{status}</if>
+		<if test="reason!=null and reason!=''">and reason=#{reason}</if>
+		<if test="province!=null and province!=''">and province=#{province}</if>
+		<if test="realName!=null and realName!=''">and realName=#{realName}</if>
+		<if test="cardImg!=null and cardImg!=''">and cardImg=#{cardImg}</if>
+		<if test="city!=null and city!=''">and city=#{city}</if>
+		order by id desc limit #{offset},#{pageSize}
+	</select>
+	<select id="front.appNatural.selectPageCount" parameterType="net.jeeshop.services.common.AppNatural"
+		resultType="Integer">
+		select count(*) from( select 1    from app_natural t where 1=1
+		<if test="id!=null and id!=''">and id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+		<if test="username!=null and username!=''">and username=#{username}</if>
+		<if test="idCard!=null and idCard!=''">and idCard=#{idCard}</if>
+		<if test="phone!=null and phone!=''">and phone=#{phone}</if>
+		<if test="area!=null and area!=''">and area=#{area}</if>
+		<if test="status!=null and status!=''">and status=#{status}</if>
+		<if test="reason!=null and reason!=''">and reason=#{reason}</if>
+		<if test="province!=null and province!=''">and province=#{province}</if>
+		<if test="realName!=null and realName!=''">and realName=#{realName}</if>
+		<if test="cardImg!=null and cardImg!=''">and cardImg=#{cardImg}</if>
+		<if test="city!=null and city!=''">and city=#{city}</if>
+		)a
+	</select>
+	<select id="front.appNatural.selectList" parameterType="net.jeeshop.services.common.AppNatural"
+		resultType="net.jeeshop.services.common.AppNatural">
+		select * from app_natural t where 1=1
+		<if test="id!=null and id!=''">and id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+		<if test="username!=null and username!=''">and username=#{username}</if>
+		<if test="idCard!=null and idCard!=''">and idCard=#{idCard}</if>
+		<if test="phone!=null and phone!=''">and phone=#{phone}</if>
+		<if test="area!=null and area!=''">and area=#{area}</if>
+		<if test="status!=null and status!=''">and status=#{status}</if>
+		<if test="reason!=null and reason!=''">and reason=#{reason}</if>
+		<if test="province!=null and province!=''">and province=#{province}</if>
+		<if test="realName!=null and realName!=''">and realName=#{realName}</if>
+		<if test="cardImg!=null and cardImg!=''">and cardImg=#{cardImg}</if>
+		<if test="city!=null and city!=''">and city=#{city}</if>
+		order by id
+	</select>
+	<select id="front.appNatural.selectOne" parameterType="net.jeeshop.services.common.AppNatural"
+		resultType="net.jeeshop.services.common.AppNatural">
+		select * from app_natural t where 1=1
+		 <if test="id!=null and id!=''">
+		 	and id=#{id}
+	 	</if>
+	   <if test="username !=null and username !=''">
+		 	and username=#{username}
+	 	</if>
+		</select>
+	<select id="front.appNatural.selectById" parameterType="String"
+		resultType="net.jeeshop.services.common.AppNatural">select * from app_natural t where 1=1 and id=#{id}</select>
+	<delete id="front.appNatural.deleteById" parameterType="Integer">delete
+		from app_natural t where 1=1 and id=#{id}</delete>
+	<delete id="front.appNatural.delete" parameterType="net.jeeshop.services.common.AppNatural">delete from
+		app_natural t where 1=1 and id=#{id}</delete>
+	<insert id="front.appNatural.insert" parameterType="net.jeeshop.services.common.AppNatural"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into app_natural(id
+		<if test="createTime!=null and createTime!=''">,createTime</if>
+		<if test="username!=null and username!=''">,username</if>
+		<if test="idCard!=null and idCard!=''">,idCard</if>
+		<if test="phone!=null and phone!=''">,phone</if>
+		<if test="area!=null and area!=''">,area</if>
+		<if test="status!=null and status!=''">,status</if>
+		<if test="reason!=null and reason!=''">,reason</if>
+		<if test="province!=null and province!=''">,province</if>
+		<if test="realName!=null and realName!=''">,realName</if>
+		<if test="cardImg!=null and cardImg!=''">,cardImg</if>
+		<if test="city!=null and city!=''">,city</if>
+		<if test="remark !=null and remark !=''">,remark</if>
+		)values(id
+		<if test="createTime!=null and createTime!=''">,#{createTime}</if>
+		<if test="username!=null and username!=''">,#{username}</if>
+		<if test="idCard!=null and idCard!=''">,#{idCard}</if>
+		<if test="phone!=null and phone!=''">,#{phone}</if>
+		<if test="area!=null and area!=''">,#{area}</if>
+		<if test="status!=null and status!=''">,#{status}</if>
+		<if test="reason!=null and reason!=''">,#{reason}</if>
+		<if test="province!=null and province!=''">,#{province}</if>
+		<if test="realName!=null and realName!=''">,#{realName}</if>
+		<if test="cardImg!=null and cardImg!=''">,#{cardImg}</if>
+		<if test="city!=null and city!=''">,#{city}</if>
+		<if test="remark !=null and remark !=''">,#{remark}</if>
+		)
+	</insert>
+	<update id="front.appNatural.update" parameterType="net.jeeshop.services.common.AppNatural">
+		update app_natural set id=#{id}
+		<if test="id!=null and id!=''">, id=#{id}</if>
+		<if test="createTime!=null and createTime!=''">, createTime=#{createTime}</if>
+		<if test="username!=null and username!=''">, username=#{username}</if>
+		<if test="idCard!=null and idCard!=''">, idCard=#{idCard}</if>
+		<if test="phone!=null and phone!=''">, phone=#{phone}</if>
+		<if test="area!=null and area!=''">, area=#{area}</if>
+		<if test="status!=null and status!=''">, status=#{status}</if>
+		<if test="reason!=null and reason!=''">, reason=#{reason}</if>
+		<if test="province!=null and province!=''">, province=#{province}</if>
+		<if test="realName!=null and realName!=''">, realName=#{realName}</if>
+		<if test="cardImg!=null and cardImg!=''">, cardImg=#{cardImg}</if>
+		<if test="city!=null and city!=''">, city=#{city}</if>
+		<if test="remark !=null and remark !=''">, remark=#{remark}</if>
+		where 1=1 and id=#{id}
+	</update>
+</mapper>

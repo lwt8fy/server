@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manage.logistics">
+    <select id="manage.logistics.selectPageList" parameterType="net.jeeshop.services.manage.logistics.bean.Logistics" resultType="net.jeeshop.services.manage.logistics.bean.Logistics">
+    	select id,createtime,name,case type when 1 then '按件数' end as type,
+    	case when deliverytime &lt; 24 then CONCAT(deliverytime,'小时内') when deliverytime &gt;= 24 then CONCAT(deliverytime/24,'天内') end as deliverytime,
+    	case isfree when 1 then '卖家承担运费' when 2 then '自定义运费' end as isfree
+    	from t_logistics t where 1=1 
+    	 <if test="account!=null and account!=''">
+        	and account=#{account}
+        </if>
+        <if test="createtime!=null and createtime!=''">
+        	and createtime=#{createtime}
+        </if>
+        <if test="id!=null and id!=''">
+        	and id=#{id}
+        </if>
+        <if test="deliverytime!=null and deliverytime!=''">
+        	and deliverytime=#{deliverytime}
+        </if>
+        <if test="isfree!=null and isfree!=''">
+       		and isfree=#{isfree}
+       	</if>
+        <if test="name!=null and name!=''">
+        	and name=#{name}
+        </if>
+        <if test="type!=null and type!=''">
+        	and type=#{type}
+        </if>
+        order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="manage.logistics.selectPageCount" parameterType="net.jeeshop.services.manage.logistics.bean.Logistics" resultType="Integer">
+    	select count(*) from t_logistics where 1=1 
+    	 <if test="account!=null and account!=''">
+        	and account=#{account}
+        </if>
+        <if test="createtime!=null and createtime!=''">
+        	and createtime=#{createtime}
+        </if>
+        <if test="id!=null and id!=''">
+        	and id=#{id}
+        </if>
+        <if test="deliverytime!=null and deliverytime!=''">
+        	and deliverytime=#{deliverytime}
+        </if>
+        <if test="isfree!=null and isfree!=''">
+        	and isfree=#{isfree}
+        </if>
+        <if test="name!=null and name!=''">
+        	and name=#{name}
+        </if>
+        <if test="type!=null and type!=''">
+        	and type=#{type}
+        </if>
+    </select>
+    <select id="manage.logistics.selectList" parameterType="net.jeeshop.services.manage.logistics.bean.Logistics" resultType="net.jeeshop.services.manage.logistics.bean.Logistics">
+    	select * from t_logistics t where 1=1 
+        <if test="account!=null and account!=''">
+        	and account=#{account}
+        </if>
+        <if test="createtime!=null and createtime!=''">
+        	and createtime=#{createtime}
+        </if>
+        <if test="id!=null and id!=''">
+        	and id=#{id}
+        </if>
+        <if test="deliverytime!=null and deliverytime!=''">
+        	and deliverytime=#{deliverytime}
+        </if>
+        <if test="isfree!=null and isfree!=''">
+        	and isfree=#{isfree}
+        </if>
+        <if test="name!=null and name!=''">
+        	and name=#{name}
+        </if>
+        <if test="type!=null and type!=''">
+        	and type=#{type}
+        </if>
+        order by id
+    </select>
+    <select id="manage.logistics.selectOne" parameterType="net.jeeshop.services.manage.logistics.bean.Logistics" resultType="net.jeeshop.services.manage.logistics.bean.Logistics">
+    	select * from t_logistics where 1=1 and id=#{id}
+    </select>
+    <select id="manage.logistics.selectById" parameterType="String" resultType="net.jeeshop.services.manage.logistics.bean.Logistics">
+    	select * from t_logistics where 1=1 and id=#{id}
+    </select>
+    <delete id="manage.logistics.deleteById" parameterType="Integer">
+    	delete from t_logistics where 1=1 and id=#{id}
+    </delete>
+    <delete id="manage.logistics.delete" parameterType="net.jeeshop.services.manage.logistics.bean.Logistics">
+    	delete from t_logistics where 1=1 and id=#{id}
+    </delete>
+    <insert id="manage.logistics.insert" parameterType="net.jeeshop.services.manage.logistics.bean.Logistics" useGeneratedKeys="true" keyProperty="id">
+    	insert into t_logistics(id,createtime
+        <if test="deliverytime!=null and deliverytime!=''">
+        	,deliverytime
+        </if>
+        <if test="account!=null and account!=''">
+        	,account
+        </if>
+        <if test="isfree!=null and isfree!=''">
+        	,isfree
+        </if>
+        <if test="name!=null and name!=''">
+        	,name
+        </if>
+        <if test="type!=null and type!=''">
+        	,type
+        </if>
+        )values(id,now()
+        <if test="deliverytime!=null and deliverytime!=''">
+        	,#{deliverytime}
+        </if>
+          <if test="account!=null and account!=''">
+        	,#{account}
+        </if>
+        <if test="isfree!=null and isfree!=''">
+        	,#{isfree}
+        </if>
+        <if test="name!=null and name!=''">
+        	,#{name}
+        </if>
+        <if test="type!=null and type!=''">
+        	,#{type}
+        </if>
+        )
+    </insert>
+    <update id="manage.logistics.update" parameterType="net.jeeshop.services.manage.logistics.bean.Logistics">
+    	update t_logistics set id=#{id},createtime=now()
+        <if test="id!=null and id!=''">
+        	,id=#{id}
+        </if>
+        <if test="deliverytime!=null and deliverytime!=''">
+        	,deliverytime=#{deliverytime}
+        </if>
+        <if test="isfree!=null and isfree!=''">
+        	,isfree=#{isfree}
+        </if>
+        <if test="name!=null and name!=''">
+        	,name=#{name}
+        </if>
+        <if test="type!=null and type!=''">
+        	,type=#{type}
+        </if>
+        where 1=1 and id=#{id}
+    </update>
+
+	<select id="manage.logistics.selectLogisticsByProductId" parameterType="string" resultType="net.jeeshop.services.manage.logistics.bean.Logistics">
+	 	select * from t_logistics where id =(select logisticsid from t_product where id=#{productid})
+	</select>
+	
+</mapper>

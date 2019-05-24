@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.appFyy">
+    <select id="front.appFyy.selectPageList" parameterType="net.jeeshop.services.common.AppFyy" resultType="net.jeeshop.services.common.AppFyy">select * from app_fyy where 1=1 
+        <if test="bjd!=null and bjd!=''">and bjd=#{bjd}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="idCard!=null and idCard!=''">and idCard=#{idCard}</if>
+        <if test="phone!=null and phone!=''">and phone=#{phone}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="reason!=null and reason!=''">and reason=#{reason}</if>
+        <if test="companyName!=null and companyName!=''">and companyName=#{companyName}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>
+        <if test="picture!=null and picture!=''">and picture=#{picture}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="userID!=null and userID!=''">and userID=#{userID}</if>
+        <if test="username!=null and username!=''">and username=#{username}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="email!=null and email!=''">and email=#{email}</if>
+        <if test="address!=null and address!=''">and address=#{address}</if>
+        <if test="QQ!=null and QQ!=''">and QQ=#{QQ}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="realName!=null and realName!=''">and realName=#{realName}</if>
+        <if test="y!=null and y!=''">and y=#{y}</if>
+        <if test="x!=null and x!=''">and x=#{x}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.appFyy.selectPageCount" parameterType="net.jeeshop.services.common.AppFyy" resultType="Integer">select count(*) from( select 1 from app_fyy where 1=1 
+        <if test="bjd!=null and bjd!=''">and bjd=#{bjd}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="idCard!=null and idCard!=''">and idCard=#{idCard}</if>
+        <if test="phone!=null and phone!=''">and phone=#{phone}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="reason!=null and reason!=''">and reason=#{reason}</if>
+        <if test="companyName!=null and companyName!=''">and companyName=#{companyName}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>
+        <if test="picture!=null and picture!=''">and picture=#{picture}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="userID!=null and userID!=''">and userID=#{userID}</if>
+        <if test="username!=null and username!=''">and username=#{username}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="email!=null and email!=''">and email=#{email}</if>
+        <if test="address!=null and address!=''">and address=#{address}</if>
+        <if test="QQ!=null and QQ!=''">and QQ=#{QQ}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="realName!=null and realName!=''">and realName=#{realName}</if>
+        <if test="y!=null and y!=''">and y=#{y}</if>
+        <if test="x!=null and x!=''">and x=#{x}</if>)a
+    </select>
+    <select id="front.appFyy.selectList" parameterType="net.jeeshop.services.common.AppFyy" resultType="net.jeeshop.services.common.AppFyy">select * from app_fyy where 1=1 
+        <if test="bjd!=null and bjd!=''">and bjd=#{bjd}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="idCard!=null and idCard!=''">and idCard=#{idCard}</if>
+        <if test="phone!=null and phone!=''">and phone=#{phone}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="reason!=null and reason!=''">and reason=#{reason}</if>
+        <if test="companyName!=null and companyName!=''">and companyName=#{companyName}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>
+        <if test="picture!=null and picture!=''">and picture=#{picture}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="userID!=null and userID!=''">and userID=#{userID}</if>
+        <if test="username!=null and username!=''">and username=#{username}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="email!=null and email!=''">and email=#{email}</if>
+        <if test="address!=null and address!=''">and address=#{address}</if>
+        <if test="QQ!=null and QQ!=''">and QQ=#{QQ}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="realName!=null and realName!=''">and realName=#{realName}</if>
+        <if test="y!=null and y!=''">and y=#{y}</if>
+        <if test="x!=null and x!=''">and x=#{x}</if>order by id
+    </select>
+    <select id="front.appFyy.selectOne" parameterType="net.jeeshop.services.common.AppFyy" resultType="net.jeeshop.services.common.AppFyy">select * from app_fyy where 1=1  
+    <if test="id!=null and id!=''">
+		 	and id=#{id}
+	 </if>
+	   <if test="userID !=null and userID !=''">
+		 	and userID=#{userID}
+	 </if>
+    </select>
+    <select id="front.appFyy.selectById" parameterType="String" resultType="net.jeeshop.services.common.AppFyy">select * from app_fyy where 1=1 and id=#{id}</select>
+    <delete id="front.appFyy.deleteById" parameterType="Integer">delete from app_fyy where 1=1 and id=#{id}</delete>
+    <delete id="front.appFyy.delete" parameterType="net.jeeshop.services.common.AppFyy">delete from app_fyy where 1=1 and id=#{id}</delete>
+    <insert id="front.appFyy.insert" parameterType="net.jeeshop.services.common.AppFyy" useGeneratedKeys="true" keyProperty="id">insert into app_fyy(id 
+        <if test="compPhone !=null and compPhone !=''">,compPhone</if>
+        <if test="bjd!=null and bjd!=''">,bjd</if>
+        <if test="createTime!=null and createTime!=''">,createTime</if>
+        <if test="idCard!=null and idCard!=''">,idCard</if>
+        <if test="phone!=null and phone!=''">,phone</if>
+        <if test="status!=null and status!=''">,status</if>
+        <if test="reason!=null and reason!=''">,reason</if>
+        <if test="companyName!=null and companyName!=''">,companyName</if>
+        <if test="city!=null and city!=''">,city</if>
+        <if test="picture!=null and picture!=''">,picture</if>
+        <if test="userID!=null and userID!=''">,userID</if>
+        <if test="username!=null and username!=''">,username</if>
+        <if test="area!=null and area!=''">,area</if>
+        <if test="email!=null and email!=''">,email</if>
+        <if test="address!=null and address!=''">,address</if>
+        <if test="QQ!=null and QQ!=''">,QQ</if>
+        <if test="province!=null and province!=''">,province</if>
+        <if test="realName!=null and realName!=''">,realName</if>
+        <if test="y!=null and y!=''">,y</if>
+        <if test="x!=null and x!=''">,x</if>)values(id
+        <if test="compPhone !=null and compPhone !=''">,#{compPhone}</if>
+        <if test="bjd!=null and bjd!=''">,#{bjd}</if>
+        <if test="createTime!=null and createTime!=''">,#{createTime}</if>
+        <if test="idCard!=null and idCard!=''">,#{idCard}</if>
+        <if test="phone!=null and phone!=''">,#{phone}</if>
+        <if test="status!=null and status!=''">,#{status}</if>
+        <if test="reason!=null and reason!=''">,#{reason}</if>
+        <if test="companyName!=null and companyName!=''">,#{companyName}</if>
+        <if test="city!=null and city!=''">,#{city}</if>
+        <if test="picture!=null and picture!=''">,#{picture}</if>
+        <if test="userID!=null and userID!=''">,#{userID}</if>
+        <if test="username!=null and username!=''">,#{username}</if>
+        <if test="area!=null and area!=''">,#{area}</if>
+        <if test="email!=null and email!=''">,#{email}</if>
+        <if test="address!=null and address!=''">,#{address}</if>
+        <if test="QQ!=null and QQ!=''">,#{QQ}</if>
+        <if test="province!=null and province!=''">,#{province}</if>
+        <if test="realName!=null and realName!=''">,#{realName}</if>
+        <if test="y!=null and y!=''">,#{y}</if>
+        <if test="x!=null and x!=''">,#{x}</if>)
+    </insert>
+    <update id="front.appFyy.update" parameterType="net.jeeshop.services.common.AppFyy">update app_fyy set id=#{id} 
+        <if test="compPhone !=null and compPhone !=''">, compPhone=#{compPhone}</if>
+        <if test="bjd!=null and bjd!=''">, bjd=#{bjd}</if>
+        <if test="createTime!=null and createTime!=''">, createTime=#{createTime}</if>
+        <if test="idCard!=null and idCard!=''">, idCard=#{idCard}</if>
+        <if test="phone!=null and phone!=''">, phone=#{phone}</if>
+        <if test="status!=null and status!=''">, status=#{status}</if>
+        <if test="reason!=null and reason!=''">, reason=#{reason}</if>
+        <if test="companyName!=null and companyName!=''">, companyName=#{companyName}</if>
+        <if test="city!=null and city!=''">, city=#{city}</if>
+        <if test="picture!=null and picture!=''">, picture=#{picture}</if>
+        <if test="id!=null and id!=''">, id=#{id}</if>
+        <if test="userID!=null and userID!=''">, userID=#{userID}</if>
+        <if test="username!=null and username!=''">, username=#{username}</if>
+        <if test="area!=null and area!=''">, area=#{area}</if>
+        <if test="email!=null and email!=''">, email=#{email}</if>
+        <if test="address!=null and address!=''">, address=#{address}</if>
+        <if test="QQ!=null and QQ!=''">, QQ=#{QQ}</if>
+        <if test="province!=null and province!=''">, province=#{province}</if>
+        <if test="realName!=null and realName!=''">, realName=#{realName}</if>
+        <if test="y!=null and y!=''">, y=#{y}</if>
+        <if test="x!=null and x!=''">, x=#{x}</if>where 1=1 and id=#{id}
+    </update>
+</mapper>

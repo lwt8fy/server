@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	
+	
+	
+	<!--生猪交易app订单管理 -->
+	<package name="appOrderFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appOrder" class="appOrderAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	<!--生猪交易app用户管理 -->
+	<package name="appUserFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appUser" class="appUserAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	<!--生猪交易app车辆管理 -->
+	<package name="appVehicleFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appVehicle" class="appVehicleAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	
+	<!--生猪交易app车辆公司管理 -->
+	<package name="appVehicleCompanyFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appVehicleCompanyFront" class="appVehicleCompanyAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	<!--生猪交易app车辆订单管理 
+	<package name="appVehicleOrderActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appVehicleOrderActionFront" class="appVehicleOrderAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>-->
+	
+	
+	<!--生猪交易app版本管理 -->
+	<package name="appVersionsFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appVersions" class="appVersionsAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	<!--生猪交易app猪场管理 -->
+	<package name="appPigFarmFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appPigFarm" class="appPigFarmAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	<!--生猪交易app经纪人管理 -->
+	<package name="appBrokerFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appBroker" class="appBrokerAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	<!--生猪交易app屠宰场管理 -->
+	<package name="appSlaughterFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appSlaughter" class="appSlaughterAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 生猪客户端 位置记录 -->
+	<package name="appLocationFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appLocation" class="appLocationAction">
+		 <result name="json">/appJsp/json.jsp</result>
+	 </action>
+ 	</package>
+	
+	<!--推广管理 -->
+	<package name="tuiGuangFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="appTuiGuang" class="appTuiGuangAction">
+		<result name="json">/appJsp/json.jsp</result>
+		</action>
+	</package>
+	 <package name="appNaturalFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appNatural" class="appNaturalAction">
+		<result name="json">/appJsp/json.jsp</result>
+	 </action>
+ </package>
+ 
+ <!-- 报价管理 -->
+	<package name="appQuoteFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appQuote" class="appQuoteAction">
+		 <result name="json">/appJsp/json.jsp</result>
+	 </action>
+ </package>
+<!-- 收益记录管理 -->
+	<package name="appProfitFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appProfit" class="appProfitAction">
+		 <result name="json">/appJsp/json.jsp</result>
+	 </action>
+ </package>
+ 
+  <package name="appFyyFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appFyy" class="appFyyAction">
+		 <result name="json">/appJsp/json.jsp</result>
+	 </action>
+ </package>
+  <package name="appJdyFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appJdy" class="appJdyAction">
+		 <result name="json">/appJsp/json.jsp</result>
+	 </action>
+ </package>
+ <package name="appJyyFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appJyy" class="appJyyAction">
+		<result name="json">/appJsp/json.jsp</result>
+	 </action>
+ </package>
+ <package name="appDjFront" namespace="/" extends="struts-jeeshop-front">
+	 <action name="appDj" class="appDjAction">
+		<result name="json">/appJsp/json.jsp</result>
+	 </action>
+ </package>
+ 
+</struts>
+
+
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.szmyComment">
+    <select id="front.szmyComment.selectPageList" parameterType="net.jeeshop.services.common.SzmyComment" resultType="net.jeeshop.services.common.SzmyComment">select * from szmy_comment where 1=1 
+        <if test="bpjr !=null and bpjr !=''">and bpjr=#{bpjr}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="parentID!=null and parentID!=''">and parentID=#{parentID}</if>
+        <if test="orderID!=null and orderID!=''">and orderID=#{orderID}</if>
+        <if test="orderType!=null and orderType!=''">and orderType=#{orderType}</if>
+        <if test="orderdetailID!=null and orderdetailID!=''">and orderdetailID=#{orderdetailID}</if>
+        <if test="star!=null and star!=''">and star=#{star}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="productName!=null and productName!=''">and productName=#{productName}</if>
+        <if test="productID!=null and productID!=''">and productID=#{productID}</if>
+        <if test="bpjrType!=null and bpjrType!=''">and bpjrType=#{bpjrType}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.szmyComment.selectPageCount" parameterType="net.jeeshop.services.common.SzmyComment" resultType="Integer">select count(*) from szmy_comment t where 1=1 
+    <if test="bpjr !=null and bpjr !=''">and bpjr=#{bpjr}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="parentID!=null and parentID!=''">and parentID=#{parentID}</if>
+        <if test="orderID!=null and orderID!=''">and orderID=#{orderID}</if>
+        <if test="orderType!=null and orderType!=''">and orderType=#{orderType}</if>
+        <if test="orderdetailID!=null and orderdetailID!=''">and orderdetailID=#{orderdetailID}</if>
+        <if test="star!=null and star!=''">and star=#{star}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="productName!=null and productName!=''">and productName=#{productName}</if>
+        <if test="productID!=null and productID!=''">and productID=#{productID}</if>
+        <if test="bpjrType!=null and bpjrType!=''">and bpjrType=#{bpjrType}</if>
+    </select>
+    <select id="front.szmyComment.selectList" parameterType="net.jeeshop.services.common.SzmyComment" resultType="net.jeeshop.services.common.SzmyComment">select * from szmy_comment t where 1=1 
+    <if test="bpjr !=null and bpjr !=''">and bpjr=#{bpjr}</if>
+        <if test="content!=null and content!=''">and content=#{content}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="parentID!=null and parentID!=''">and parentID=#{parentID}</if>
+        <if test="orderID!=null and orderID!=''">and orderID=#{orderID}</if>
+        <if test="orderType!=null and orderType!=''">and orderType=#{orderType}</if>
+        <if test="orderdetailID!=null and orderdetailID!=''">and orderdetailID=#{orderdetailID}</if>
+        <if test="star!=null and star!=''">and star=#{star}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="productName!=null and productName!=''">and productName=#{productName}</if>
+        <if test="productID!=null and productID!=''">and productID=#{productID}</if>
+        <if test="bpjrType!=null and bpjrType!=''">and bpjrType=#{bpjrType}</if>order by id
+    </select>
+    <select id="front.szmyComment.selectOne" parameterType="net.jeeshop.services.common.SzmyComment" resultType="net.jeeshop.services.common.SzmyComment">select * from szmy_comment t where 1=1 and id=#{id}</select>
+    <select id="front.szmyComment.selectById" parameterType="String" resultType="net.jeeshop.services.common.SzmyComment">select * from szmy_comment t where 1=1 and id=#{id}</select>
+    <delete id="front.szmyComment.deleteById" parameterType="Integer">delete from szmy_comment t where 1=1 and id=#{id}</delete>
+    <delete id="front.szmyComment.delete" parameterType="net.jeeshop.services.common.SzmyComment">delete from szmy_comment t where 1=1 and id=#{id}</delete>
+   <insert id="front.szmyComment.insert" parameterType="net.jeeshop.services.common.SzmyComment" useGeneratedKeys="true" keyProperty="id">insert into szmy_comment(id 
+        <if test="content!=null and content!=''">,content</if>
+        <if test="createTime!=null and createTime!=''">,createTime</if>
+        <if test="parentID!=null and parentID!=''">,parentID</if>
+        <if test="orderID!=null and orderID!=''">,orderID</if>
+        <if test="orderType!=null and orderType!=''">,orderType</if>
+        <if test="orderdetailID!=null and orderdetailID!=''">,orderdetailID</if>
+        <if test="star!=null and star!=''">,star</if>
+        <if test="userName!=null and userName!=''">,userName</if>
+        <if test="productName!=null and productName!=''">,productName</if>
+        <if test="productID!=null and productID!=''">,productID</if>
+        <if test="bpjrType!=null and bpjrType!=''">,bpjrType</if>
+        <if test="bpjr !=null and bpjr !=''">,bpjr</if>
+        )values(id
+        <if test="content!=null and content!=''">,#{content}</if>
+        <if test="createTime!=null and createTime!=''">,#{createTime}</if>
+        <if test="parentID!=null and parentID!=''">,#{parentID}</if>
+        <if test="orderID!=null and orderID!=''">,#{orderID}</if>
+        <if test="orderType!=null and orderType!=''">,#{orderType}</if>
+        <if test="orderdetailID!=null and orderdetailID!=''">,#{orderdetailID}</if>
+        <if test="star!=null and star!=''">,#{star}</if>
+        <if test="userName!=null and userName!=''">,#{userName}</if>
+        <if test="productName!=null and productName!=''">,#{productName}</if>
+        <if test="productID!=null and productID!=''">,#{productID}</if>
+        <if test="bpjrType!=null and bpjrType!=''">,#{bpjrType}</if>
+        <if test="bpjr !=null and bpjr !=''">,#{bpjr}</if>
+        )
+    </insert>
+    <update id="front.szmyComment.update" parameterType="net.jeeshop.services.common.SzmyComment">update szmy_comment set id=#{id} 
+        <if test="content!=null and content!=''">, content=#{content}</if>
+        <if test="createTime!=null and createTime!=''">, createTime=#{createTime}</if>
+        <if test="parentID!=null and parentID!=''">, parentID=#{parentID}</if>
+        <if test="orderID!=null and orderID!=''">, orderID=#{orderID}</if>
+        <if test="orderType!=null and orderType!=''">, orderType=#{orderType}</if>
+        <if test="orderdetailID!=null and orderdetailID!=''">, orderdetailID=#{orderdetailID}</if>
+        <if test="star!=null and star!=''">, star=#{star}</if>
+        <if test="userName!=null and userName!=''">, userName=#{userName}</if>
+        <if test="productName!=null and productName!=''">, productName=#{productName}</if>
+        <if test="productID!=null and productID!=''">, productID=#{productID}</if>
+        <if test="bpjr !=null and bpjr !=''">,bpjr=#{bpjr}</if>
+        <if test="bpjrType!=null and bpjrType!=''">, bpjrType=#{bpjrType}</if>where 1=1 and id=#{id}
+    </update>
+</mapper>

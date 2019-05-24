@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="front.catalogType">
+    <select id="front.catalogType.selectPageList" parameterType="net.jeeshop.services.common.CatalogType" resultType="net.jeeshop.services.common.CatalogType">select * from t_catalogType where 1=1 
+        <if test="catalogName!=null and catalogName!=''">and catalogName=#{catalogName}</if>
+        <if test="catalogID!=null and catalogID!=''">and catalogID=#{catalogID}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.catalogType.selectPageCount" parameterType="net.jeeshop.services.common.CatalogType" resultType="Integer">select count(*) from( select 1 t_catalogType t where 1=1 
+        <if test="catalogName!=null and catalogName!=''">and catalogName=#{catalogName}</if>
+        <if test="catalogID!=null and catalogID!=''">and catalogID=#{catalogID}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>)a
+    </select>
+    <select id="front.catalogType.selectList" parameterType="net.jeeshop.services.common.CatalogType" resultType="net.jeeshop.services.common.CatalogType">select * from t_catalogType t where 1=1 
+        <if test="catalogName!=null and catalogName!=''">and catalogName=#{catalogName}</if>
+        <if test="catalogID!=null and catalogID!=''">and catalogID=#{catalogID}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>order by type
+    </select>
+    <select id="front.catalogType.selectOne" parameterType="net.jeeshop.services.common.CatalogType" resultType="net.jeeshop.services.common.CatalogType">select * from t_catalogType t where 1=1 and id=#{id}</select>
+    <select id="front.catalogType.selectById" parameterType="String" resultType="net.jeeshop.services.common.CatalogType">select * from t_catalogType t where 1=1 and id=#{id}</select>
+    <delete id="front.catalogType.deleteById" parameterType="Integer">delete from t_catalogType t where 1=1 and id=#{id}</delete>
+    <delete id="front.catalogType.delete" parameterType="net.jeeshop.services.common.CatalogType">delete from t_catalogType t where 1=1 and id=#{id}</delete>
+    <insert id="front.catalogType.insert" parameterType="net.jeeshop.services.common.CatalogType" useGeneratedKeys="true" keyProperty="id">insert into t_catalogType( 
+        <if test="catalogName!=null and catalogName!=''">,catalogName</if>
+        <if test="catalogID!=null and catalogID!=''">,catalogID</if>
+        <if test="type!=null and type!=''">,type</if>
+        <if test="catalogPID!=null and catalogPID!=''">
+,catalogPID
+</if>
+<if test="catalogPName!=null and catalogPName!=''">
+,catalogPName
+</if>
+        )values(
+        <if test="catalogName!=null and catalogName!=''">,#{catalogName}</if>
+        <if test="catalogID!=null and catalogID!=''">,#{catalogID}</if>
+        <if test="type!=null and type!=''">,#{type}</if>
+        <if test="catalogPID!=null and catalogPID!=''">
+,#{catalogPID}
+</if>
+<if test="catalogPName!=null and catalogPName!=''">
+,#{catalogPName}
+</if>
+        )
+    </insert>
+    <update id="front.catalogType.update" parameterType="net.jeeshop.services.common.CatalogType">update t_catalogType set id=#{id} 
+        <if test="catalogName!=null and catalogName!=''">, catalogName=#{catalogName}</if>
+        <if test="catalogID!=null and catalogID!=''">, catalogID=#{catalogID}</if>
+        <if test="type!=null and type!=''">, type=#{type}</if>
+        <if test="catalogPID!=null and catalogPID!=''">
+,catalogPID=#{catalogPID}
+</if>
+<if test="catalogPName!=null and catalogPName!=''">
+,catalogPName=#{catalogPName}
+</if>
+        where 1=1 and id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,50 @@
+.news_con{ width:1200px;  margin:20px auto 50px;; overflow:hidden;}
+.sidebar{ width:210px;  float:left; border:1px solid #dcdcdc;}
+/*******end 快讯********/
+.side_news{ width:210px; height:260px; }
+.side_tl{ width:190px; height:20px; font-family:微软雅黑; padding:10px 10px; border-bottom:1px solid #dcdcdc; background:#fcebe1;}
+.side_tl h4{  font-weight:normal; font-size:14px; color:#666; display:block; float:left;}
+.side_tl span{ float:right; font-size:12px;}
+.side_tl span a{color:#888;}
+.side_tl span a:hover{color:#ff6600; text-decoration:underline;}
+.kx_con{ width:200px; height:220px; overflow:hidden;}
+.kx_con ul {list-style:none;width:200px; padding-top:15px; display:block;}
+.kx_con ul li {line-height:28px;height:28px; width:180px;  background:url(../images/li_bg.jpg) no-repeat left center; padding-left:15px; margin:0 8px;}
+.kx_con ul li a {font-size:12px;color:#666666;display:block;overflow:hidden; text-overflow:ellipsis;white-space:nowrap;}
+.kx_con ul li a:hover{color:#ff6600;text-decoration:underline; }
+/*******end 快讯********/
+
+/*******热销********/
+.side_pop{ width:210px; height:505px;}
+.pop_con{width:200px;}
+.pop_con ul { list-style:none;  }
+.pop_con ul li { height:95px; width:190px; border-bottom:1px dashed #cdcdcd; list-style:none;  display:block; padding:10px 10px;}
+
+.pop_pic{width:70px;height:70px;float:left;display:table;overflow:hidden;margin-top:10px;}
+.pop_pic a{display:table-cell;vertical-align:middle; text-align:center;}
+.pop_pic a img{border:none;max-width:77px;max-height:75px;}
+
+.pop_pic img {max-width:75px;max-height:71px;}
+.pop_pic:hover img {border:1px solid #ff6600;}
+.pop_rt{width:100px;float:right; }
+.pop_rt p span {font-size:12px;color:#f00;height:20px;line-height:20px;  }
+.pop_rt p a {color:#585858; font-size:12px; text-decoration:none;height:63px; line-height:20px; display:block; overflow:hidden;}
+.pop_rt p a:hover {text-decoration: underline; color:#ff6600;}
+.pop_rt p.ysc {color:#ababab; font-size:12px; height:20px; line-height:20px; }
+.pop_rt p.ysc span { color:#f00; font-weight:normal; height:20px; line-height:20px; padding:0 5px;}
+
+/*******end 热销********/
+
+
+
+
+
+.right{ width:930px;  float:right; border:1px solid #dcdcdc; padding:10px 20px;}
+.right_tl{border-bottom:1px solid #f4f4f4; width:950px; font-size:14px; height:60px;}
+.right_tl h3{  color:#666; display:block; float:left;margin-left:330px; overflow:hidden;line-height:50px;}
+.right_tl span{display:block;float:right;position:relative;right:25px;top:35px;}
+.right_con{letter-spacing:2px;line-height:20px;paddng-top:10px;}
+
+
+
+

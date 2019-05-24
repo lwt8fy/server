@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+		<!-- web产品 -->
+	<package name="szmyMobileProductActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyMobileProductActionFront" class="szmyMobileProductActionFront">
+			<result name="product">/szmyMobie/productInfo.jsp</result>
+			<result name="productActivityInfo">/szmyMobie/productActivityInfo.jsp</result>
+<!--			<result name="productList">/szmyMobie/productList.jsp</result>-->
+			<result name="toProductList">/szmyMobie/productList.jsp</result>
+			<result name="toShowAllProductList">/szmyMobie/toShowAllProductList.jsp</result>
+			<result name="json">/json.jsp</result>
+			<result name="toLimitTime">/szmyMobie/activity/limitTime.jsp</result>
+		</action>
+	</package>
+	<!-- web产品支付 -->
+	<package name="szmyMobileOrdersActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyMobileOrdersActionFront" class="szmyMobileOrdersActionFront">
+		 <result name="toLogin">/szmyMobie/login.jsp</result>
+		 <result name="confirmOrder">/szmyMobie/ConfirmOrder.jsp</result>
+		 <result name="toJson">/json.jsp</result>
+		 <result name="confirmOrderNow">/szmyMobie/confirmOrderNow.jsp</result>
+		 <result name="toPayStyle">/szmyMobie/payStyle.jsp</result>
+		</action>
+	</package>
+	<!-- web 用户管理 -->
+	<package name="szmyMobileAccountActionFront" namespace="/" extends="struts-jeeshop-front">
+	<action name="szmyMobileAccountActionFront" class="szmyMobileAccountActionFront">
+<!-- 			<interceptor-ref name="token"/> -->
+			<result name="toShowFavorite">/szmyMobie/userInfo/favorite.jsp</result>
+			
+			<result name="toIndex">/szmyMobie/index.jsp</result>
+			<result name="toResetPass">/szmyMobie/userInfo/resetPass.jsp</result>
+			<result name="toUserMain">/szmyMobie/userInfo/userMain.jsp</result>
+			<result name="toLogin">/szmyMobie/login.jsp</result>
+			<result name="register">/szmyMobie/register.jsp</result>
+			<result name="changePwdSuccess">/userInfo/resetPassSuccess.jsp</result>
+			<result name="help">/help.jsp</result>
+			<result name="orders">/szmyMobie/userInfo/orders.jsp</result>
+			<result name="toAddressList">/szmyMobie/address/addressList.jsp</result>
+			<result name="toAddressInfo">/szmyMobie/address/addressInfo.jsp</result>
+			<result name="product">/szmyMobie/productInfo.jsp</result>
+			<result name="paySuccess">/szmyMobie/paySuccess.jsp</result>
+			<result name="toAddress" >/szmyMobie/address.jsp</result>
+			<result name="toAddress1" >/szmyMobie/address/address.jsp</result>
+			<result name="changePwdSuccess" >/szmyMobie/userInfo/resetPassSuccess.jsp</result>
+			<result name="changePwd" >/szmyMobie/userInfo/resetPass.jsp</result>
+			<result name="successMsg">/successMsg.jsp</result>
+			
+		    <result name="confirmOrderNow" >/szmyMobie/confirmOrderNow.jsp</result>
+
+		    <result name="confirmOrder">/szmyMobie/ConfirmOrder.jsp</result>
+
+		    <result name="toJson" >/json.jsp</result>
+		    <result name="cart">/cart.jsp</result>
+		  </action>
+	</package>
+	
+	<!-- 购物车 -->
+	<package name="szmyMobileCartActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyMobileCartActionFront" class="szmyMobileCartActionFront">
+			<result name="cart">/szmyMobie/cart.jsp</result>
+			<result name="toLogin">/szmyMobie/login.jsp</result>
+<!-- 			<result name="confirmOrder">/confirmOrder.jsp</result> -->
+		</action>
+	</package>
+	
+		<!-- 积分-->
+	<package name="szmyMobileProfitActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyMobileProfitActionFront" class="szmyMobileProfitActionFront">
+			<result name="toMyScoce">/szmyMobie/userInfo/myCode.jsp</result>
+			<result name="toLogin">/szmyMobie/login.jsp</result>
+		</action>
+	</package>
+		<!-- 资讯-->
+	<package name="szmyMobileNewsActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="szmyMobileNewsActionFront" class="szmyMobileNewsActionFront">
+			<result name="newsInfo">/szmyMobie/news/newsInfo.jsp</result>
+			<result name="toShowNewsList">/szmyMobie/news/newsList.jsp</result>
+			<result name="toLogin">/szmyMobie/login.jsp</result>
+			<result name="json">/json.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="common"> 
+	<select id="common.selectVisitorcounterOne" parameterType="String" resultType="Long">
+	${value}
+	</select>
+	<update id="common.update" parameterType="String" >
+	${value}
+	</update>
+	<insert id="common.insert" parameterType="String" >
+	${value}
+	</insert>
+	 
+	<select id="common.selectList" parameterType="String" resultType="java.lang.Object">
+	${value}
+	</select>
+</mapper>

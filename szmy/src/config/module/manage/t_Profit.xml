@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="manage.profit">
+	<select id="manage.profit.selectPageList" parameterType="net.jeeshop.services.common.Profit" resultType="net.jeeshop.services.common.Profit">
+	 select  *   from t_profit t where 1=1
+	 <if test="userID !=null and userID !=''">
+		and t.userID =#{userID}
+	 </if>
+	 <if test="source !=null and source !=''">
+		and t.source = #{source}
+	 </if>
+	 <if test="startTime !=null and startTime !=''">
+		and t.createTime &gt;= #{startTime}
+	 </if>
+	 
+	 <if test="endTime !=null and endTime !=''">
+		and t.createTime &lt;= #{endTime}
+	 </if>
+	 <if test="type !=null and type !=''">
+		and type = #{type}
+	 </if>
+	 <if test="account !=null and account !=''">
+		and account=#{account}
+		</if>
+	 order by id  desc
+	 limit #{offset},#{pageSize} 
+	</select>
+ 	
+ 	<select id="manage.profit.sumProfit" parameterType="net.jeeshop.services.common.Profit" resultType="java.lang.Object">
+	  select  sum(t.finalProfit)  from t_profit t where 1=1
+	 <if test="userID !=null and userID !=''">
+		and t.userID =#{userID}
+	 </if>
+	
+	 <if test="startTime !=null and startTime !=''">
+		and t.createTime &gt;= #{startTime}
+	 </if>
+	 
+	 <if test="endTime !=null and endTime !=''">
+		and t.createTime &lt;= #{endTime}
+	 </if>
+	 <if test="type !=null and type !=''">
+		and type = #{type}
+	 </if>
+	 <if test="account !=null and account !=''">
+		and account=#{account}
+		</if>
+	</select>
+	<select id="manage.profit.selectPageCount" parameterType="net.jeeshop.services.common.Profit" resultType="java.lang.Integer">
+	  select  count(1)  from t_profit t where 1=1
+	 <if test="userID !=null and userID !=''">
+		and t.userID =#{userID}
+	 </if>
+	 <if test="type !=null and type !=''">
+		and type =#{type}
+	 </if>
+	  <if test="source !=null and source !=''">
+		and t.source =#{source}
+	 </if>
+	 <if test="startTime !=null and startTime !=''">
+		and t.createTime &gt;= #{startTime}
+	 </if>
+	 
+	 <if test="endTime !=null and endTime !=''">
+		and t.createTime &lt;= #{endTime}
+	 </if>
+	</select>
+ 
+	<insert id="manage.profit.insert" parameterType="net.jeeshop.services.common.Profit" useGeneratedKeys="true" keyProperty="id">
+		insert into t_profit
+		(
+		id
+		<if test="userID !=null and userID !=''">
+		,userID
+		</if>
+		<if test="presentee !=null and presentee !=''">
+		,presentee
+		</if>
+		<if test="productID !=null and productID !=''">
+		,productID
+		</if>
+		<if test="productName !=null and productName !=''">
+		,productName
+		</if>
+		<if test="createTime !=null and createTime !=''">
+		,createTime
+		</if>
+		<if test="compName !=null and compName !=''">
+		,compName
+		</if>
+		<if test="compID !=null and compID !=''">
+		,compID
+		</if>
+		<if test="account !=null and account !=''">
+		,account
+		</if>
+		<if test="type !=null and type !=''">
+		,type
+		</if>
+		<if test="number !=null">
+		,number
+		</if>
+		<if test="price !=null">
+		,price
+		</if>
+		<if test="profit !=null">
+		,profit
+		</if>
+		<if test="ratio !=null">
+		,ratio
+		</if>
+		<if test="finalProfit !=null">
+		,finalProfit
+		</if>
+		<if test="source !=null and source !=''">
+		,source
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark
+		</if>
+		)
+		values
+		(
+		id
+		<if test="userID !=null and userID !=''">
+		,#{userID}
+		</if>
+		<if test="presentee !=null and presentee !=''">
+		,#{presentee}
+		</if>
+		<if test="productID !=null and productID !=''">
+		,#{productID}
+		</if>
+		<if test="productName !=null and productName !=''">
+		,#{productName}
+		</if>
+		<if test="createTime !=null and createTime !=''">
+		,#{createTime}
+		</if>
+		<if test="compName !=null and compName !=''">
+		,#{compName}
+		</if>
+		<if test="compID !=null and compID !=''">
+		,#{compID}
+		</if>
+		<if test="account !=null and account !=''">
+		,#{account}
+		</if>
+		<if test="type !=null and type !=''">
+		,#{type}
+		</if>
+		<if test="number !=null">
+		,#{number}
+		</if>
+		<if test="price !=null">
+		,#{price}
+		</if>
+		<if test="profit !=null">
+		,#{profit}
+		</if>
+		<if test="ratio !=null">
+		,#{ratio}
+		</if>
+		<if test="finalProfit !=null">
+		,#{finalProfit}
+		</if>
+		<if test="source !=null and source !=''">
+		,#{source}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,#{remark}
+		</if>
+	)</insert>
+	
+	<update id="manage.profit.update" parameterType="net.jeeshop.services.common.Profit">
+		update t_profit
+		  set id=#{id}
+		
+		 where 1=1 and id=#{id}
+	</update>
+	<select id="manage.profit.selectOne" parameterType="net.jeeshop.services.common.Profit" resultType="net.jeeshop.services.common.Profit">
+	select * from t_profit t where 1=1 
+	 <if test="id!=null and id!=''"> and id=#{id} </if> 
+	</select>
+	<delete id="manage.profit.deleteById" parameterType="net.jeeshop.services.common.Profit">
+		delete from t_profit where 1=1 and id=#{id}
+	</delete>
+	
+	<select id="manage.profit.getExpenditureList" parameterType="net.jeeshop.services.common.Profit" resultType="net.jeeshop.services.common.Profit">
+	 select * from t_profit t where source=2
+	 <if test="userID !=null and userID !=''">
+		and t.userID =#{userID}
+	 </if>
+	 order by id  desc
+	 limit #{offset},#{pageSize} 
+	</select>
+	<select id="manage.profit.getExpenditureCount" parameterType="net.jeeshop.services.common.Profit" resultType="java.lang.Integer">
+	  select  count(1)  from t_profit t where source=2
+	 <if test="userID !=null and userID !=''">
+		and t.userID =#{userID}
+	 </if>
+	</select>
+	<select id="manage.profit.getIncomeList" parameterType="net.jeeshop.services.common.Profit" resultType="net.jeeshop.services.common.Profit">
+	  select  *  from t_profit t where source in ('1','3')
+	 <if test="userID !=null and userID !=''">
+		and t.userID =#{userID}
+	 </if>
+	  limit #{offset},#{pageSize} 
+	</select>
+	<select id="manage.profit.getIncomeCount" parameterType="net.jeeshop.services.common.Profit" resultType="java.lang.Integer">
+	  select  count(1)  from t_profit t where source in ('1','3')
+	 <if test="userID !=null and userID !=''">
+		and t.userID =#{userID}
+	 </if>
+	</select>
+</mapper>

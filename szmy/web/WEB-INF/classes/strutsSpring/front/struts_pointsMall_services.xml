@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- web 用户管理 -->
+	<package name="pointsMallAccountActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="pointsMallAccountActionFront" class="pointsMallAccountActionFront">
+			<result name="toIndex" type="redirect">/pointsMall/index.jsp</result>
+			<result name="toLogin">/pointsMall/login.jsp</result>
+		    <result name="toJson" >/json.jsp</result>
+		</action>
+		<action name="pointsAccount" class="pointsMallAccountActionFront">
+			<result name="toIndex" type="redirect">/points/index.jsp</result>
+		    <result name="toJson" >/json.jsp</result>
+		</action>
+	</package>
+	
+	<package name="pointsProfitActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="pointsProfit" class="pointsProfitActionFront">
+			<result name="toList">/points/account.jsp</result>
+			<result name="toEarn">/points/earn.jsp</result>
+		</action>
+	</package>
+	
+	<package name="pointsMallActionFront" namespace="/" extends="struts-jeeshop-front">
+		<action name="pointsMall" class="pointsMallActionFront">
+			<result name="pointsProduct">/pointsMall/product.jsp</result>
+		</action>
+		<action name="points" class="pointsMallActionFront">
+			<result name="pointsProduct">/points/product.jsp</result>
+			<result name="toLogin">/user/login.jsp</result>
+			<result name="toPointsList">/points/index.jsp</result>
+			<result name="productList">/points/productList.jsp</result>
+			<result name="toIndex">/points/index.jsp</result>
+		</action>
+	</package>
+</struts>

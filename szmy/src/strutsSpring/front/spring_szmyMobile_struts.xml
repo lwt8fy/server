@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+           
+    <!-- web 用户 管理--> 
+       <bean id="szmyMobileAccountActionFront" class="net.jeeshop.web.action.front.account.SzmyMobileAccountAction" scope="prototype">
+		<property name="pass" value="123456"></property>
+		<property name="server" ref="accountServiceFront"></property>
+		<property name="accountService" ref="accountServiceFront"></property>
+		<property name="addressService" ref="addressServiceFront"></property>
+		<property name="productService" ref="productServiceFront"></property>
+		<property name="favoriteShopService" ref="favoriteShopService"></property>
+		<property name="favoriteService" ref="favoriteServiceFront"></property>
+		<property name="orderService" ref="orderServiceFront"></property>
+		<!-- <property name="couponService" ref="couponServiceFront"></property>
+		<property name="newsService" ref="newsServiceFront"></property>
+		<property name="emailService" ref="emailServiceFront"></property>
+		<property name="companyService" ref="companyServiceManage"></property>
+		--><property name="userService" ref="userServiceManage"></property>
+		<property name="menuService" ref="menuServiceManage"></property>
+		<!--<property name="tuiGuangService" ref="tuiGuangServiceManage"></property>-->
+		<property name="orderdetailService" ref="orderdetailServiceFront"></property>
+	</bean>
+	<!-- web 产品管理 -->
+	<bean id="szmyMobileProductActionFront" class="net.jeeshop.web.action.front.product.SzmyMobileProductAction" scope="prototype">
+		<property name="server" ref="productServiceFront"></property>
+		<property name="companyService" ref="companyServiceFront"></property>
+		<property name="productService" ref="productServiceFront"></property>
+		<property name="commentService" ref="commentServiceFront"></property>
+		<property name="addressService" ref="addressServiceFront"></property>
+		<property name="newsService" ref="newsServiceFront"></property>
+		<property name="favoriteService" ref="favoriteServiceFront"></property>
+		<property name="favoriteShopService" ref="favoriteShopService"></property>
+		<property name="emailNotifyProductService" ref="emailNotifyProductServiceFront"></property>
+		<property name="specService" ref="specServiceManage"></property>
+		<property name="giftService" ref="giftServiceManage"></property>
+		<property name="catalogService" ref="catalogServiceFront"></property>
+		<property name="myCommonDao" ref="myCommonDao"></property>
+		<property name="activityService" ref="activityServiceManage"></property>
+		<property name="activityCountService" ref="activityCountService"></property>
+	</bean>
+	
+		     <!-- 支付action-->
+	<bean id="szmyMobileOrdersActionFront" class="net.jeeshop.web.action.front.orders.SzmyMobileOrdersAction" scope="prototype">
+		<property name="server" ref="orderServiceFront"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="productService" ref="productServiceFront"></property>
+		<property name="orderdetailService" ref="orderdetailServiceFront"></property>
+		<property name="ordershipService" ref="ordershipServiceFront"></property>
+		<property name="addressService" ref="addressServiceFront"></property>
+		<property name="orderpayService" ref="orderpayServiceFront"></property>
+		<property name="orderlogService" ref="orderlogServiceFront"></property>
+		<property name="orderService" ref="orderServiceFront"></property>
+		<property name="companyService" ref="companyServiceFront"></property>
+		<property name="accountService" ref="accountServiceFront"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="logisticsService" ref="logisticsService"></property>
+		<property name="logistics_priceService" ref="logistics_priceService"></property>
+		<property name="logistics_freeService" ref="logistics_freeService"></property>
+		<property name="activityService" ref="activityServiceManage"></property>
+		<property name="activityCountService" ref="activityCountService"></property>
+		<property name="specService" ref="specServiceManage"></property>
+	</bean>
+	
+	<!-- 购物车管理 -->
+	<bean id="szmyMobileCartActionFront" class="net.jeeshop.web.action.front.cart.SzmyMobileCartAction" scope="prototype">
+		<property name="productService" ref="productServiceFront"></property>
+		<property name="addressService" ref="addressServiceFront"></property>
+		<property name="specService" ref="specServiceManage"></property>
+	</bean>
+	<!-- 我的积分管理 -->
+	<bean id="szmyMobileProfitActionFront" class="net.jeeshop.web.action.front.profit.SzmyMobileProfitAction" scope="prototype">
+		<property name="server" ref="profitServiceManage"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="accountService" ref="accountServiceFront"></property>
+	</bean>
+	<!-- 我的新闻管理 -->
+	<bean id="szmyMobileNewsActionFront" class="net.jeeshop.web.action.front.news.SzmyMobileNewsAction" scope="prototype">
+		<property name="newsService" ref="newsServiceFront"></property>
+	</bean>
+</beans>

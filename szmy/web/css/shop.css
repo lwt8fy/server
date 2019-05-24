@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+.shop{ width:1200px; margin:0 auto; overflow:hidden;}
+.shop_top{ width:1200px; height:158px;}
+.shop_top h4{ float:left; font-size:14px; line-height:60px;}
+.shop_top span{font-size:14px; line-height:60px;}
+
+/*****标题分类列表开始*****/
+.top_list{ border:1px solid #e2e2e2; width:1198px; }
+.top_list ul{ font-family:宋体; font-size:14px; line-height:45px; display:block; width:1200px; overflow:hidden;}
+.list_fl{ border-bottom:1px dashed #e2e2e2;}
+.top_list ul li{ display:block; float:left; padding:0 15px; font-size:12px;}
+.top_list ul li a:hover{ color:#ff6600;}
+.list_choosed a{ color:#ff6600;}
+
+/********店铺开始********/
+.shop_list{ width:1200px; margin:20px 0 50px 0; overflow:hidden;}
+.shop_box{ width:255px;height:375px;border:1px solid #e2e2e2; margin-right:16px; margin-bottom:16px; background:#fff; padding:15px; position:relative; float:left;}
+.shop_box_last{ margin-right:0px;}
+.shop_box_pic{ width:254px; height:254px; display:table-cell;text-align: center;vertical-align: middle;  border-bottom:1px solid #f4f4f4;}
+.shop_box_pic img{ max-width:254px; max-height:254px;}
+.shop_box_name{ width:235px; height:35px; text-align:center; display:block; font-size:14px; color:#666; font-family:宋体; padding:20px 10px 0 10px;overflow:hidden;}
+.shop_box_name:hover{ color:#ff6600; text-decoration:underline;}
+.shop_box button{width:76px; height:33px; border:none; margin:0 auto ; display:block; cursor:pointer; outline:none; font-size:12px; overflow:hidden; padding-bottom:2px;}
+.shop_collected{  background:url(../images/collected_bg.png) no-repeat;  padding-left:25px; color:#ff0000; }
+.shop_collect{  background:url(../images/collect_bg.png) no-repeat;  padding-left:20px;  color:#fff; }
+.shop_enter{ width:285px; height:38px; background:url(../images/shop_enter.png); position:absolute; top:231px; left:0px;}
+.shop_enter a{ color:#fff; text-align:center; line-height:38px; display:block; font-size:16px;}
+.shop_enter a:hover{ color:#ff0000;}
+
+/*****分页开始*******/
+.shop_pagelist{ margin:20px auto 50px;text-align:center; color:#333; font-family:"宋体"; clear:both;}
+.shop_pagelist a{ padding:7px 10px; border:1px solid #CFCFCF; color:#333; margin:0 3px; text-decoration: none; background: #fff;}
+.shop_pagelist a:visited{ text-decoration:none;}
+.shop_pagelist a:active{ text-decoration:none;}
+.shop_pagelist a:hover{background:#ff6600; color:#fff;cursor:pointer; text-decoration: none; }
+.shop_pagelist span{padding:7px 10px; border:1px solid #CFCFCF;}
+.shop_pagelist a.page_first{ background:#ff6600; color:#fff;}
+.shop_pagelist a:hover.onepage{background:#ff6600; color:#fff;}
+.shop_pagelist .ellipsis{ border:none; padding:5px; }
+.shop_pagelist .last_page{ width:50px; height:27px; line-height:27px;margin:0 3px;  border:1px solid #CFCFCF; text-align:center; vertical-align:middle; background: #fff;}
+.shop_pagelist .go{padding:7px 15px;  background:#fff; cursor:pointer; border:1px solid #CFCFCF; outline:none; margin-left:10px;}
+
+
+
+
+
+
+
+
+

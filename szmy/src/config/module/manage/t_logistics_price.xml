@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manage.logistics_price">
+    <select id="manage.logistics_price.selectPageList" parameterType="net.jeeshop.services.common.Logistics_price" resultType="net.jeeshop.services.common.Logistics_price">
+    	select * from t_logistics_price where 1=1 order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="manage.logistics_price.selectPageCount" parameterType="net.jeeshop.services.common.Logistics_price" resultType="Integer">
+    	select count(*) from t_logistics_price where 1=1 
+    </select>
+    <select id="manage.logistics_price.selectList" parameterType="net.jeeshop.services.common.Logistics_price" resultType="net.jeeshop.services.common.Logistics_price">
+    	select * from t_logistics_price where order by id
+    </select>
+    <select id="manage.logistics_price.selectOne" parameterType="net.jeeshop.services.common.Logistics_price" resultType="net.jeeshop.services.common.Logistics_price">
+    	select * from t_logistics_price where 1=1 and id=#{id}</select>
+    <select id="manage.logistics_price.selectById" parameterType="String" resultType="net.jeeshop.services.common.Logistics_price">
+    	select * from t_logistics_price where 1=1 and id=#{id}</select>
+    <delete id="manage.logistics_price.deleteById" parameterType="Integer">delete from t_logistics_price t where 1=1 and id=#{id}</delete>
+    <delete id="manage.logistics_price.delete" parameterType="net.jeeshop.services.common.Logistics_price">
+    	delete from t_logistics_price where 1=1 and id=#{id}</delete>
+    <insert id="manage.logistics_price.insert" parameterType="net.jeeshop.services.common.Logistics_price" useGeneratedKeys="true" keyProperty="id">
+    	insert into t_logistics_price(id 
+        <if test="isdefault!=null and isdefault!=''">,isdefault</if>
+        <if test="logisticsid!=null and logisticsid!=''">,logisticsid</if>
+        <if test="firstprice!=null and firstprice!=''">,firstprice</if>
+        <if test="extendnum!=null and extendnum!=''">,extendnum</if>
+        <if test="areas!=null and areas!=''">,areas</if>
+        <if test="areasid!=null and areasid!=''">,areasid</if>
+        <if test="type!=null and type!=''">,type</if>
+        <if test="extendprice!=null and extendprice!=''">,extendprice</if>
+        <if test="firstnum!=null and firstnum!=''">,firstnum</if>)values(id
+        <if test="isdefault!=null and isdefault!=''">,#{isdefault}</if>
+        <if test="logisticsid!=null and logisticsid!=''">,#{logisticsid}</if>
+        <if test="firstprice!=null and firstprice!=''">,#{firstprice}</if>
+        <if test="extendnum!=null and extendnum!=''">,#{extendnum}</if>
+        <if test="areas!=null and areas!=''">,#{areas}</if>
+        <if test="areasid!=null and areasid!=''">,#{areasid}</if>
+        <if test="type!=null and type!=''">,#{type}</if>
+        <if test="extendprice!=null and extendprice!=''">,#{extendprice}</if>
+        <if test="firstnum!=null and firstnum!=''">,#{firstnum}</if>)
+    </insert>
+    <update id="manage.logistics_price.update" parameterType="net.jeeshop.services.common.Logistics_price">
+    	update t_logistics_price set id=#{id} 
+        <if test="id!=null and id!=''">, id=#{id}</if>
+        <if test="isdefault!=null and isdefault!=''">, isdefault=#{isdefault}</if>
+        <if test="logisticsid!=null and logisticsid!=''">, logisticsid=#{logisticsid}</if>
+        <if test="firstprice!=null and firstprice!=''">, firstprice=#{firstprice}</if>
+        <if test="extendnum!=null and extendnum!=''">, extendnum=#{extendnum}</if>
+        <if test="areas!=null and areas!=''">, areas=#{areas}</if>
+        <if test="areasid!=null and areasid!=''">,areasid=#{areasid}</if>
+        <if test="type!=null and type!=''">, type=#{type}</if>
+        <if test="extendprice!=null and extendprice!=''">, extendprice=#{extendprice}</if>
+        <if test="firstnum!=null and firstnum!=''">, firstnum=#{firstnum}</if>where 1=1 and id=#{id}
+    </update>
+    
+    <select id="manage.logistics_price.selectListByLogid" parameterType="net.jeeshop.services.common.Logistics_price" resultType="net.jeeshop.services.common.Logistics_price">
+    	select * from t_logistics_price where 1=1 
+    	<if test="logisticsid!=null and logisticsid!=''">and logisticsid=#{logisticsid}</if>
+    	<if test="type!=null and type!=''">and type=#{type}</if>
+    	<if test="isdefault!=null and isdefault!=''">and isdefault=#{isdefault}</if>
+    	order by id
+    </select>
+    <select id="manage.logistics_price.selectDefaultByLogid" parameterType="net.jeeshop.services.common.Logistics_price" resultType="net.jeeshop.services.common.Logistics_price">
+    	select * from t_logistics_price where logisticsid=#{logisticsid} and isdefault=#{isdefault} and type=#{type}
+    </select>
+    <delete id="manage.logistics_price.deleteByLogId" parameterType="Integer">delete from t_logistics_price where logisticsid=#{logisticsid}</delete>
+    
+     <select id="manage.logistics_price.selectPriceByArea" parameterType="net.jeeshop.services.common.Logistics_price" resultType="net.jeeshop.services.common.Logistics_price">
+    	select * from t_logistics_price where logisticsid='${logisticsid}' and (areasid like '%${province}%' || areasid like '%${city}%' || areasid like '%${area}%')
+    </select>
+</mapper>

@@ -1,0 +1,1 @@
+package net.jeeshop.services.front.company;import net.jeeshop.core.Services;import net.jeeshop.services.front.company.bean.Company;public interface CompanyService extends Services<Company> {	public Company ipCompany(String	 ip,String encodingString);}

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.appVehicleOrder">
+	<select id="front.appVehicleOrder.selectPageList" parameterType="net.jeeshop.services.common.AppVehicle"
+		resultType="net.jeeshop.services.common.AppVehicleOrder">
+		select t.*,v.icon
+		,v.startTime
+		,v.endTime
+		,v.type
+		,v.carNum
+		,v.capacity
+		,v.companyId
+		,v.companyTel
+		,v.name
+		,v.address 
+		,v.linkman
+		,v.phone
+		,v.status 
+		,v.remark
+		 from app_vehicleorder t,app_vehicle v where t.vehicleId=v.id
+		order by id desc
+		limit #{offset},#{pageSize}
+	</select>
+
+	<select id="front.appVehicleOrder.selectPageCount" parameterType="net.jeeshop.services.common.AppVehicleOrder"
+		resultType="java.lang.Integer">
+		select count(1) from app_vehicleorder t where 1=1
+	</select>
+	<select id="front.appVehicleOrder.selectOne" parameterType="net.jeeshop.services.common.AppVehicleOrder"
+		resultType="net.jeeshop.services.common.AppVehicleOrder">
+		select t.*,v.icon from app_vehicleorder t,app_vehicle v where t.vehicleId=v.id and t.id=#{id}
+	</select>
+	<select id="front.appVehicleOrder.selectById" parameterType="string"
+		resultType="net.jeeshop.services.common.AppVehicleOrder">
+		select t.*,v.icon from app_vehicleorder t,app_vehicle v where t.vehicleId=v.id and t.id=#{id}
+	</select>
+	<delete id="front.appVehicleOrder.delete" parameterType="net.jeeshop.services.common.AppVehicleOrder">
+		delete from
+		app_vehicleorder where 1=1 
+		<if test="id !=null and id !=''">
+		and id=#{id}
+		</if>
+		<if test="vehicleId !=null and vehicleId !=''">
+			and vehicleId = #{vehicleId}
+		</if>
+	</delete>
+	<insert id="front.appVehicleOrder.insert" parameterType="net.jeeshop.services.common.AppVehicleOrder"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into app_vehicleorder (
+			 id
+			,createTime
+			<if test="vehicleId !=null and vehicleId !=''">
+			,vehicleId
+			</if>
+			<if test="price !=null and price !=''">
+			,price
+			</if>
+			<if test="lockTime !=null and lockTime !=''">
+			,lockTime
+			</if>
+			<if test="finishTime !=null and finishTime !=''">
+			,finishTime
+			</if>
+			<if test="paymentTime !=null and paymentTime !=''">
+			,paymentTime
+			</if>
+			<if test="orderStatus !=null and orderStatus !=''">
+			,orderStatus
+			</if>
+			<if test="address !=null and address !=''">
+			,address
+			</if>
+			<if test="remark !=null and remark !=''">
+			,remark
+			</if>
+			<if test="userID !=null and userID !=''">
+			,userID
+			</if>
+			<if test="phone !=null and phone !=''">
+			,phone
+			</if>
+			<if test="finalPrice !=null and finalPrice !=''">
+			,finalPrice
+			</if>
+			<if test="purchaserID !=null and purchaserID !=''">
+			,purchaserID
+			</if>
+			<if test="x !=null and x !=''">
+			,x
+			</if>
+			<if test="y !=null and y !=''">
+			,y
+			</if>
+			<if test="subscription !=null and subscription !=''">
+			,subscription 
+			</if>
+			<if test="purchaserSubscription !=null and purchaserSubscription !=''">
+			,purchaserSubscription 
+			</if>
+			<if test="type !=null and type !=''">
+			,type 
+			</if>
+		)values(
+			 id
+			 ,now()
+			<if test="vehicleId !=null and vehicleId !=''">
+			,#{vehicleId}
+			</if>
+			<if test="price !=null and price !=''">
+			,#{price}
+			</if>
+			<if test="lockTime !=null and lockTime !=''">
+			,#{lockTime}
+			</if>
+			<if test="finishTime !=null and finishTime !=''">
+			,#{finishTime}
+			</if>
+			<if test="paymentTime !=null and paymentTime !=''">
+			,#{paymentTime}
+			</if>
+			<if test="orderStatus !=null and orderStatus !=''">
+			,#{orderStatus}
+			</if>
+			<if test="address !=null and address !=''">
+			,#{address}
+			</if>
+			<if test="remark !=null and remark !=''">
+			,#{remark}
+			</if>
+			<if test="userID !=null and userID !=''">
+			,#{userID}
+			</if>
+			<if test="phone !=null and phone !=''">
+			,#{phone}
+			</if>
+			<if test="finalPrice !=null and finalPrice !=''">
+			,#{finalPrice}
+			</if>
+			<if test="purchaserID !=null and purchaserID !=''">
+			,#{purchaserID}
+			</if>
+			<if test="x !=null and x !=''">
+			,#{x}
+			</if>
+			<if test="y !=null and y !=''">
+			,#{y}
+			</if>
+			<if test="subscription !=null and subscription !=''">
+			,#{subscription }
+			</if>
+			<if test="purchaserSubscription !=null and purchaserSubscription !=''">
+			,#{purchaserSubscription }
+			</if>
+			<if test="type !=null and type !=''">
+			,#{type }
+			</if>		
+		)
+	</insert>
+	<update id="front.appVehicleOrder.update" parameterType="net.jeeshop.services.common.AppVehicleOrder">
+		update app_vehicleorder set id=#{id}
+		<if test="vehicleId !=null and vehicleId !=''">
+			, vehicleId=#{vehicleId}
+			</if>
+			<if test="price !=null and price !=''">
+			, price=#{price}
+			</if>
+			<if test="lockTime !=null and lockTime !=''">
+			, lockTime=#{lockTime}
+			</if>
+			<if test="finishTime !=null and finishTime !=''">
+			, finishTime=#{finishTime}
+			</if>
+			<if test="paymentTime !=null and paymentTime !=''">
+			, paymentTime=#{paymentTime}
+			</if>
+			<if test="orderStatus !=null and orderStatus !=''">
+			, orderStatus=#{orderStatus}
+			</if>
+			<if test="address !=null and address !=''">
+			, address=#{address}
+			</if>
+			<if test="remark !=null and remark !=''">
+			, remark=#{remark}
+			</if>
+			<if test="userID !=null and userID !=''">
+			, userID=#{userID}
+			</if>
+			<if test="phone !=null and phone !=''">
+			, phone=#{phone}
+			</if>
+			<if test="finalPrice !=null and finalPrice !=''">
+			, finalPrice=#{finalPrice}
+			</if>
+			<if test="purchaserID !=null and purchaserID !=''">
+			, purchaserID=#{purchaserID}
+			</if>
+			<if test="x !=null and x !=''">
+			, x=#{x}
+			</if>
+			<if test="y !=null and y !=''">
+			, y=#{y}
+			</if>
+			<if test="subscription !=null and subscription !=''">
+			, subscription=#{subscription }
+			</if>
+			<if test="purchaserSubscription !=null and purchaserSubscription !=''">
+			, purchaserSubscription=#{purchaserSubscription }
+			</if>
+			<if test="type !=null and type !=''">
+			, type =#{type }
+			</if>		
+			where id=#{id}
+	</update>
+</mapper>

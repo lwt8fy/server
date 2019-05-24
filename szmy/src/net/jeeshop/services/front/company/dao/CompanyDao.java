@@ -1,0 +1,1 @@
+package net.jeeshop.services.front.company.dao;import net.jeeshop.core.DaoManager;import net.jeeshop.services.front.company.bean.Company;public interface CompanyDao extends DaoManager<Company> {}

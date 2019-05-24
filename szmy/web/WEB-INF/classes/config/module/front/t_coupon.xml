@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.coupon"> 
+	<select id="front.coupon.selectPageList" parameterType="net.jeeshop.services.front.coupon.bean.Coupon" resultType="net.jeeshop.services.front.coupon.bean.Coupon">
+	 select * from t_coupon t where 1=1 
+	 <if test="id!=null and id!=''">
+		 	and t.id=#{id}
+	  </if>
+	 <if test="ownerID!=null and ownerID!=''">
+		 	and t.ownerID=#{ownerID}
+	  </if>
+	 <if test="ownerType !=null and ownerType !=''">
+		 	and t.ownerType=#{ownerType}
+	  </if>
+	 <if test="parentID!=null and parentID!=''">
+	   <if test=" parentID=='two'">
+		 	and t.parentID!='0'
+	  </if>
+	   <if test=" parentID!='two'">
+		 	and t.parentID=#{parentID}
+	  </if>
+		 	
+	  </if>
+	 
+ order by t.id desc 
+ limit #{offset},#{pageSize} 
+	</select>
+ 
+	<select id="front.coupon.selectPageCount" parameterType="net.jeeshop.services.front.coupon.bean.Coupon" resultType="java.lang.Integer">
+	 select count(*) from t_coupon t where 1=1 
+	<if test="id!=null and id!=''">
+		 	and t.id=#{id}
+	  </if>
+	   <if test="ownerID!=null and ownerID!=''">
+		 	and t.ownerID=#{ownerID}
+	  </if>
+	   <if test="ownerType !=null and ownerType !=''">
+		 	and t.ownerType=#{ownerType}
+	  </if>
+	 <if test="parentID!=null and parentID!=''">
+	   <if test=" parentID=='two'">
+		 	and t.parentID!='0'
+	  </if>
+	   <if test=" parentID!='two'">
+		 	and t.parentID=#{parentID}
+	  </if>
+		 	
+	  </if>
+	 
+	 
+	</select>
+	
+	<select id="front.coupon.selectList" parameterType="net.jeeshop.services.front.coupon.bean.Coupon" resultType="net.jeeshop.services.front.coupon.bean.Coupon">
+	 select * 
+	 from t_coupon t where 1=1 
+	 <if test="id!=null and id!=''">
+		 	and id=#{id}
+	</if>
+	<if test="ownerType !=null and ownerType !=''">
+		 	and t.ownerType=#{ownerType}
+	  </if>
+	 <if test="parentID!=null and parentID!=''">
+	   <if test=" parentID=='two'">
+		 	and t.parentID!='0'
+	  </if>
+	   <if test=" parentID!='two'">
+		 	and t.parentID=#{parentID}
+	  </if>
+	  </if>
+	 <if test="ownerID!=null and ownerID!=''">
+		 	and t.ownerID=#{ownerID}
+	  </if>
+	 <if test="ownerName !=null and ownerName !=''">
+		 	and t.ownerName=#{ownerName}
+	  </if>
+	
+ order by id desc 
+	</select>
+	<select id="front.coupon.selectAccCoupon" parameterType="net.jeeshop.services.front.coupon.bean.Coupon" resultType="net.jeeshop.services.front.coupon.bean.Coupon">
+	 select * 
+	 from t_coupon t where 1=1 
+	 <if test="id!=null and id!=''">
+		 	and id=#{id}
+	</if>
+	 <if test="parentID!=null and parentID!=''">
+		 	and t.parentID=#{parentID}
+	  </if>
+	 <if test="ownerID!=null and ownerID!=''">
+		 	and t.ownerID=#{ownerID}
+	  </if>
+	 <if test="ownerType !=null and ownerType !=''">
+		 	and t.ownerType=#{ownerType}
+	  </if>
+	 <if test="status!=null and status!=''">
+		 	and t.status=#{status}
+	  </if>
+	
+	 <if test="orientationType!=null and orientationType!=''">
+	 <if test="orientationType.equals('pay')"> and orientationType in ('0','1') </if>
+	 <if test="!orientationType.equals('pay')"> and orientationType=#{orientationType} </if>
+	  </if>
+	 <if test="orientationID!=null and orientationID!=''">
+		 	and t.orientationID like CONCAT('%','${orientationID}','%' ) 
+	  </if>
+	 <if test="orientationName!=null and orientationName!=''">
+		 	and t.orientationName like CONCAT('%','${orientationName}','%' ) 
+	  </if>
+	
+ order by t.remaining asc 
+	</select>
+ 
+	<insert id="front.coupon.insert" parameterType="net.jeeshop.services.front.coupon.bean.Coupon" useGeneratedKeys="true" keyProperty="id">
+		insert into t_coupon
+		(
+		id,createTime
+		<if test="ownerID!=null and ownerID!=''">
+		,ownerID
+		</if>
+		<if test="ownerType!=null and ownerType!=''">
+		,ownerType
+		</if>
+		<if test="ownerName!=null and ownerName!=''">
+		,ownerName
+		</if>
+		<if test="ownerNo!=null and ownerNo!=''">
+		,ownerNo
+		</if>
+		<if test="orientationType!=null and orientationType!=''">
+		,orientationType
+		</if>
+		<if test="orientationID!=null and orientationID!=''">
+		,orientationID
+		</if>
+		<if test="orientationName!=null and orientationName!=''">
+		,orientationName
+		</if>
+		<if test="amount!=null and amount!=''">
+		,amount
+		</if>
+		<if test="remaining!=null and remaining!=''">
+		,remaining
+		</if>
+		<if test="recycle!=null and recycle!=''">
+		,recycle
+		</if>
+		<if test="status!=null and status!=''">
+		,status
+		</if>
+		<if test="parentID!=null and parentID!=''">
+		,parentID
+		</if>
+		
+		<if test="beginTime !=null and beginTime !=''">
+		,beginTime
+		</if>
+		<if test="endTime !=null and endTime !=''">
+		,endTime
+		</if>
+		<if test="begin !=null and begin !=''">
+		,begin
+		</if>
+		<if test="end !=null and end !=''">
+		,end
+		</if>
+		<if test="maxMoney !=null and maxMoney !=''">
+		,maxMoney
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark
+		</if>
+		
+		)
+		values
+		(
+		id,now()
+		<if test="ownerID !=null and ownerID !=''">
+		,#{ownerID}
+		</if>
+		<if test="ownerType !=null and ownerType !=''">
+		,#{ownerType}
+		</if>
+		<if test="ownerName !=null and ownerName !=''">
+		,#{ownerName}
+		</if>
+		<if test="ownerNo !=null and ownerNo !=''">
+		,#{ownerNo}
+		</if>
+		<if test="orientationType !=null and orientationType !=''">
+		,#{orientationType}
+		</if>
+		<if test="orientationID !=null and orientationID !=''">
+		,#{orientationID}
+		</if>
+		<if test="orientationName !=null and orientationName !=''">
+		,#{orientationName}
+		</if>
+		<if test="amount !=null and amount !=''">
+		,#{amount}
+		</if>
+		<if test="remaining !=null and remaining !=''">
+		,#{remaining}
+		</if>
+		<if test="recycle !=null and recycle !=''">
+		,#{recycle}
+		</if>
+		<if test="status !=null and status !=''">
+		,#{status}
+		</if>
+		<if test="parentID !=null and parentID !=''">
+		,#{parentID}
+		</if>
+		<if test="beginTime !=null and beginTime !=''">
+		,#{beginTime}
+		</if>
+		<if test="endTime !=null and endTime !=''">
+		,#{endTime}
+		</if>
+		<if test="begin !=null and begin !=''">
+		,#{begin}
+		</if>
+		<if test="end !=null and end !=''">
+		,#{end}
+		</if>
+		<if test="maxMoney !=null and maxMoney !=''">
+		,#{maxMoney}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,#{remark}
+		</if>
+		
+	)</insert>
+	
+	<!-- 更新后台商品信息，若其他地方需要更新商品部分数据，请另外写方法，此方法仅仅用于更新商品全部数据（此方法不作为通用update方法调用，否则会导致部分字段的数据丢失，切记。） -->
+	<update id="front.coupon.update" parameterType="net.jeeshop.services.front.coupon.bean.Coupon">
+		update t_coupon
+		  set id=#{id}
+		
+		<if test="ownerID!=null and ownerID!=''">
+		,ownerID=#{ownerID}
+		</if>
+		<if test="ownerType!=null and ownerType!=''">
+		,ownerType=#{ownerType}
+		</if>
+		<if test="ownerName!=null and ownerName!=''">
+		,ownerName=#{ownerName}
+		</if>
+		<if test="ownerNo!=null and ownerNo!=''">
+		,ownerNo=#{ownerNo}
+		</if>
+		<if test="orientationType!=null and orientationType!=''">
+		,orientationType=#{orientationType}
+		</if>
+		<if test="orientationID!=null and orientationID!=''">
+		,orientationID=#{orientationID}
+		</if>
+		<if test="orientationName!=null and orientationName!=''">
+		,orientationName=#{orientationName}
+		</if>
+		<if test="amount!=null">
+		,amount=#{amount}
+		</if>
+		<if test="remaining !=null">
+		,remaining=#{remaining}
+		</if>
+		<if test="recycle!=null">
+		,recycle=#{recycle}
+		</if>
+		<if test="status!=null and status!=''">
+		,status=#{status}
+		</if>
+		<if test="parentID!=null and parentID!=''">
+		,parentID=#{parentID}
+		</if>
+		<if test="createTime!=null and createTime!=''">
+		,createTime=#{createTime}
+		</if>
+		<if test="beginTime !=null and beginTime !=''">
+		,beginTime=#{beginTime}
+		</if>
+		<if test="endTime !=null and endTime !=''">
+		,endTime=#{endTime}
+		</if>
+		<if test="begin !=null and begin !=''">
+		,begin=#{begin}
+		</if>
+		<if test="end !=null and end !=''">
+		,end=#{end}
+		</if>
+		<if test="maxMoney !=null and maxMoney !=''">
+		,maxMoney=#{maxMoney}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark=#{remark}
+		</if>
+		 where 1=1 and id=#{id}
+	</update>
+	
+	<select id="front.coupon.selectOne" parameterType="net.jeeshop.services.front.coupon.bean.Coupon" resultType="net.jeeshop.services.front.coupon.bean.Coupon">
+	 select * 
+	 from t_coupon t where 1=1 
+		 <if test="id!=null and id!=''">
+		 	and id=#{id}
+		 </if>
+	</select>
+	
+	<select id="front.coupon.selectById" parameterType="string" resultType="net.jeeshop.services.front.coupon.bean.Coupon">
+	 select * from t_coupon t where id=#{id}
+	</select>
+	
+	<delete id="front.coupon.deleteById" parameterType="int">
+		delete from t_coupon where 1=1 and id=#{id}
+	</delete>
+</mapper>

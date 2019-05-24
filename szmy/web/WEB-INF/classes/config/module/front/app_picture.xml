@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.appPicture">
+	<select id="front.appPicture.selectPageList" parameterType="net.jeeshop.services.common.AppPicture" resultType="net.jeeshop.services.common.AppPicture">
+	 select * from app_picture t where 1=1 
+ order by id desc 
+ limit #{offset},#{pageSize} 
+	</select>
+ 
+	<select id="front.appPicture.selectPageCount" parameterType="net.jeeshop.services.common.AppPicture" resultType="java.lang.Integer">
+	 select count(*) from (select 1 	 from app_picture t where 1=1 
+	 ) a 
+	</select>
+	
+	<select id="front.appPicture.selectList" parameterType="net.jeeshop.services.common.AppPicture" resultType="net.jeeshop.services.common.AppPicture">
+	 select * from app_picture t where 1=1
+	 
+	 <if test="orderID !=null and orderID !=''">
+		and orderID=#{orderID}
+		</if>
+	 <if test="vehicleID !=null and vehicleID !=''">
+		and vehicleID=#{vehicleID}
+	</if>
+	  order by id
+	</select>
+ 
+	<select id="front.appPicture.selectOne" parameterType="net.jeeshop.services.common.AppPicture" resultType="net.jeeshop.services.common.AppPicture">
+	 select * from app_picture t where 1=1 and id=#{id}
+	</select>
+	<select id="front.appPicture.selectById" parameterType="String" resultType="net.jeeshop.services.common.AppPicture">
+	 select * from app_picture t where 1=1 and id=#{id}
+	</select>
+	<select id="front.appPicture.selectByOid" parameterType="String" resultType="net.jeeshop.services.common.AppPicture">
+	 select * from app_picture t where 1=1 and orderID=#{oid}
+	</select>
+	
+	<delete id="front.appPicture.deleteById" parameterType="Integer">
+		delete from app_picture where 1=1 and id=#{id}
+	</delete>
+	<delete id="front.appPicture.deleteByOid" parameterType="String">
+		delete from app_picture where 1=1 and orderID=#{oid}
+	</delete>
+	<delete id="front.appPicture.deleteByVid" parameterType="String">
+		delete from app_picture where 1=1 and vehicleID=#{vid}
+	</delete>
+	<delete id="front.appPicture.delete" parameterType="net.jeeshop.services.common.AppPicture">
+		delete from app_picture where 1=1 and id=#{id}
+	</delete>
+	
+	<insert id="front.appPicture.insert" parameterType="net.jeeshop.services.common.AppPicture" useGeneratedKeys="true" keyProperty="id">
+	insert into app_picture
+		(
+		id
+		<if test="orderID !=null and orderID !=''">
+		,orderID
+		</if>
+		<if test="vehicleID !=null and vehicleID !=''">
+		,vehicleID
+		</if>
+		<if test="picture !=null and picture !=''">
+		,picture
+		</if>
+		
+		)
+		values
+		(
+		id
+		<if test="orderID !=null and orderID !=''">
+		,#{orderID}
+		</if>
+		<if test="vehicleID !=null and vehicleID !=''">
+		,#{vehicleID}
+		</if>
+		<if test="picture !=null and picture !=''">
+		,#{picture}
+		</if>
+		)
+	</insert>
+	<update id="front.appPicture.update" parameterType="net.jeeshop.services.common.AppPicture">
+		update app_picture
+		  set id=#{id}
+		<if test="orderID !=null and orderID !=''">
+		,orderID=#{orderID}
+		</if>
+		<if test="vehicleID !=null and vehicleID !=''">
+		,vehicleID=#{vehicleID}
+		</if>
+		<if test="picture !=null and picture !=''">
+		,picture=#{picture}
+		</if>
+		where id=#{id}
+	</update>
+</mapper>

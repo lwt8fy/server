@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.appSdOrder">
+    <select id="front.appSdOrder.selectPageList" parameterType="net.jeeshop.services.common.AppSdOrder" resultType="net.jeeshop.services.common.AppSdOrder">select * from app_sd_order t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="nextTime!=null and nextTime!=''">and nextTime=#{nextTime}</if>
+        <if test="orderid!=null and orderid!=''">and orderid=#{orderid}</if>
+        <if test="name1!=null and name1!=''">and name1=#{name1}</if>
+        <if test="name2!=null and name2!=''">and name2=#{name2}</if>rorder by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.appSdOrder.selectPageCount" parameterType="net.jeeshop.services.common.AppSdOrder" resultType="Integer">select count(*) from( select 1 app_sd_order t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="nextTime!=null and nextTime!=''">and nextTime=#{nextTime}</if>
+        <if test="orderid!=null and orderid!=''">and orderid=#{orderid}</if>
+        <if test="name1!=null and name1!=''">and name1=#{name1}</if>
+        <if test="name2!=null and name2!=''">and name2=#{name2}</if>)a
+    </select>
+    <select id="front.appSdOrder.selectList" parameterType="net.jeeshop.services.common.AppSdOrder" resultType="net.jeeshop.services.common.AppSdOrder">select * from app_sd_order t where 1=1 
+        <if test="nextTime!=null and nextTime!=''">and nextTime &lt;= #{nextTime}</if>
+      order by id desc
+    </select>
+    <select id="front.appSdUser.selectSdUser"  resultType="String">
+    select username from app_sd_user
+    </select>
+    <select id="front.appSdOrder.selectOne" parameterType="net.jeeshop.services.common.AppSdOrder" resultType="net.jeeshop.services.common.AppSdOrder">select * from app_sd_order t where 1=1 and id=#{id}</select>
+    <select id="front.appSdOrder.selectById" parameterType="String" resultType="net.jeeshop.services.common.AppSdOrder">select * from app_sd_order t where 1=1 and id=#{id}</select>
+    <delete id="front.appSdOrder.deleteById" parameterType="Integer">delete from app_sd_order t where 1=1 and id=#{id}</delete>
+    <delete id="front.appSdOrder.delete" parameterType="net.jeeshop.services.common.AppSdOrder">delete from app_sd_order t where 1=1 and id=#{id}</delete>
+    <insert id="front.appSdOrder.insert" parameterType="net.jeeshop.services.common.AppSdOrder" useGeneratedKeys="true" keyProperty="id">insert into app_sd_order( 
+        id
+        <if test="name2id !=null and name2id !=''">,name2id</if>
+        <if test="name2phone !=null and name2phone !=''">,name2phone</if>
+        <if test="status!=null and status!=''">,status</if>
+        <if test="nextTime!=null and nextTime!=''">,nextTime</if>
+        <if test="orderid!=null and orderid!=''">,orderid</if>
+        <if test="name1!=null and name1!=''">,name1</if>
+        <if test="name2!=null and name2!=''">,name2</if>)values(
+        id
+        <if test="name2id !=null and name2id !=''">,#{name2id}</if>
+        <if test="name2phone !=null and name2phone !=''">,#{name2phone}</if>
+        <if test="status!=null and status!=''">,#{status}</if>
+        <if test="nextTime!=null and nextTime!=''">,#{nextTime}</if>
+        <if test="orderid!=null and orderid!=''">,#{orderid}</if>
+        <if test="name1!=null and name1!=''">,#{name1}</if>
+        <if test="name2!=null and name2!=''">,#{name2}</if>)
+    </insert>
+    <update id="front.appSdOrder.update" parameterType="net.jeeshop.services.common.AppSdOrder">
+    	update app_sd_order set id=#{id} 
+        <if test="status!=null and status!=''">, status=#{status}</if>
+        <if test="nextTime!=null and nextTime!=''">, nextTime=#{nextTime}</if>
+        <if test="name2!=null and name2!=''">, name2=#{name2}</if>
+         <if test="orderid!=null and orderid!=''">, orderid=#{orderid}</if>
+        where 1=1 and id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.company">
+	<select id="front.company.selectPageList" parameterType="net.jeeshop.services.front.company.bean.Company" resultType="net.jeeshop.services.front.company.bean.Company">
+	 select t.id,t.name,t.legalPerson,t.address,t.businessLicense,t.contactor,t.contactorTelephone,t.contactorPhone
+	 ,t.contactorEmail,t.contactorZipcode,t.contactorFax,t.note,t.compNum,DATE_FORMAT(t.createtime,'%Y-%m-%d') createtime,t.icon,t.type
+	 from t_company t where 1=1 
+	 <if test="id!=null and id!=''">
+		 	and t.id=#{id}
+	  </if>
+	  <if test="createAccount!=null and createAccount!=''">
+	 	and t.createAccount=#{createAccount}
+	 </if>
+	 <if test="name!=null and name!=''">
+			and t.name like CONCAT('%','${name}','%' ) 
+	 </if>
+	 <if test="startDate!=null and startDate!=''">
+		and createtime &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createtime &lt;= #{endDate}
+	 </if>
+	 <if test="type!=null and type!=''">
+		and type = #{type}
+	 </if>
+ order by compNum asc,id desc
+ limit #{offset},#{pageSize} 
+	</select>
+ 
+	<select id="front.company.selectPageCount" parameterType="net.jeeshop.services.front.company.bean.Company" resultType="java.lang.Integer">
+	 select count(*) from t_company t where 1=1 
+	<if test="id!=null and id!=''">
+		 	and t.id=#{id}
+	  </if>
+	  <if test="createAccount!=null and createAccount!=''">
+	 	and t.createAccount=#{createAccount}
+	 </if>
+	 <if test="name!=null and name!=''">
+			and t.name like CONCAT('%','${name}','%' ) 
+	 </if>
+	 <if test="startDate!=null and startDate!=''">
+		and createtime &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createtime &lt;= #{endDate}
+	 </if>
+	 <if test="type!=null and type!=''">
+		and type = #{type}
+	 </if>
+	</select>
+	
+	<select id="front.company.selectList" parameterType="net.jeeshop.services.front.company.bean.Company" resultType="net.jeeshop.services.front.company.bean.Company">
+	 select * 
+	 from t_company t where 1=1 
+	  <if test="pcadetail !=null and pcadetail!=''">
+			and t.pcadetail like CONCAT('%','${pcadetail}','%' ) 
+	 </if>
+	  <if test="type!=null and type!=''">
+		and type = #{type}
+	 </if>
+	 <if test="status!=null and status!=''">
+		 	and t.status=#{status}
+	  </if>
+	 <if test="id!=null and id!=''">
+		 	and id=#{id}
+	</if>
+	 <if test="name!=null and name!=''">
+			and t.name like CONCAT('%','${name}','%' ) 
+	 </if>
+	 <if test="city!=null and city!=''">
+		 	and t.city=#{city}
+	  </if>
+	 <if test="area!=null and area!=''">
+		 	and t.area=#{area}
+	  </if>
+ order by compNum asc,id desc 
+	</select>
+ 
+	<insert id="front.company.insert" parameterType="net.jeeshop.services.front.company.bean.Company" useGeneratedKeys="true" keyProperty="id">
+		insert into t_company
+		(
+		id,createAccount,createTime
+		<if test="name!=null and name!=''">
+		,name
+		</if>
+		<if test="legalPerson!=null and legalPerson!=''">
+		,legalPerson
+		</if>
+		<if test="address!=null and address!=''">
+		,address
+		</if>
+		<if test="businessLicense!=null and businessLicense!=''">
+		,businessLicense
+		</if>
+		<if test="contactor!=null and contactor !=''">
+		,contactor
+		</if>
+		<if test="contactorTelephone !=null and contactorTelephone !=''">
+		,contactorTelephone
+		</if>
+		<if test="contactorPhone !=null and contactorPhone !=''">
+		,contactorPhone
+		</if>
+		<if test="contactorEmail !=null and contactorEmail !=''">
+		,contactorEmail
+		</if>
+		<if test="contactorZipcode !=null and contactorZipcode !=''">
+		,contactorZipcode
+		</if>
+		<if test="contactorFax !=null and contactorFax !=''">
+		,contactorFax
+		</if>
+		<if test="note !=null and note !=''">
+		,note
+		</if>
+		<if test="accountBank !=null and accountBank !=''">
+		,accountBank
+		</if>
+		<if test="accountNumber !=null and accountNumber !=''">
+		,accountNumber
+		</if>
+		
+		<if test="icon!=null and icon!=''">
+		,icon
+		</if>
+		<if test="type!=null and type !=''">
+		,type
+		</if>
+		<if test="province!=null and province!=''">
+		,province
+		</if>
+		<if test="city!=null and city!=''">
+		,city
+		</if>
+		<if test="area!=null and area!=''">
+		,area
+		</if>
+		<if test="pcadetail!=null and pcadetail!=''">
+		,pcadetail
+		</if>
+		<if test="sfz1!=null and sfz1!=''">
+		,sfz1
+		</if>
+		<if test="sfz2!=null and sfz2!=''">
+		,sfz2
+		</if>
+		<if test="gsyyzz!=null and gsyyzz!=''">
+		,gsyyzz
+		</if>
+		<if test="swdjz!=null and swdjz!=''">
+		,swdjz
+		</if>
+		<if test="zzjgdmz!=null and zzjgdmz!=''">
+		,zzjgdmz
+		</if>
+		<if test="scxkz!=null and scxkz!=''">
+		,scxkz
+		</if>
+		<if test="gmpzs!=null and gmpzs!=''">
+		,gmpzs
+		</if>
+		<if test="gspzs!=null and gspzs!=''">
+		,gspzs
+		</if>
+		<if test="status !=null and status !=''">
+		,status
+		</if>
+		)
+		values
+		(
+		id,#{createAccount},now()
+		<if test="name !=null and name !=''">
+		,#{name}
+		</if>
+		<if test="legalPerson !=null and legalPerson !=''">
+		,#{legalPerson}
+		</if>
+		<if test="address !=null and address !=''">
+		,#{address}
+		</if>
+		<if test="businessLicense !=null and businessLicense !=''">
+		,#{businessLicense}
+		</if>
+		<if test="contactor !=null and contactor !=''">
+		,#{contactor}
+		</if>
+		<if test="contactorTelephone !=null and contactorTelephone !=''">
+		,#{contactorTelephone}
+		</if>
+		<if test="contactorPhone !=null and contactorPhone !=''">
+		,#{contactorPhone}
+		</if>
+		<if test="contactorEmail !=null and contactorEmail !=''">
+		,#{contactorEmail}
+		</if>
+		<if test="contactorZipcode !=null and contactorZipcode !=''">
+		,#{contactorZipcode}
+		</if>
+		<if test="contactorFax !=null and contactorFax !=''">
+		,#{contactorFax}
+		</if>
+		<if test="note !=null and note !=''">
+		,#{note}
+		</if>
+		<if test="accountBank !=null and accountBank !=''">
+		,#{accountBank}
+		</if>
+		<if test="accountNumber !=null and accountNumber !=''">
+		,#{accountNumber}
+		</if>
+		<if test="icon!=null and icon!=''">
+		,#{icon}
+		</if>
+		<if test="type !=null and type !=''">
+		,#{type}
+		</if>
+		<if test="province!=null and province!=''">
+,#{province}
+</if>
+<if test="city!=null and city!=''">
+,#{city}
+</if>
+<if test="area!=null and area!=''">
+,#{area}
+</if>
+<if test="pcadetail!=null and pcadetail!=''">
+,#{pcadetail}
+</if>
+<if test="sfz1!=null and sfz1!=''">
+,#{sfz1}
+</if>
+<if test="sfz2!=null and sfz2!=''">
+,#{sfz2}
+</if>
+<if test="gsyyzz!=null and gsyyzz!=''">
+,#{gsyyzz}
+</if>
+<if test="swdjz!=null and swdjz!=''">
+,#{swdjz}
+</if>
+<if test="zzjgdmz!=null and zzjgdmz!=''">
+,#{zzjgdmz}
+</if>
+<if test="scxkz!=null and scxkz!=''">
+,#{scxkz}
+</if>
+<if test="gmpzs!=null and gmpzs!=''">
+,#{gmpzs}
+</if>
+<if test="gspzs!=null and gspzs!=''">
+,#{gspzs}
+</if>
+<if test="status !=null and status !=''">
+,#{status}
+</if>
+	)</insert>
+	
+	<!-- 更新后台商品信息，若其他地方需要更新商品部分数据，请另外写方法，此方法仅仅用于更新商品全部数据（此方法不作为通用update方法调用，否则会导致部分字段的数据丢失，切记。） -->
+	<update id="front.company.update" parameterType="net.jeeshop.services.front.company.bean.Company">
+		update t_company
+		  set id=#{id},updatetime=now()
+		<if test="name !=null and name !=''">
+		,name=#{name}
+		</if>
+		<if test="legalPerson !=null and legalPerson !=''">
+		,legalPerson=#{legalPerson}
+		</if>
+		<if test="address !=null and address !=''">
+		,address=#{address}
+		</if>
+		<if test="businessLicense !=null and businessLicense !=''">
+		,businessLicense=#{businessLicense}
+		</if>
+		<if test="contactor !=null and contactor !=''">
+		,contactor=#{contactor}
+		</if>
+		<if test="contactorTelephone !=null and contactorTelephone !=''">
+		,contactorTelephone=#{contactorTelephone}
+		</if>
+		<if test="contactorPhone !=null and contactorPhone !=''">
+		,contactorPhone=#{contactorPhone}
+		</if>
+		<if test="contactorEmail !=null and contactorEmail !=''">
+		,contactorEmail=#{contactorEmail}
+		</if>
+		<if test="contactorZipcode !=null and contactorZipcode !=''">
+		,contactorZipcode=#{contactorZipcode}
+		</if>
+		<if test="contactorFax !=null and contactorFax !=''">
+		,contactorFax=#{contactorFax}
+		</if>
+		<if test="note !=null and note !=''">
+		,note=#{note}
+		</if>
+		<if test="accountBank !=null and accountBank !=''">
+		,accountBank=#{accountBank}
+		</if>
+		<if test="accountNumber !=null and accountNumber !=''">
+		,accountNumber=#{accountNumber}
+		</if>
+		<if test="province!=null and province!=''">
+		,province=#{province}
+		</if>
+		<if test="city!=null and city!=''">
+		,city=#{city}
+		</if>
+		<if test="area!=null and area!=''">
+		,area=#{area}
+		</if>
+		<if test="pcadetail!=null and pcadetail!=''">
+		,pcadetail=#{pcadetail}
+		</if>
+		<if test="sfz1!=null and sfz1!=''">
+		,sfz1=#{sfz1}
+		</if>
+		<if test="sfz2!=null and sfz2!=''">
+		,sfz2=#{sfz2}
+		</if>
+		<if test="gsyyzz!=null and gsyyzz!=''">
+		,gsyyzz=#{gsyyzz}
+		</if>
+		<if test="swdjz!=null and swdjz!=''">
+		,swdjz=#{swdjz}
+		</if>
+		<if test="zzjgdmz!=null and zzjgdmz!=''">
+		,zzjgdmz=#{zzjgdmz}
+		</if>
+		<if test="scxkz!=null and scxkz!=''">
+		,scxkz=#{scxkz}
+		</if>
+		<if test="gmpzs!=null and gmpzs!=''">
+		,gmpzs=#{gmpzs}
+		</if>
+		<if test="gspzs!=null and gspzs!=''">
+		,gspzs=#{gspzs}
+		</if>
+		 where 1=1 and id=#{id}
+	</update>
+	
+	<select id="front.company.selectOne" parameterType="net.jeeshop.services.front.company.bean.Company" resultType="net.jeeshop.services.front.company.bean.Company">
+	 select * 
+	 from t_company t where 1=1 
+		 <if test="id!=null and id!=''">
+		 	and id=#{id}
+		 </if>
+		  <if test="createAccount !=null and createAccount !=''">
+		 	and createAccount=#{createAccount}
+		 </if>
+		 <if test="name!=null and name!=''">
+				and t.name like CONCAT('%','${name}','%' ) 
+		 </if>
+	</select>
+	
+	<select id="front.company.selectById" parameterType="string" resultType="net.jeeshop.services.front.company.bean.Company">
+	 select * from t_company t where id=#{id}
+	</select>
+	
+	<delete id="front.company.deleteById" parameterType="int">
+		delete from t_company where 1=1 and id=#{id}
+	</delete>
+</mapper>

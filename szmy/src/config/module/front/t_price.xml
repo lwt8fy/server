@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.price">
+    <select id="front.price.selectPageList" parameterType="net.jeeshop.services.common.Price" resultType="net.jeeshop.services.common.Price">select * from t_price where 1=1 
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="tzz!=null and tzz!=''">and tzz=#{tzz}</if>
+        <if test="wsy!=null and wsy!=''">and wsy=#{wsy}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="nsy!=null and nsy!=''">and nsy=#{nsy}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="areaType!=null and areaType!=''">and areaType=#{areaType}</if>
+        <if test="zlb!=null and zlb!=''">and zlb=#{zlb}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="ym!=null and ym!=''">and ym=#{ym}</if>
+        <if test="dp!=null and dp!=''">and dp=#{dp}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.price.selectPageCount" parameterType="net.jeeshop.services.common.Price" resultType="Integer">select count(*) from( select 1 from t_price where 1=1 
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="tzz!=null and tzz!=''">and tzz=#{tzz}</if>
+        <if test="wsy!=null and wsy!=''">and wsy=#{wsy}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="nsy!=null and nsy!=''">and nsy=#{nsy}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="areaType!=null and areaType!=''">and areaType=#{areaType}</if>
+        <if test="zlb!=null and zlb!=''">and zlb=#{zlb}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="ym!=null and ym!=''">and ym=#{ym}</if>
+        <if test="dp!=null and dp!=''">and dp=#{dp}</if>)a
+    </select>
+    <select id="front.price.selectList" parameterType="net.jeeshop.services.common.Price" resultType="net.jeeshop.services.common.Price">select * from t_price where 1=1 
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="tzz!=null and tzz!=''">and tzz=#{tzz}</if>
+        <if test="wsy!=null and wsy!=''">and wsy=#{wsy}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="nsy!=null and nsy!=''">and nsy=#{nsy}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="areaType!=null and areaType!=''">and areaType=#{areaType}</if>
+        <if test="zlb!=null and zlb!=''">and zlb=#{zlb}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="ym!=null and ym!=''">and ym=#{ym}</if>
+        <if test="dp!=null and dp!=''">and dp=#{dp}</if>
+        <if test="whereSql!=null and whereSql!=''">${whereSql}</if>
+        
+        order by id
+    </select>
+    <select id="front.price.selectOne" parameterType="net.jeeshop.services.common.Price" resultType="net.jeeshop.services.common.Price">
+        select * from t_price  where 1=1 
+         <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">
+        	and DATE_FORMAT(createTime, '%Y-%m-%d')=DATE_FORMAT(SYSDATE(), '%Y-%m-%d')
+        </if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="areaType!=null and areaType!=''">and areaType=#{areaType}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+           limit 1
+    </select>
+    <select id="front.price.selectById" parameterType="String" resultType="net.jeeshop.services.common.Price">select * from t_price  where 1=1 and id=#{id}</select>
+    <delete id="front.price.deleteById" parameterType="Integer">delete from t_price where 1=1 and id=#{id}</delete>
+    <delete id="front.price.delete" parameterType="net.jeeshop.services.common.Price">delete from t_price  where 1=1 and id=#{id}</delete>
+    <insert id="front.price.insert" parameterType="net.jeeshop.services.common.Price" useGeneratedKeys="true" keyProperty="id">insert into t_price(id 
+        <if test="createTime!=null and createTime!=''">,createTime</if>
+        <if test="tzz!=null and tzz!=''">,tzz</if>
+        <if test="wsy!=null and wsy!=''">,wsy</if>
+        <if test="type!=null and type!=''">,type</if>
+        <if test="nsy!=null and nsy!=''">,nsy</if>
+        <if test="city!=null and city!=''">,city</if>
+        <if test="area!=null and area!=''">,area</if>
+        <if test="areaType!=null and areaType!=''">,areaType</if>
+        <if test="zlb!=null and zlb!=''">,zlb</if>
+        <if test="province!=null and province!=''">,province</if>
+        <if test="ym!=null and ym!=''">,ym</if>
+        <if test="dp!=null and dp!=''">,dp</if>)values(id
+        <if test="createTime!=null and createTime!=''">,#{createTime}</if>
+        <if test="tzz!=null and tzz!=''">,#{tzz}</if>
+        <if test="wsy!=null and wsy!=''">,#{wsy}</if>
+        <if test="type!=null and type!=''">,#{type}</if>
+        <if test="nsy!=null and nsy!=''">,#{nsy}</if>
+        <if test="city!=null and city!=''">,#{city}</if>
+        <if test="area!=null and area!=''">,#{area}</if>
+        <if test="areaType!=null and areaType!=''">,#{areaType}</if>
+        <if test="zlb!=null and zlb!=''">,#{zlb}</if>
+        <if test="province!=null and province!=''">,#{province}</if>
+        <if test="ym!=null and ym!=''">,#{ym}</if>
+        <if test="dp!=null and dp!=''">,#{dp}</if>)
+    </insert>
+    <update id="front.price.update" parameterType="net.jeeshop.services.common.Price">update t_price set id=#{id} 
+        <if test="createTime!=null and createTime!=''">, createTime=#{createTime}</if>
+        <if test="tzz!=null and tzz!=''">, tzz=#{tzz}</if>
+        <if test="wsy!=null and wsy!=''">, wsy=#{wsy}</if>
+        <if test="type!=null and type!=''">, type=#{type}</if>
+        <if test="nsy!=null and nsy!=''">, nsy=#{nsy}</if>
+        <if test="city!=null and city!=''">, city=#{city}</if>
+        <if test="id!=null and id!=''">, id=#{id}</if>
+        <if test="area!=null and area!=''">, area=#{area}</if>
+        <if test="areaType!=null and areaType!=''">, areaType=#{areaType}</if>
+        <if test="zlb!=null and zlb!=''">, zlb=#{zlb}</if>
+        <if test="province!=null and province!=''">, province=#{province}</if>
+        <if test="ym!=null and ym!=''">, ym=#{ym}</if>
+        <if test="dp!=null and dp!=''">, dp=#{dp}</if>where 1=1 and id=#{id}
+    </update>
+</mapper>

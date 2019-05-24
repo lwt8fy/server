@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.appUser">
+	<select id="front.appUser.selectPageList" parameterType="net.jeeshop.services.common.AppUser" resultType="net.jeeshop.services.common.AppUser">
+	 select id,account username,password,mobile phone,picture,uuid,address,province,city,area,type,authentication,x,y from t_account t where 1=1 
+ order by id desc 
+ limit #{offset},#{pageSize} 
+	</select>
+ 
+	<select id="front.appUser.selectPageCount" parameterType="net.jeeshop.services.common.AppUser" resultType="java.lang.Integer">
+	 select count(*) from (select 1 	 from t_account t where 1=1 
+	 ) a 
+	</select>
+	
+	<select id="front.appUser.selectList" parameterType="net.jeeshop.services.common.AppUser" resultType="net.jeeshop.services.common.AppUser">
+	  select id,account username,password,mobile phone,picture,uuid,address,province,city,area,type,authentication,x,y from t_account t where 1=1
+	  
+	<if test="phone !=null and phone !=''">
+			and mobile =#{phone}
+	</if>
+	  
+	   order by id 
+	</select>
+ 
+	<select id="front.appUser.selectOne" parameterType="net.jeeshop.services.common.AppUser" resultType="net.jeeshop.services.common.AppUser">
+	  select id,account username,password,mobile phone,picture,uuid,address,province,city,area,type,authentication,x,y,userStatus,tjrsl,presenter,money,source from t_account t where 1=1 and account=#{username}
+	 <if test="password !=null and password !=''">
+		 and password=#{password}
+		</if>
+	  
+	</select>
+	<select id="front.appUser.selectByUuid" parameterType="string" resultType="net.jeeshop.services.common.AppUser">
+	  select id,account username,password,mobile phone,picture,uuid,address,province,city,area,type,authentication,x,y,userStatus,tjrsl,presenter,money,source from t_account t where 1=1 and uuid=#{uuid}
+	</select>
+	<select id="front.appUser.selectById" parameterType="string" resultType="net.jeeshop.services.common.AppUser">
+	  select id,account username,password,mobile phone,picture,uuid,address,province,city,area,type,authentication,x,y,userStatus,tjrsl,presenter,money,source from t_account t where 1=1 and id=#{id}
+	</select>
+	<delete id="front.appUser.deleteById" parameterType="Integer">
+		delete from t_account where 1=1 and id=#{id}
+	</delete>
+	<delete id="front.appUser.delete" parameterType="net.jeeshop.services.common.AppUser">
+		delete from t_account where 1=1 and id=#{id}
+	</delete> 
+	<insert id="front.appUser.insert" parameterType="net.jeeshop.services.common.AppUser" useGeneratedKeys="true" keyProperty="id">
+	insert into t_account
+		(
+		id,account,password,mobile,emailIsActive,nickname,status,rid,regeistDate,source,authentication
+		<if test="picture!=null and picture!=''">
+		,picture
+		</if>
+		<if test="uuid!=null and uuid!=''">
+		,uuid
+		</if>
+		
+		<if test="address !=null and address !=''">
+		,address
+		</if>
+		<if test="province !=null and province !=''">
+		,province
+		</if>
+		<if test="city !=null and city !=''">
+		,city
+		</if>
+		<if test="area !=null and area !=''">
+		,area
+		</if>
+		<if test="type !=null and type !=''">
+		,type
+		</if>
+		<if test="presenter !=null and presenter !=''">
+		,presenter
+		</if>
+	    <if test="x !=null and x !=''">
+		,x
+		</if>
+		<if test="y !=null and y !=''">
+		,y
+		</if>
+		<if test="userStatus !=null and userStatus !=''">
+		,userStatus
+		</if>
+		<if test="tjrsl !=null">
+		,tjrsl
+		</if>
+		)
+		values
+		(
+		id,#{username},#{password},#{phone},'y',#{username},'y','13',now(),'3','0'
+		<if test="picture !=null and picture !=''">
+		,#{picture}
+		</if>
+		<if test="uuid !=null and uuid !=''">
+		,#{uuid}
+		</if>
+		
+		<if test="address !=null and address !=''">
+		,#{address}
+		</if>
+		<if test="province !=null and province !=''">
+		,#{province}
+		</if>
+		<if test="city !=null and city !=''">
+		,#{city}
+		</if>
+		<if test="area !=null and area !=''">
+		,#{area}
+		</if>
+		<if test="type !=null and type !=''">
+		,#{type}
+		</if>
+		<if test="presenter !=null and presenter !=''">
+		,#{presenter}
+		</if>
+		<if test="x !=null and x !=''">
+		,#{x}
+		</if>
+		<if test="y !=null and y !=''">
+		,#{y}
+		</if>
+		<if test="userStatus !=null and userStatus !=''">
+		,#{userStatus}
+		</if>
+		<if test="tjrsl !=null">
+		,#{tjrsl}
+		</if>
+		)
+	</insert>
+	<update id="front.appUser.update" parameterType="net.jeeshop.services.common.AppUser">
+		update t_account
+		  set id=#{id}
+		<if test="username !=null and username !=''">
+		,account=#{username}
+		</if>
+		<if test="password !=null and password !=''">
+		,password=#{password}
+		</if>
+		<if test="phone !=null and phone !=''">
+		,mobile=#{phone}
+		</if>
+		<if test="picture !=null and picture !=''">
+		,picture=#{picture}
+		</if>
+		<if test="uuid !=null and uuid !=''">
+		,uuid=#{uuid}
+		</if>
+		
+		<if test="address !=null and address !=''">
+		,address=#{address}
+		</if>
+		<if test="province !=null and province !=''">
+		,province=#{province}
+		</if>
+		<if test="city !=null and city !=''">
+		,city=#{city}
+		</if>
+		<if test="area !=null and area !=''">
+		,area=#{area}
+		</if>
+		<if test="type !=null and type !=''">
+		,type=#{type}
+		</if>
+		<if test="authentication !=null and authentication !=''">
+		,authentication=#{authentication}
+		</if>
+		<if test="presenter !=null and presenter !=''">
+		,presenter=#{presenter}
+		</if>
+		<if test="x !=null and x !=''">
+		,x=#{x}
+		</if>
+		<if test="y !=null and y !=''">
+		,y=#{y}
+		</if>
+		<if test="userStatus !=null and userStatus !=''">
+		,userStatus=#{userStatus}
+		</if>
+		<if test="tjrsl !=null">
+		,tjrsl=#{tjrsl}
+		</if>
+		where 1=1 and id=#{id}
+	</update>
+	<update id="front.appUser.updateMoney" parameterType="net.jeeshop.services.common.AppUser">
+		update t_account
+		  set money=#{money}
+		<if test="tjrsl !=null">
+		,tjrsl=#{tjrsl}
+		</if>
+		<if test="authentication !=null and authentication!=''">
+		,authentication=#{authentication}
+		</if>
+		where 1=1 and id=#{id}
+	</update>
+</mapper>

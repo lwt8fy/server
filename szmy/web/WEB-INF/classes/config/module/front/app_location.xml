@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.appLocation">
+    <select id="front.appLocation.selectPageList" parameterType="net.jeeshop.services.common.AppLocation" resultType="net.jeeshop.services.common.AppLocation">select * from app_location t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="address!=null and address!=''">and address=#{address}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="y!=null and y!=''">and y=#{y}</if>
+        <if test="x!=null and x!=''">and x=#{x}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.appLocation.selectPageCount" parameterType="net.jeeshop.services.common.AppLocation" resultType="Integer">select count(*) from( select 1 app_location t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="address!=null and address!=''">and address=#{address}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="y!=null and y!=''">and y=#{y}</if>
+        <if test="x!=null and x!=''">and x=#{x}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>)a
+    </select>
+    <select id="front.appLocation.selectList" parameterType="net.jeeshop.services.common.AppLocation" resultType="net.jeeshop.services.common.AppLocation">select * from app_location t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="address!=null and address!=''">and address=#{address}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="y!=null and y!=''">and y=#{y}</if>
+        <if test="x!=null and x!=''">and x=#{x}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>order by id
+    </select>
+    <select id="front.appLocation.selectOne" parameterType="net.jeeshop.services.common.AppLocation" resultType="net.jeeshop.services.common.AppLocation">select * from app_location t where 1=1 and id=#{id}</select>
+    <select id="front.appLocation.selectById" parameterType="String" resultType="net.jeeshop.services.common.AppLocation">select * from app_location t where 1=1 and id=#{id}</select>
+    <delete id="front.appLocation.deleteById" parameterType="Integer">delete from app_location t where 1=1 and id=#{id}</delete>
+    <delete id="front.appLocation.delete" parameterType="net.jeeshop.services.common.AppLocation">delete from app_location t where 1=1 and id=#{id}</delete>
+    <insert id="front.appLocation.insert" parameterType="net.jeeshop.services.common.AppLocation" useGeneratedKeys="true" keyProperty="id">insert into app_location(id 
+        <if test="area!=null and area!=''">,area</if>
+        <if test="address!=null and address!=''">,address</if>
+        <if test="province!=null and province!=''">,province</if>
+        <if test="userName!=null and userName!=''">,userName</if>
+        <if test="y!=null and y!=''">,y</if>
+        <if test="x!=null and x!=''">,x</if>
+        <if test="city!=null and city!=''">,city</if>
+        <if test="createTime !=null and createTime !=''">,createTime</if>
+        
+        )values(id
+        <if test="area!=null and area!=''">,#{area}</if>
+        <if test="address!=null and address!=''">,#{address}</if>
+        <if test="province!=null and province!=''">,#{province}</if>
+        <if test="userName!=null and userName!=''">,#{userName}</if>
+        <if test="y!=null and y!=''">,#{y}</if>
+        <if test="x!=null and x!=''">,#{x}</if>
+        <if test="city!=null and city!=''">,#{city}</if>
+        <if test="createTime !=null and createTime !=''">,#{createTime}</if>
+        )
+    </insert>
+    <update id="front.appLocation.update" parameterType="net.jeeshop.services.common.AppLocation">update app_location set id=#{id} 
+        <if test="id!=null and id!=''">, id=#{id}</if>
+        <if test="area!=null and area!=''">, area=#{area}</if>
+        <if test="address!=null and address!=''">, address=#{address}</if>
+        <if test="province!=null and province!=''">, province=#{province}</if>
+        <if test="userName!=null and userName!=''">, userName=#{userName}</if>
+        <if test="y!=null and y!=''">, y=#{y}</if>
+        <if test="x!=null and x!=''">, x=#{x}</if>
+        <if test="city!=null and city!=''">, city=#{city}</if>where 1=1 and id=#{id}
+    </update>
+</mapper>

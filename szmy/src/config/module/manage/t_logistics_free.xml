@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manage.logistics_free">
+    <select id="manage.logistics_free.selectPageList" parameterType="net.jeeshop.services.common.Logistics_free" resultType="net.jeeshop.services.common.Logistics_free">
+    	select * from t_logistics_free t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="logisticsid!=null and logisticsid!=''">and logisticsid=#{logisticsid}</if>
+        <if test="conditions!=null and conditions!=''">and conditions=#{conditions}</if>
+        <if test="areas!=null and areas!=''">and areas=#{areas}</if>
+        <if test="conditiontype!=null and conditiontype!=''">and conditiontype=#{conditiontype}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="manage.logistics_free.selectPageCount" parameterType="net.jeeshop.services.common.Logistics_free" resultType="Integer">
+    	select count(*) from t_logistics_free t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="logisticsid!=null and logisticsid!=''">and logisticsid=#{logisticsid}</if>
+        <if test="conditions!=null and conditions!=''">and conditions=#{conditions}</if>
+        <if test="areas!=null and areas!=''">and areas=#{areas}</if>
+        <if test="conditiontype!=null and conditiontype!=''">and conditiontype=#{conditiontype}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+    </select>
+    <select id="manage.logistics_free.selectList" parameterType="net.jeeshop.services.common.Logistics_free" resultType="net.jeeshop.services.common.Logistics_free">
+    	select * from t_logistics_free t where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="logisticsid!=null and logisticsid!=''">and logisticsid=#{logisticsid}</if>
+        <if test="conditions!=null and conditions!=''">and conditions=#{conditions}</if>
+        <if test="areas!=null and areas!=''">and areas=#{areas}</if>
+        <if test="conditiontype!=null and conditiontype!=''">and conditiontype=#{conditiontype}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>order by id
+    </select>
+    <select id="manage.logistics_free.selectOne" parameterType="net.jeeshop.services.common.Logistics_free" resultType="net.jeeshop.services.common.Logistics_free">
+    	select * from t_logistics_free t where 1=1 and id=#{id}</select>
+    <select id="manage.logistics_free.selectById" parameterType="String" resultType="net.jeeshop.services.common.Logistics_free">
+    	select * from t_logistics_free t where 1=1 and id=#{id}</select>
+    <delete id="manage.logistics_free.deleteById" parameterType="Integer">delete from t_logistics_free t where 1=1 and id=#{id}</delete>
+    <delete id="manage.logistics_free.deleteByLogId" parameterType="Integer">delete from t_logistics_free where logisticsid=#{logisticsid}</delete>
+    <delete id="manage.logistics_free.delete" parameterType="net.jeeshop.services.common.Logistics_free">
+    	delete from t_logistics_free t where 1=1 and id=#{id}</delete>
+    <insert id="manage.logistics_free.insert" parameterType="net.jeeshop.services.common.Logistics_free" useGeneratedKeys="true" keyProperty="id">
+    	insert into t_logistics_free(id,logisticsid
+        <if test="conditions!=null and conditions!=''">
+        	,conditions
+        </if>
+        <if test="areas!=null and areas!=''">
+        	,areas
+        </if>
+        <if test="areasid!=null and areasid!=''">
+        	,areasid
+        </if>
+        <if test="conditiontype!=null and conditiontype!=''">
+        	,conditiontype
+        </if>
+        <if test="type!=null and type!=''">
+        	,type
+        </if>
+        )values(id,#{logisticsid}
+        <if test="conditions!=null and conditions!=''">
+        	,#{conditions}
+        </if>
+        <if test="areas!=null and areas!=''">
+        	,#{areas}
+        </if>
+        <if test="areasid!=null and areasid!=''">
+        	,#{areasid}
+        </if>
+        <if test="conditiontype!=null and conditiontype!=''">
+        	,#{conditiontype}
+        </if>
+        <if test="type!=null and type!=''">
+        	,#{type}
+        </if>
+        )
+    </insert>
+    <update id="manage.logistics_free.update" parameterType="net.jeeshop.services.common.Logistics_free">
+    	update t_logistics_free set id=#{id} 
+        <if test="id!=null and id!=''">, id=#{id}</if>
+        <if test="logisticsid!=null and logisticsid!=''">, logisticsid=#{logisticsid}</if>
+        <if test="conditions!=null and conditions!=''">, conditions=#{conditions}</if>
+        <if test="areas!=null and areas!=''">, areas=#{areas}</if>
+        <if test="areasid!=null and areasid!=''">, areasid=#{areasid}</if>
+        <if test="conditiontype!=null and conditiontype!=''">, conditiontype=#{conditiontype}</if>
+        <if test="type!=null and type!=''">, type=#{type}</if>where 1=1 and id=#{id}
+    </update>
+    <select id="manage.logistics_free.selectListByLogid" parameterType="String" resultType="net.jeeshop.services.common.Logistics_free">
+    	select * from t_logistics_free where logisticsid=#{logisticsid}
+    </select>
+    <select id="manage.logistics_free.selectFreeByArea" parameterType="net.jeeshop.services.common.Logistics_free" resultType="net.jeeshop.services.common.Logistics_free">
+    	select * from t_logistics_free where logisticsid='${logisticsid}' and (areasid like '%${province}%' || areasid like '%${city}%' || areasid like '%${area}%')
+    </select>
+</mapper>

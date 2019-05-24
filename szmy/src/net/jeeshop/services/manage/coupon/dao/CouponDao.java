@@ -1,0 +1,1 @@
+package net.jeeshop.services.manage.coupon.dao;import java.util.List;import net.jeeshop.core.DaoManager;import net.jeeshop.services.manage.coupon.bean.Coupon;public interface CouponDao extends DaoManager<Coupon> {	List selectAccCoupon(Coupon c); }

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.product"> 
+	<select id="front.product.selectPageList" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select 
+		t.id "id",
+		t.status,
+		t.catalogID "catalogID",
+		t.name "name",
+		t.introduce "introduce",
+		t.price "price",
+		t.nowPrice "nowprice",
+		t.picture "picture",
+		DATE_FORMAT(t.createtime,'%Y-%m-%d') "createtime",
+		t.isnew "isnew",
+		t.sale "sale",
+		t.hit "hit",
+		t.isDel "isDel",
+		t.stock,t.sellcount,t.phone ,t.companyType ,
+		t.province,
+		t.city,
+		t.area,
+		t.activityType,
+		t.activityPrice,
+		t.compName,
+		t.compID
+		
+	 from t_product t where 1=1 and status=2 and checkState=2 and isDel='0' 
+	 <if test="attrID!=0">  
+		 and t.id in (select al.productID from t_attribute_link al where al.attrID=#{attrID})   
+	 </if>
+	 <if test="catalogIdStr!=null and catalogIdStr!=''">
+	  and ${catalogIdStr}
+	 </if>
+	 <if test="companyType !=null and companyType!=''">
+		  and companyType=#{companyType}
+	 </if>
+	 <if test="id!=null and id!=''">
+		 	and id=#{id}
+	 </if>
+	 <if test="compID!=null and compID!=''">
+		 	and compID=#{compID}
+	 </if> 
+	 <if test="activityType !=null and activityType !=''">
+		 	and activityType=#{activityType}
+	 </if>
+	 <if test="name!=null and name!=''">
+		and t.name like CONCAT('%','${name}','%' ) 
+	 </if>
+	
+	 	<if test="province!=null and province!=''">
+			and province=#{province}
+	 	</if>
+		<if test="city!=null and city!=''">
+			and city=#{city}
+	 	</if>
+		<if test="area!=null and area!=''">
+			and area=#{area}
+	 	</if>
+	 <if test="special!=null and special!=''">
+	 	<if test="special.equals('hot')"> order by orderNum desc,hit desc </if>
+	 	<if test="special.equals('newest')"> and isnew='y' </if>
+	 	<if test="special.equals('sale')"> and sale='y' </if>
+	 </if>
+	 
+	 <if test="special==null">
+		 <if test="orderBy==0">
+			 order by orderNum desc,id asc 
+		 </if>
+		 <if test="orderBy==1">
+			 order by orderNum desc,hit desc 
+		 </if>
+		 <if test="orderBy==2">
+			  <if test="orderType==0">
+				 order by orderNum desc,nowPrice asc 
+			 </if>
+			  <if test="orderType==1">
+				 order by orderNum desc,nowPrice desc 
+			 </if>
+		 </if>
+		 <if test="orderBy==3">
+			 order by orderNum desc,createtime desc 
+		 </if>
+		 <if test="orderBy==4">
+			 order by orderNum desc, sellcount desc 
+		 </if>
+	 </if>
+	 limit #{offset},#{pageSize} 
+	</select>
+ 
+	<select id="front.product.selectPageCount" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="java.lang.Integer">
+	 select count(*) from t_product t where 1=1 and status=2  and checkState=2 and isDel='0'
+	 <if test="attrID!=0">
+		 and t.id in (select al.productID from t_attribute_link al where al.attrID=#{attrID})   
+	 </if>
+	 <if test="catalogIdStr!=null and catalogIdStr!=''">
+	  and ${catalogIdStr}
+	 </if>
+	 <if test="id!=null and id!=''">
+		 	and id=#{id}
+	 </if>
+	  <if test="activityType !=null and activityType !=''">
+		 	and activityType=#{activityType}
+	 </if>
+	  <if test="compID!=null and compID!=''">
+		 	and compID=#{compID}
+	 </if>
+	 <if test="companyType !=null and companyType!=''">
+	  and companyType=#{companyType}
+	 </if>
+	 
+	 <if test="name!=null and name!=''">
+		and t.name like CONCAT('%','${name}','%' ) 
+	 </if>
+	    <if test="province!=null and province!=''">
+			and province=#{province}
+	 	</if>
+		<if test="city!=null and city!=''">
+			and city=#{city}
+	 	</if>
+		<if test="area!=null and area!=''">
+			and area=#{area}
+	 	</if>
+	 <if test="special!=null and special!=''">
+	 	<if test="special.equals('hot')"> order by orderNum desc,hit desc </if>
+	 	<if test="special.equals('newest')"> and isnew='y'  order by orderNum desc </if>
+	 	<if test="special.equals('sale')"> and sale='y'  order by orderNum desc </if>
+	 </if>
+	 <if test="special==null">
+		 <if test="orderBy==0">
+			 order by orderNum desc,id asc 
+		 </if>
+		 <if test="orderBy==1">
+			 order by orderNum desc,hit desc 
+		 </if>
+		 <if test="orderBy==2">
+			  <if test="orderType==0">
+				 order by orderNum desc,nowPrice asc 
+			 </if>
+			  <if test="orderType==1">
+				 order by orderNum desc,nowPrice desc 
+			 </if>
+		 </if>
+		 <if test="orderBy==3">
+			 order by orderNum desc,createtime desc 
+		 </if>
+		 <if test="orderBy==4">
+			 order by id desc 
+		 </if>
+	 </if>
+	</select>
+	
+	<select id="front.product.selectHotSearch" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select 
+		t.id,
+		t.name,
+		t.isDel
+	 from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+	 <if test="productIds!=null and productIds.size &gt; 0">
+	  and t.id in <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">  
+  			#{item}  
+ 		</foreach>
+	 </if>
+	 order by orderNum desc
+	</select>
+	
+	<!-- 加载促销活动的商品 -->
+	<select id="front.product.selectActivityProductList" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select 
+		t.id "id",
+		t.status,
+		t.catalogID "catalogID",
+		t.name "name",
+		t.introduce "introduce",
+		t.price "price",
+		t.nowPrice "nowprice",
+		t.picture "picture",
+		DATE_FORMAT(t.createtime,'%Y-%m-%d') "createtime",
+		t.isnew "isnew",
+		t.sale "sale",
+		t.hit "hit",
+		t.isDel "isDel",
+		t.stock,t.sellcount,
+		t.activityID ,
+		t.activityType
+		 
+<!-- 		(select * from t_activity activity where activity.id=t.activityID)  -->
+	 from t_product t where 1=1 and status=2 and activityID is not null and checkState=2 and isDel='0'
+	 	<if test="productIds!=null and productIds.size &gt; 0">
+	  		and t.id in <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">  
+  			#{item}  
+ 			</foreach>
+ 		</if>
+ 		order by orderNum desc
+	</select>
+	
+	<select id="front.product.loadHotProductShowInSuperMenu" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select t.id,t.name,t.isDel from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+	 <if test="productIds!=null and productIds.size &gt; 0">
+	  and t.catalogID in <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">  
+  			#{item}  
+ 		</foreach>
+	 </if>
+	 order by orderNum desc,sellcount desc 
+	 limit 0,#{top} 
+	</select>
+	
+	<select id="front.product.selectList" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select 
+		t.id "id",
+		t.catalogID "catalogID",
+		t.name "name",
+		t.introduce "introduce",
+		t.price "price",
+		t.nowPrice "nowprice",
+		t.picture "picture",
+		DATE_FORMAT(t.createtime,'%Y-%m-%d') "createtime",
+		t.isnew "isnew",
+		t.sale "sale",
+		t.hit "hit",
+		t.isDel "isDel",
+		t.stock,t.sellcount,t.phone,t.companyType,t.compName,t.compID ,
+		t.province,
+		t.city,
+		t.area,
+		t.activityType,
+		t.activityPrice,
+		t.activityID
+	 from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+	 <if test="catalogIdStr!=null and catalogIdStr!=''">
+	  and ${catalogIdStr}
+	 </if>
+	 <if test="id!=null and id!=''">
+	 	and id=#{id}
+	</if>
+	 <if test="productIds!=null and productIds.size &gt; 0">
+  		and t.id in <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">  
+ 			#{item}  
+			</foreach>
+	 </if>
+	 <if test="name!=null and name!=''">
+		and t.name like CONCAT('%','${name}','%' ) 
+	 </if>
+	 <if test="isnew!=null and isnew!=''">
+	 	and isnew=#{isnew}
+	 </if>
+	 <if test="sale!=null and sale!=''">
+	 	and sale=#{sale}
+	 </if> 
+	 <if test="compID!=null and compID!=''">
+	 	and compID=#{compID}
+	 </if> 
+	 <if test="activityType !=null and activityType !=''">
+	 	and activityType=#{activityType}
+	 </if> 
+	 	<if test="province!=null and province!=''">
+			and province=#{province}
+	 	</if>
+		<if test="city!=null and city!=''">
+			and city=#{city}
+	 	</if>
+		<if test="area!=null and area!=''">
+			and area=#{area}
+	 	</if>
+	 <if test="hot">
+ 	order by orderNum desc,sellcount desc 
+	 </if>
+	 <if test="!hot">
+	 <if test="orderBy!=null and orderBy==1">
+		order by orderNum desc,hit desc 
+	  </if>
+	 <if test="orderBy!=null and orderBy==2">
+		order by sellcount desc 
+	  </if>
+	  <if test="orderBy==null">
+		order by orderNum desc,id desc 
+	  </if>
+ 	
+	 </if>
+ 	<if test="top &gt; 0">
+	 limit 0,#{top} 
+ 	</if>
+	</select>
+
+	<select id="front.product.selectListByArea" parameterType="net.jeeshop.services.front.product.bean.Product"
+		resultType="net.jeeshop.services.front.product.bean.Product">
+		(select
+		t.id "id",
+		t.catalogID "catalogID",
+		t.name "name",
+		t.introduce "introduce",
+		t.price "price",
+		t.nowPrice "nowprice",
+		t.picture "picture",
+		DATE_FORMAT(t.createtime,'%Y-%m-%d') "createtime",
+		t.isnew "isnew",
+		t.sale "sale",
+		t.hit "hit",
+		t.isDel "isDel",
+		t.stock,t.sellcount,t.phone,t.companyType,t.compName,t.compID,
+		t.province,
+		t.city,
+		t.area
+		from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+		 <if test="catalogIdStr!=null and catalogIdStr!=''">
+	  and ${catalogIdStr}
+	 </if>
+		<if test="id!=null and id!=''">
+			and id=#{id}
+		</if>
+		<if test="name!=null and name!=''">
+			and t.name like CONCAT('%','${name}','%' ) 
+	 	</if>
+		<if test="isnew!=null and isnew!=''">
+			and isnew=#{isnew}
+	 	</if>
+		<if test="sale!=null and sale!=''">
+			and sale=#{sale}
+	 	</if>
+		<if test="province!=null and province!=''">
+			and province=#{province}
+	 	</if>
+		<if test="city!=null and city!=''">
+			and city=#{city}
+	 	</if>
+		<if test="area!=null and area!=''">
+			and area=#{area}
+	 	</if>
+		<if test="hot">
+			order by orderNum desc,sellcount desc 
+	 	</if>
+		<if test="!hot">
+			<if test="orderBy!=null and orderBy==1">
+				order by orderNum desc,hit desc 
+	  		</if>
+			<if test="orderBy!=null and orderBy==2">
+				order by sellcount desc 
+	  		</if>
+			<if test="orderBy==null">
+					order by orderNum desc,id desc 
+		  	</if>
+		</if>
+		)
+		<if test="province!=null and province!=''">
+			union
+					(select
+					t.id "id",
+					t.catalogID "catalogID",
+					t.name "name",
+					t.introduce "introduce",
+					t.price "price",
+					t.nowPrice "nowprice",
+					t.picture "picture",
+					DATE_FORMAT(t.createtime,'%Y-%m-%d') "createtime",
+					t.isnew "isnew",
+					t.sale "sale",
+					t.hit "hit",
+					t.isDel "isDel",
+					t.stock,t.sellcount,t.phone,t.companyType,t.compName,t.compID,
+					t.province,
+					t.city,
+					t.area
+					from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+					 <if test="catalogIdStr!=null and catalogIdStr!=''">
+	  and ${catalogIdStr}
+	 </if>
+					<if test="id!=null and id!=''">
+						and id=#{id}
+					</if>
+					<if test="name!=null and name!=''">
+						and t.name like CONCAT('%','${name}','%' ) 
+				 	</if>
+					<if test="isnew!=null and isnew!=''">
+						and isnew=#{isnew}
+				 	</if>
+					<if test="sale!=null and sale!=''">
+						and sale=#{sale}
+				 	</if>
+					<if test="province!=null and province!=''">
+						or (province!=#{province} or province is null)
+				 	</if>
+					<if test="city!=null and city!=''">
+						or (city!=#{city} or city is null )
+				 	</if>
+					<if test="area!=null and area!=''">
+						or (area!=#{area} or area is null)
+				 	</if>
+					<if test="hot">
+						order by orderNum desc,sellcount desc 
+				 	</if>
+					<if test="!hot">
+						<if test="orderBy!=null and orderBy==1">
+							order by orderNum desc,hit desc 
+				  		</if>
+						<if test="orderBy!=null and orderBy==2">
+							order by sellcount desc 
+				  		</if>
+						<if test="orderBy==null">
+								order by orderNum desc,id desc 
+					  	</if>
+					</if>
+			)
+	 	</if>
+		<if test="top &gt; 0">
+			limit 0,#{top} 
+ 		</if>
+	</select>
+	
+	<select id="front.product.selectPageLeftHotProducts" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select 
+		t.id "id",
+		t.catalogID "catalogID",
+		t.name "name",
+		t.price "price",
+		t.nowPrice "nowprice",
+		t.picture "picture",
+		t.isnew "isnew",
+		t.sale "sale",
+		t.hit "hit",
+		t.isDel "isDel",
+		t.stock,t.sellcount
+	 from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+	 <if test="catalogID!=null and catalogID!=''">
+			and catalogID=',${catalogID},'
+		</if>
+	 <if test="catalogIdStr!=null and catalogIdStr!=''">
+	  and ${catalogIdStr}
+	 </if>
+	 order by orderNum desc limit 0,#{top} 
+	</select>
+	
+	<select id="front.product.selectStockList" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.ProductStockInfo">
+	 select t.id,t.stock,t.isDel,t.activityID,score from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+	 <if test="id!=null and id!=''"> and id=#{id}</if>
+	 order by orderNum desc
+	</select>
+	
+	<select id="front.product.selectProductListByIds" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select t.id,t.stock,t.name,t.nowPrice,t.picture,t.isDel,t.price,t.activityPrice,t.sellcount from t_product t where 1=1 and status=2 and checkState=2 and isDel='0'
+	 <if test="productIds!=null and productIds.size &gt; 0">
+	  and id in <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">  
+  			#{item}  
+ 		</foreach>
+	 </if>
+	 order by orderNum desc
+	</select>
+	
+	<select id="front.product.selectListProductHTML" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select t.id,t.productHTML,t.isDel from t_product t where 1=1 and status=2 and t.productHTML is not null and checkState=2 and isDel='0'
+	 <if test="id!=null and id!=''"> and id=#{id}</if>
+	</select>
+	
+	<update id="front.product.update" parameterType="net.jeeshop.services.front.product.bean.Product">
+		update t_product
+		  set id=#{id}
+		<if test="catalogID!=null and catalogID!=''">
+		,catalogID=#{catalogID}
+		</if>
+		<if test="name !=null and name !=''">
+		,name=#{name}
+		</if>
+		<if test="introduce !=null and introduce !=''">
+		,introduce=#{introduce}
+		</if>
+		<if test="price !=null and price !=''">
+		,price=#{price}
+		</if>
+		<if test="nowPrice !=null and nowPrice !=''">
+		,nowPrice=#{nowPrice}
+		</if>
+		<if test="picture !=null and picture !=''">
+		,picture=#{picture}
+		</if>
+		<if test="maxPicture !=null and maxPicture !=''">
+		,maxPicture=#{maxPicture}
+		</if>
+		<if test="productHTML !=null and productHTML !=''">
+		,productHTML=#{productHTML}
+		</if>
+		<if test="createtime !=null and createtime !=''">
+		,createtime=#{createtime}
+		</if>
+		<if test="isnew !=null and isnew!=''">
+		,isnew=#{isnew}
+		</if>
+		<if test="isDel !=null and isDel !=''">
+		,isDel=#{isDel}
+		</if>
+		<if test="sale !=null and sale!=''">
+		,sale=#{sale}
+		</if>
+		<if test="hit !=0">
+		,hit=#{hit}
+		</if>
+		<if test="status !=0">
+		,status=#{status}
+		</if>
+		<if test="stock !=0">
+		,stock=#{stock}
+		</if>
+		 where 1=1 and id=#{id}
+	</update>
+	
+	<update id="front.product.updateStockAfterPaySuccess" parameterType="net.jeeshop.services.front.product.bean.Product">
+		update t_product set 
+		<if test="addSellcount !=0 ">
+		sellcount=#{addSellcount}+sellcount
+		</if>
+		<if test="addSellcount ==0">
+		stock=#{stock}
+		</if>
+		  where 1=1 and id=#{id}
+	</update>
+	
+	<update id="front.product.updateHit" parameterType="net.jeeshop.services.front.product.bean.Product">
+		update t_product set hit=hit+1 where 1=1 and id=#{id}
+	</update>
+ 
+	<select id="front.product.selectOne" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select * 
+	 from t_product t where 1=1 and isDel='0'
+		 <if test="id!=null and id!=''">
+		 	and id=#{id}
+ 		</if>
+		 <if test="catalogID!=null and catalogID!=''">
+			and catalogID=',${catalogID},'
+		</if>
+		 <if test="name!=null and name!=''">
+			and t.name like CONCAT('%','${name}','%' ) 
+		 </if>
+	</select>
+
+	<select id="front.product.selectParameterList" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+	 SELECT a.name,al.value FROM t_attribute a,t_attribute_link  al 
+	 where a.id=al.attrID and al.productID=#{id} and al.value is not null
+	</select>
+	
+	<select id="front.product.selectById" parameterType="string" resultType="net.jeeshop.services.front.product.bean.Product">
+	 select * from t_product t where 1=1 and id=#{id} 
+	</select>
+	
+	<select id="front.product.selectPointsMallProduct" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+		select * from t_product where catalogID in (select CONCAT(',',id,',') from t_catalog where pid='345') order by id desc
+	</select>
+	
+	<select id="front.product.getPointsProductByMoney" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+		select * from t_product where catalogID in (select CONCAT(',',id,',') from t_catalog where pid='345') 
+		and nowprice*100 &lt;= (select  money  from t_account t where t.id = ${catalogIdStr})
+		order by id desc limit #{offset},#{pageSize}
+	</select>
+	<select id="front.product.getPointsProductByMoneyCount" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="java.lang.Integer">
+		select count(*) from t_product where catalogID in (select CONCAT(',',id,',') from t_catalog where pid='345') 
+		and nowprice*100 &lt;= (select  money  from t_account t where t.id = ${catalogIdStr})
+	</select>
+	<select id="front.product.getHotPointsProduct" parameterType="net.jeeshop.services.front.product.bean.Product" resultType="net.jeeshop.services.front.product.bean.Product">
+		select * from t_product where catalogID in (select CONCAT(',',id,',') from t_catalog where pid='345') order by sellcount LIMIT 0,5
+	</select>
+	
+</mapper>

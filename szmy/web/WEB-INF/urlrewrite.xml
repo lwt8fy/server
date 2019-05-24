@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.1//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.1.dtd">
+<urlrewrite>
+	<rule> <from>/activity/([a-zA-Z]+).html</from> <to last="true">/activity/$1.jsp</to> </rule>
+	
+	<!-- 用户反馈前台 -->
+	<rule>
+		<from>/feedback/([a-zA-Z0-9]+).html</from>
+		<to last="true">/feedback!$1.action</to>
+	</rule>
+	
+	<!-- 产品详细信息 -->
+	<rule>
+		<from>/product/([0-9]+).html</from>
+		<to last="true">/product!product?e.id=$1</to>
+	</rule>
+	
+	<!--请求prouct中的方法，注意：要和请求商品明细区别开来-->
+	<rule>
+		<from>/product/([a-zA-Z]+).html</from>
+		<to last="true">/product!$1.action</to>
+	</rule>
+	<!-- 购物车操作 -->
+	<rule>
+		<from>/cart/([a-zA-Z0-9]+).html</from>
+		<to last="true">/cart!$1.action</to>
+	</rule>
+	
+	<!-- 用户收益  -->
+	<rule>
+		<from>/profit/([a-zA-Z0-9]+).html</from>
+		<to last="true">/profitAction!$1.action</to>
+	</rule>
+	
+	<!-- 问卷调查 -->
+	<rule>
+		<from>/question/([0-9a-zA-Z]+).html</from>
+		<to last="true">/questionnaire!$1.action</to>
+	</rule>
+	
+	<!-- 会员中心 -->
+	<rule>
+		<from>/user/([a-zA-Z0-9]+).html</from>
+		<to last="true">/account!$1.action</to>
+	</rule>
+	
+	<!-- 订单管理 -->
+	<rule>
+		<from>/order/([a-zA-Z0-9]+).html</from>
+		<to last="true">/orders!$1.action</to>
+	</rule>
+	<!-- 旗舰店管理 -->
+	<rule>
+		<from>/company/([a-zA-Z0-9]+).html</from>
+		<to last="true">/company!$1.action</to>
+	</rule>
+	<rule>
+		<from>/showCompanyProduct/([a-zA-Z0-9]+).html</from>
+		<to last="true">/product!showCompanyProduct?id=$1</to>
+	</rule>
+	
+	<!-- 根据商品关键字，搜索商品 -->
+	<rule>
+		<from>/search.html</from>
+<!-- 		<from>/search.html?q=^([a-zA-Z0-9]+)$</from> -->
+		<to last="true">/product!search.action</to>
+	</rule>
+	
+	<rule>
+		<from>/newsSearch.html</from>
+		<to last="true">/product!newsSearch.action</to>
+	</rule>
+	
+	<!-- 根据目录ID加载产品列表信息 -->
+	<rule>
+		<from>/catalog/([0-9a-zA-Z]+).html</from>
+		<to last="true">/product!productList?catalogCode=$1</to>
+	</rule>
+	
+	<!-- 加载热门、特价、最新的商品列表信息 -->
+	<rule>
+		<from>/special/([a-z]+).html</from>
+		<to last="true">/product!specialProductList?special=$1</to>
+	</rule>
+	
+	<!-- 加载促销活动的商品列表
+	<rule>
+		<from>/activity.html</from>
+		<to last="true">/product!activityProductList.action</to>
+	</rule> -->
+	
+	<!-- 根据产品属性ID加载产品列表信息 -->
+	<rule>
+		<from>/catalog/attr/([0-9]+).html</from>
+		<to last="true">/product!productListByAttrID?attributeID=$1</to>
+	</rule>
+	
+	<!-- 新闻列表 -->
+	<rule>
+		<from>/news/list.html</from>
+		<to last="true">/product!newsList.action</to>
+	</rule>
+	
+	<!-- 根据新闻ID获取指定新闻明细内容 -->
+	<rule>
+		<from>/news/([0-9]+).html</from>
+		<to last="true">/news!newsInfo.action?id=$1</to>
+	</rule>
+	
+	<!-- 转到帮助中心 -->
+	<rule>
+		<from>/help/([0-9a-zA-Z]+).html</from>
+		<to last="true">/news!help?helpCode=$1</to>
+	</rule>
+	<!-- 根据类型跳转到列表 -->
+	<rule>
+		<from>/listByType/([0-9a-zA-Z]+).html</from> 
+		<to last="true">/product!listByType.action?catalogType=$1</to>
+	</rule>
+	<!-- 团购 -->
+	<rule>
+		<from>/tuangou/([a-zA-Z0-9]+).html</from>
+		<to last="true">/tuangou!$1.action</to>
+	</rule>
+	
+	<!-- 生鲜畜 -->
+	<rule>
+		<from>/shengXianChuFront/([a-zA-Z0-9]+).html</from>
+		<to last="true">/shengXianChuFront!$1.action</to>
+	</rule>
+	<!-- 积分商城M -->
+	<rule>
+		<from>/pmAccount/([0-9a-zA-Z]+).html</from>
+		<to last="true">/pointsMallAccountActionFront!$1</to>
+	</rule>
+	<rule>
+		<from>/pointsAccount/([0-9a-zA-Z]+).html</from>
+		<to last="true">/pointsAccount!$1</to>
+	</rule>
+	<rule>
+		<from>/pointsMall/([0-9]+).html</from>
+		<to last="true">/pointsMall!pointsProduct?e.id=$1</to>
+	</rule>
+	<rule>
+		<from>/points/([0-9]+).html</from>
+		<to last="true">/points!pointsProduct?e.id=$1</to>
+	</rule>
+	<rule>
+		<from>/pointsProduct/([0-9a-zA-Z]+).html</from>
+		<to last="true">/points!$1</to>
+	</rule>
+	<rule>
+		<from>/pointsProfit/([0-9a-zA-Z]+).html</from>
+		<to last="true">/pointsProfit!$1</to>
+	</rule>
+	
+	
+		<!-- web产品详细信息 -->
+	<rule>
+		<from>/mProduct/([0-9]+).html</from>
+		<to last="true">/szmyMobileProductActionFront!product?e.id=$1</to>
+	</rule>
+			<!-- web产品类别查询-->
+	<rule>
+		<from>/mCatalog/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileProductActionFront!toProductList?catalogCode=$1</to>
+	</rule>
+		<!-- web订单支付 -->
+	<rule>
+		<from>/mOrders/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileOrdersActionFront!$1</to>
+	</rule>
+
+	<!-- web用户管理 -->
+	<rule>
+		<from>/mAccount/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileAccountActionFront!$1</to>
+	</rule>
+	
+	<!-- web购物车管理  -->
+	<rule>
+		<from>/mCart/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileCartActionFront!$1</to>
+	</rule>
+	
+		<!-- web商品详情页搜索全部商品进入页面  -->
+	<rule>
+		<from>/mAllProduct/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileProductActionFront!toShowAllProductList</to>
+	</rule>
+	
+			<!-- web商品详情页搜索全部商品进入页面  -->
+	<rule>
+		<from>/mAProduct/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileProductActionFront!$1</to>
+	</rule>
+			<!-- 我的积分  -->
+	<rule>
+		<from>/mProfit/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileProfitActionFront!$1</to>
+	</rule>
+			<!-- 资讯  -->
+	<rule>
+		<from>/mNews/([0-9a-zA-Z]+).html</from>
+		<to last="true">/szmyMobileNewsActionFront!$1</to>
+	</rule>
+	
+	 <!-- 此优先级是最低的,直接转发  -->
+	<rule> <from>/([a-zA-Z]+).html</from> <to last="true">$1.jsp</to> </rule>
+</urlrewrite>

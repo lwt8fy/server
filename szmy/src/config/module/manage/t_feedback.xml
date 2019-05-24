@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manage.feedback">
+    <select id="manage.feedback.selectPageList" parameterType="net.jeeshop.services.common.Feedback" resultType="net.jeeshop.services.common.Feedback">select * from t_feedback t where 1=1 
+        <if test="content!=null and content!=''">and content=#{content}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="userName!=null and userName!=''">and userName like CONCAT('%','${userName}','%' )</if>
+        <if test="createUser!=null and createUser!=''">and createUser=#{createUser}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="answer!=null and answer!=''">and answer=#{answer}</if>order by createTime desc
+        limit #{offset},#{pageSize}
+    </select>
+    <select id="manage.feedback.selectPageCount" parameterType="net.jeeshop.services.common.Feedback" resultType="Integer">select count(*) from t_feedback where 1=1 
+        <if test="content!=null and content!=''">and content=#{content}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="userName!=null and userName!=''">and userName like CONCAT('%','${userName}','%' )</if>
+        <if test="createUser!=null and createUser!=''">and createUser=#{createUser}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="answer!=null and answer!=''">and answer=#{answer}</if>
+    </select>
+    <select id="manage.feedback.selectList" parameterType="net.jeeshop.services.common.Feedback" resultType="net.jeeshop.services.common.Feedback">select * from t_feedback t where 1=1 
+        <if test="content!=null and content!=''">and content=#{content}</if>
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="userName!=null and userName!=''">and userName like CONCAT('%','${userName}','%' )</if>
+        <if test="createUser!=null and createUser!=''">and createUser=#{createUser}</if>
+        <if test="status!=null and status!=''">and status=#{status}</if>
+        <if test="answer!=null and answer!=''">and answer=#{answer}</if>order by id desc
+    </select>
+    <select id="manage.feedback.selectOne" parameterType="net.jeeshop.services.common.Feedback" resultType="net.jeeshop.services.common.Feedback">select * from t_feedback t where 1=1 and id=#{id}</select>
+    <select id="manage.feedback.selectById" parameterType="String" resultType="net.jeeshop.services.common.Feedback">select * from t_feedback t where 1=1 and id=#{id}</select>
+    <delete id="manage.feedback.deleteById" parameterType="Integer">delete from t_feedback t where 1=1 and id=#{id}</delete>
+    <delete id="manage.feedback.delete" parameterType="net.jeeshop.services.common.Feedback">delete from t_feedback t where 1=1 and id=#{id}</delete>
+    <insert id="manage.feedback.insert" parameterType="net.jeeshop.services.common.Feedback" useGeneratedKeys="true" keyProperty="id">insert into t_feedback( 
+    	id,createTime
+        <if test="content!=null and content!=''">,content</if>
+        <if test="createUser!=null and createUser!=''">,createUser</if>
+        <if test="status!=null and status!=''">,status</if>
+        <if test="answer!=null and answer!=''">,answer</if>
+        <if test="userName!=null and userName!=''">,userName</if>
+        <if test="answerTime!=null and answerTime!=''">,answerTime</if>
+        )values(
+        id,now()
+        <if test="content!=null and content!=''">,#{content}</if>
+        <if test="createUser!=null and createUser!=''">,#{createUser}</if>
+        <if test="status!=null and status!=''">,#{status}</if>
+        <if test="answer!=null and answer!=''">,#{answer}</if>
+        <if test="userName!=null and userName!=''">,#{userName}</if>
+         <if test="answerTime!=null and answerTime!=''">,answerTime</if>)
+    </insert>
+    <update id="manage.feedback.update" parameterType="net.jeeshop.services.common.Feedback">
+    update t_feedback 
+    set id=#{id} 
+    ,answerTime=now()
+    	<if test="userName!=null and userName!=''">,userName=#{userName}</if>
+        <if test="content!=null and content!=''">, content=#{content}</if>
+        <if test="createTime!=null and createTime!=''">,createTime=#{createTime}</if>
+        <if test="createUser!=null and createUser!=''">, createUser=#{createUser}</if>
+        <if test="status!=null and status!=''">, status=#{status}</if>
+        <if test="answer!=null and answer!=''">, answer=#{answer}</if>where 1=1 and id=#{id}
+    </update>
+</mapper>

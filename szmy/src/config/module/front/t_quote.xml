@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.quote">
+    <select id="front.quote.selectPageList" parameterType="net.jeeshop.services.common.Quote" resultType="net.jeeshop.services.common.Quote">select * from t_quote where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="price!=null and price!=''">and price=#{price}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="source!=null and source!=''">and source=#{source}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="mobile!=null and mobile!=''">and mobile=#{mobile}</if>
+        <if test="productType!=null and productType!=''">and productType=#{productType}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>order by id desc limit #{offset},#{pageSize}
+    </select>
+    <select id="front.quote.selectPageCount" parameterType="net.jeeshop.services.common.Quote" resultType="Integer">select count(*) from( select 1 from t_quote where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="price!=null and price!=''">and price=#{price}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="source!=null and source!=''">and source=#{source}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="mobile!=null and mobile!=''">and mobile=#{mobile}</if>
+        <if test="productType!=null and productType!=''">and productType=#{productType}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>)a
+    </select>
+    <select id="front.quote.selectList" parameterType="net.jeeshop.services.common.Quote" resultType="net.jeeshop.services.common.Quote">select * from t_quote where 1=1 
+        <if test="id!=null and id!=''">and id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">and createTime=#{createTime}</if>
+        <if test="price!=null and price!=''">and price=#{price}</if>
+        <if test="area!=null and area!=''">and area=#{area}</if>
+        <if test="source!=null and source!=''">and source=#{source}</if>
+        <if test="province!=null and province!=''">and province=#{province}</if>
+        <if test="userName!=null and userName!=''">and userName=#{userName}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="mobile!=null and mobile!=''">and mobile=#{mobile}</if>
+        <if test="productType!=null and productType!=''">and productType=#{productType}</if>
+        <if test="city!=null and city!=''">and city=#{city}</if>order by id
+    </select>
+    
+    <select id="front.quote.selectSZList"  resultType="net.jeeshop.services.common.Quote">
+		SELECT convert(avg(t.price),decimal(10,2))  price,t.province,t.city,t.area,t.productType FROM t_quote t LEFT JOIN   t_price p on p.province=t.province and  p.city = t.city and p.area = t.area
+		and  DATE_FORMAT(t.createTime, '%Y-%m-%d') = DATE_FORMAT(p.createTime, '%Y-%m-%d')  and  DATE_FORMAT(t.createTime, '%Y-%m-%d') = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') where  t.type='生猪' 
+		GROUP BY t.province,t.city,t.area,t.productType       
+    </select>
+     <select id="front.quote.selectYMList"  resultType="net.jeeshop.services.common.Quote">
+     	SELECT convert(avg(t.price),decimal(10,2))  price,t.province,t.city,t.area,t.type FROM t_quote t LEFT JOIN   t_price p on p.province=t.province and  p.city = t.city and p.area = t.area 
+		and  DATE_FORMAT(t.createTime, '%Y-%m-%d') = DATE_FORMAT(p.createTime, '%Y-%m-%d')  and  DATE_FORMAT(t.createTime, '%Y-%m-%d') = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') where t.type='玉米' 
+		GROUP BY t.province,t.city,t.area,t.type
+    </select>
+     <select id="front.quote.selectDPList" resultType="net.jeeshop.services.common.Quote">
+     	SELECT convert(avg(t.price),decimal(10,2))  price,t.province,t.city,t.area,t.type FROM t_quote t LEFT JOIN   t_price p on p.province=t.province and  p.city = t.city and p.area = t.area 
+		and  DATE_FORMAT(t.createTime, '%Y-%m-%d') = DATE_FORMAT(p.createTime, '%Y-%m-%d')  and  DATE_FORMAT(t.createTime, '%Y-%m-%d') = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') where t.type='豆粕' 
+		GROUP BY t.province,t.city,t.area,t.type
+    </select>
+    <select id="front.quote.selectOne" parameterType="net.jeeshop.services.common.Quote" resultType="net.jeeshop.services.common.Quote">
+    select * from t_quote where 1=1 and id=#{id}
+    </select>
+    <select id="front.quote.selectById" parameterType="String" resultType="net.jeeshop.services.common.Quote">select * from t_quote where 1=1 and id=#{id}</select>
+    <delete id="front.quote.deleteById" parameterType="Integer">delete from t_quote where 1=1 and id=#{id}</delete>
+    <delete id="front.quote.delete" parameterType="net.jeeshop.services.common.Quote">delete from t_quote where 1=1 
+     <if test="type!=null and type!=''">
+     	 and type=#{type}
+     </if>
+     <if test="createTime!=null and createTime!=''">
+	    and createTime=#{createTime}
+     </if>
+       <if test="source!=null and source!=''">
+	    and source=#{source}
+     </if>
+    </delete>
+    <insert id="front.quote.insert" parameterType="net.jeeshop.services.common.Quote" useGeneratedKeys="true" keyProperty="id">insert into t_quote(id 
+        <if test="createTime!=null and createTime!=''">,createTime</if>
+        <if test="price!=null and price!=''">,price</if>
+        <if test="area!=null and area!=''">,area</if>
+        <if test="source!=null and source!=''">,source</if>
+        <if test="province!=null and province!=''">,province</if>
+        <if test="userName!=null and userName!=''">,userName</if>
+        <if test="type!=null and type!=''">,type</if>
+        <if test="mobile!=null and mobile!=''">,mobile</if>
+        <if test="productType!=null and productType!=''">,productType</if>
+        <if test="city!=null and city!=''">,city</if>)values(id
+        <if test="createTime!=null and createTime!=''">,#{createTime}</if>
+        <if test="price!=null and price!=''">,#{price}</if>
+        <if test="area!=null and area!=''">,#{area}</if>
+        <if test="source!=null and source!=''">,#{source}</if>
+        <if test="province!=null and province!=''">,#{province}</if>
+        <if test="userName!=null and userName!=''">,#{userName}</if>
+        <if test="type!=null and type!=''">,#{type}</if>
+        <if test="mobile!=null and mobile!=''">,#{mobile}</if>
+        <if test="productType!=null and productType!=''">,#{productType}</if>
+        <if test="city!=null and city!=''">,#{city}</if>)
+    </insert>
+    <insert id="front.quote.updateAll" useGeneratedKeys="true" parameterType="net.jeeshop.services.common.Quote" keyProperty="id">  
+	    insert into t_quote (province,city,area,type,productType,price,source,createTime) values  
+        (#{province},#{city},#{area},#{type},#{productType},#{price},#{source},#{createTime})  
+	</insert>  
+    <update id="front.quote.update" parameterType="net.jeeshop.services.common.Quote">update t_quote set id=#{id} 
+        <if test="id!=null and id!=''">, id=#{id}</if>
+        <if test="createTime!=null and createTime!=''">, createTime=#{createTime}</if>
+        <if test="price!=null and price!=''">, price=#{price}</if>
+        <if test="area!=null and area!=''">, area=#{area}</if>
+        <if test="source!=null and source!=''">, source=#{source}</if>
+        <if test="province!=null and province!=''">, province=#{province}</if>
+        <if test="userName!=null and userName!=''">, userName=#{userName}</if>
+        <if test="type!=null and type!=''">, type=#{type}</if>
+        <if test="mobile!=null and mobile!=''">, mobile=#{mobile}</if>
+        <if test="productType!=null and productType!=''">, productType=#{productType}</if>
+        <if test="city!=null and city!=''">, city=#{city}</if>where 1=1 and id=#{id}
+    </update>
+     <update id="front.quote.updatePrice" statementType="CALLABLE">
+       <![CDATA[
+    		{call updateAllPrice()}
+		]]>
+    </update>
+</mapper>

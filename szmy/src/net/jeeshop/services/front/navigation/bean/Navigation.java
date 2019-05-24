@@ -1,0 +1,1 @@
+package net.jeeshop.services.front.navigation.bean;import java.io.Serializable;public class Navigation extends net.jeeshop.services.common.Navigation		implements Serializable {	private static final long serialVersionUID = 1L;	@Override	public void clear() {		super.clear();	}}

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.appVersions">
+	<select id="front.appVersions.selectPageList" parameterType="net.jeeshop.services.common.AppVersions" resultType="net.jeeshop.services.common.AppVersions">
+	 select * from app_versions t where 1=1 
+	 <if test="title !=null and title !=''">
+	 and title like CONCAT('%','${title}','%' ) 
+	</if>
+	<if test="userID !=null and userID !=''">
+		 and userID=#{userID}
+	</if>
+	<if test="orderType !=null and orderType !=''">
+		 and orderType=#{orderType}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+		 and orderStatus=#{orderStatus}
+	</if>
+	<if test="purchaserID !=null and purchaserID !=''">
+		 and purchaserID=#{purchaserID}
+	</if>
+ order by id desc 
+ limit #{offset},#{pageSize} 
+	</select>
+ 
+	<select id="front.appVersions.selectPageCount" parameterType="net.jeeshop.services.common.AppVersions" resultType="java.lang.Integer">
+	 select count(*) from (select 1 	 from app_versions t where 1=1 
+	  <if test="title !=null and title !=''">
+	 and title like CONCAT('%','${title}','%' ) 
+	</if>
+	<if test="userID !=null and userID !=''">
+		 and userID=#{userID}
+	</if>
+	<if test="orderType !=null and orderType !=''">
+		 and orderType=#{orderType}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+		 and orderStatus=#{orderStatus}
+	</if>
+	<if test="purchaserID !=null and purchaserID !=''">
+		 and purchaserID=#{purchaserID}
+	</if>
+	 ) a 
+	</select>
+	
+	<select id="front.appVersions.selectList" parameterType="net.jeeshop.services.common.AppVersions" resultType="net.jeeshop.services.common.AppVersions">
+	 select * from app_versions t where 1=1 order by id desc 
+	</select>
+	<select id="front.appVersions.selectNewest"  resultType="net.jeeshop.services.common.AppVersions">
+	 select * from app_versions t where id=(select MAX(id) from app_versions)
+	</select>
+ 
+	<select id="front.appVersions.selectOne" parameterType="net.jeeshop.services.common.AppVersions" resultType="net.jeeshop.services.common.AppVersions">
+	 select * from app_versions t where 1=1 and id=#{id}
+	</select>
+	<select id="front.appVersions.selectById" parameterType="string" resultType="net.jeeshop.services.common.AppVersions">
+	 select * from app_versions t where 1=1 and id=#{id}
+	</select>
+	<delete id="front.appVersions.deleteById" parameterType="Integer">
+		delete from app_user where 1=1 and id=#{id}
+	</delete>
+	<delete id="front.appVersions.delete" parameterType="net.jeeshop.services.common.AppVersions">
+		delete from app_versions where 1=1 and id=#{id}
+	</delete>
+	<insert id="front.appVersions.insert" parameterType="net.jeeshop.services.common.AppVersions" useGeneratedKeys="true" keyProperty="id">
+	insert into app_versions
+		(
+		id,title,price,createTime
+		<if test="marketingTime !=null and marketingTime !=''">
+		,marketingTime
+		</if>
+		<if test="number !=null ">
+		,number
+		</if>
+		<if test="weight !=null ">
+		,weight
+		</if>
+		<if test="orderStatus !=null and orderStatus !=''">
+		,orderStatus
+		</if>
+		<if test="address !=null and address !=''">
+		,address
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark
+		</if>
+		<if test="userName !=null and userName !=''">
+		,userName
+		</if>
+		<if test="userID !=null and userID !=''">
+		,userID
+		</if>
+		<if test="picNumber !=null">
+		,picNumber
+		</if>
+		<if test="coverPicture !=null and coverPicture !=''">
+		,coverPicture
+		</if>
+		
+		<if test="lockTime !=null and lockTime !=''">
+		,lockTime
+		</if>
+		<if test="sellTime !=null and sellTime !=''">
+		,sellTime
+		</if>
+		<if test="finalPrice !=null">
+		,finalPrice
+		</if>
+		<if test="orderType !=null and orderType !=''">
+		,orderType
+		</if>
+		<if test="phone !=null and phone !=''">
+		,phone
+		</if>
+		)
+		values
+		(
+		id,#{title},#{price},now()
+		<if test="marketingTime !=null and marketingTime !=''">
+		,#{marketingTime}
+		</if>
+		<if test="number !=null ">
+		,#{number}
+		</if>
+		<if test="weight !=null ">
+		,#{weight}
+		</if>
+		<if test="orderStatus !=null and orderStatus !=''">
+		,#{orderStatus}
+		</if>
+		<if test="address !=null and address !=''">
+		,#{address}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,#{remark}
+		</if>
+		<if test="userName !=null and userName !=''">
+		,#{userName}
+		</if>
+		<if test="userID !=null and userID !=''">
+		,#{userID}
+		</if>
+		<if test="coverPicture !=null and coverPicture !=''">
+		,#{coverPicture}
+		</if>
+		<if test="lockTime !=null and lockTime !=''">
+		,#{lockTime}
+		</if>
+		<if test="sellTime !=null and sellTime !=''">
+		,#{sellTime}
+		</if>
+		<if test="finalPrice !=null">
+		,#{finalPrice}
+		</if>
+		<if test="orderType !=null and orderType !=''">
+		,#{orderType}
+		</if>
+		<if test="phone !=null and phone !=''">
+		,#{phone}
+		</if>
+		)
+	</insert>
+	<update id="front.appVersions.update" parameterType="net.jeeshop.services.common.AppVersions">
+		update app_versions
+		  set id=#{id}
+		<if test="title !=null and title !=''">
+		,title=#{title}
+		</if>
+		<if test="price !=null">
+		,price=#{price}
+		</if>
+		<if test="marketingTime !=null and marketingTime !=''">
+		,marketingTime=#{marketingTime}
+		</if>
+		<if test="number !=null ">
+		,number=#{number}
+		</if>
+		<if test="weight !=null ">
+		,weight=#{weight}
+		</if>
+		<if test="orderStatus !=null and orderStatus !=''">
+		,orderStatus=#{orderStatus}
+		</if>
+		<if test="address !=null and address !=''">
+		,address=#{address}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark=#{remark}
+		</if>
+		<if test="userID !=null and userID !=''">
+		,userID=#{userID}
+		</if>
+		<if test="coverPicture !=null and coverPicture !=''">
+		,coverPicture=#{coverPicture}
+		</if>
+		<if test="lockTime !=null and lockTime !=''">
+		,lockTime=#{lockTime}
+		</if>
+		<if test="sellTime !=null and sellTime !=''">
+		,sellTime=#{sellTime}
+		</if>
+		<if test="finalPrice !=null">
+		,finalPrice=#{finalPrice}
+		</if>
+		<if test="orderType !=null and orderType !=''">
+		,orderType=#{orderType}
+		</if>
+		<if test="phone !=null and phone !=''">
+		,phone=#{phone}
+		</if>
+		<if test="purchaserPhone !=null and purchaserPhone !=''">
+			<if test="purchaserPhone =='del'">
+				,purchaserID=null,purchaserPhone=null,purchaserName=null
+			</if>
+			<if test="purchaserPhone !='del'">
+				,purchaserID=#{purchaserID},purchaserPhone=#{purchaserPhone},purchaserName=#{purchaserPhone}
+			</if>
+			
+		</if>
+		where 1=1 and id=#{id}
+	</update>
+</mapper>

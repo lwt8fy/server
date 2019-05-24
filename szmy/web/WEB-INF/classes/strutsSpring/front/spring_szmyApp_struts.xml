@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+           
+     <!-- 神州牧易 appaction 王海洋 2015年11月11日15:03:56 -->
+     <!-- 商品展示 -->
+	<bean id="appProductActionFront" class="net.jeeshop.web.action.front.product.AppProductAction" scope="prototype">
+		<property name="server" ref="productServiceFront"></property>
+		<property name="productService" ref="productServiceFront"></property>
+		<property name="addressService" ref="addressServiceFront"></property>
+		<property name="catalogService" ref="catalogServiceFront"></property>
+		<property name="commentService" ref="commentServiceFront"></property>
+		<property name="favoriteService" ref="favoriteServiceFront"></property>
+		<property name="specService" ref="specServiceManage"></property>
+		<property name="companyService" ref="companyServiceFront"></property>
+	</bean>
+	
+	     <!-- 支付action-->
+	<bean id="szmyOrdersActionFront" class="net.jeeshop.web.action.front.orders.SzmyOrdersAction" scope="prototype">
+		<property name="server" ref="orderServiceFront"></property>
+		<property name="appUserService" ref="appUserService"></property>
+<!--		<property name="orderService" ref="orderServiceFront"></property>-->
+		<property name="productService" ref="productServiceFront"></property>
+		<property name="orderdetailService" ref="orderdetailServiceFront"></property>
+		<property name="ordershipService" ref="ordershipServiceFront"></property>
+		<property name="addressService" ref="addressServiceFront"></property>
+		<property name="orderpayService" ref="orderpayServiceFront"></property>
+		<property name="orderlogService" ref="orderlogServiceFront"></property>
+			<property name="orderService" ref="orderServiceFront"></property>
+			<property name="companyService" ref="companyServiceFront"></property>
+		<property name="accountService" ref="accountServiceFront"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="specService" ref="specServiceManage"></property>
+	</bean>
+	
+		     <!-- 地址action-->
+	<bean id="szmyAddressActionFront" class="net.jeeshop.web.action.front.szmyAddress.SzmyAddressAction" scope="prototype">
+		<property name="server" ref="addressServiceFront"></property>
+		<property name="addressService" ref="addressServiceFront"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<!--
+		<property name="productService" ref="productServiceFront"></property>
+		<property name="orderdetailService" ref="orderdetailServiceFront"></property>
+		<property name="ordershipService" ref="ordershipServiceFront"></property>
+		<property name="orderpayService" ref="orderpayServiceFront"></property>
+		<property name="orderlogService" ref="orderlogServiceFront"></property>
+			<property name="orderService" ref="orderServiceFront"></property>
+			<property name="companyService" ref="companyServiceFront"></property>
+		<property name="accountService" ref="accountServiceFront"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+	--></bean>
+	
+	<bean id="szmyAppNewsActionFront" class="net.jeeshop.web.action.front.news.SzmyAppNewsAction" scope="prototype">
+		<property name="server" ref="newsServiceFront"></property>
+    </bean>
+	<bean id="szmyFavoriteAction" class="net.jeeshop.web.action.front.favorite.SzmyFavoriteAction" scope="prototype">
+		<property name="server" ref="favoriteServiceFront"></property>
+		<property name="favoriteService" ref="favoriteServiceFront"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="productService" ref="productServiceFront"></property>
+    </bean>
+	<bean id="FavoriteShopAction" class="net.jeeshop.web.action.front.company.FavoriteShopAction" scope="prototype">
+		<property name="server" ref="favoriteShopService"></property>
+	    <property name="favoriteShopService" ref="favoriteShopService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="companyservice" ref="companyServiceFront"></property>
+    </bean>
+	
+</beans>

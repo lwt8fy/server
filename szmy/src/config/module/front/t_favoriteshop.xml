@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="front.FavoriteShop">
+    <select id="front.favoriteShop.selectPageList" parameterType="net.jeeshop.services.common.FavoriteShop" resultType="net.jeeshop.services.common.FavoriteShop">
+        select * from t_favoriteshop where 1=1 
+	 <if test="account!=null and account!=''"> and account=#{account} </if> 
+      order by id desc 
+       limit #{offset},#{pageSize} 
+	</select>
+    <select id="front.favoriteShop.selectPageCount" parameterType="net.jeeshop.services.common.FavoriteShop" resultType="Integer">
+    select count(*) from t_favoriteshop  where 1=1 
+        <if test="account!=null and account!=''"> and account=#{account} </if>
+	</select>
+    <select id="front.favoriteShop.selectList" parameterType="net.jeeshop.services.common.FavoriteShop" resultType="net.jeeshop.services.common.FavoriteShop">
+     select * from t_favoriteshop t where 1=1 
+	 <if test="account!=null and account!=''"> and account=#{account} </if> 
+	 <if test="companyID!=null and companyID!=''"> and companyID=#{companyID} </if> 
+	</select>
+    
+    <select id="front.FavoriteShop.connect" parameterType="net.jeeshop.services.common.FavoriteShop" resultType="net.jeeshop.services.front.company.bean.Company">
+    select * from t_company c inner join t_favoriteshop f on c.id=f.companyID
+    </select>
+    
+    <select id="front.favoriteShop.selectOne" parameterType="net.jeeshop.services.common.FavoriteShop" resultType="net.jeeshop.services.common.FavoriteShop">
+    select 
+		t.id "id",
+		t.account "account",
+		t.companyID "companyID",
+		t.createtime "createtime"
+	 from t_favorite t where 1=1 and id=#{id}
+	</select>
+    <select id="front.favoriteShop.selectById" parameterType="String" resultType="net.jeeshop.services.common.FavoriteShop">
+    select * from t_favoriteshop t where 1=1 and id=#{id}</select>
+    <delete id="front.favoriteShop.deleteById" parameterType="Integer">
+    delete from t_favoriteshop t where 1=1 and id=#{id}</delete>
+    <delete id="front.favoriteShop.delete" parameterType="net.jeeshop.services.common.FavoriteShop">
+    delete from t_favoriteshop  where 1=1 and id=#{id}</delete>
+    <insert id="front.favoriteShop.insert" parameterType="net.jeeshop.services.common.FavoriteShop" useGeneratedKeys="true" keyProperty="id">
+    insert into t_favoriteshop( 
+        id,createtime
+        <if test="account!=null and account!=''">
+        ,account
+        </if>
+        <if test="companyID!=null and companyID!=''">
+        ,companyID
+        </if>
+        )
+        values
+		(
+		id,now()
+		<if test="account !=null and account !=''">
+		,#{account}
+		</if>
+		<if test="companyID !=null and companyID !=''">
+		,#{companyID}
+		</if>
+		)
+    </insert>
+    
+    <select id="front.favoriteShop.selectFavoriteShopCount" parameterType="net.jeeshop.services.common.FavoriteShop"  resultType="Integer">
+    	select count(*) from t_favoriteshop where account=#{account} and companyID=#{companyID}
+    </select>
+</mapper>

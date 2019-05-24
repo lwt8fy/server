@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manage.scrollPic">
+    <select id="manage.scrollPic.selectPageList" parameterType="net.jeeshop.services.common.ScrollPic" resultType="net.jeeshop.services.common.ScrollPic">
+    	select *
+    	from t_scrollPic t where 1=1 
+    	
+    	<if test="floor !=null and floor !=''">
+	 	and floor=#{floor}
+	 </if>
+        order by floor asc limit #{offset},#{pageSize}
+    </select>
+    <select id="manage.scrollPic.selectPageCount" parameterType="net.jeeshop.services.common.ScrollPic" resultType="Integer">
+    	select count(*) from t_scrollPic where 1=1 
+    	<if test="floor !=null and floor !=''">
+	 	and floor=#{floor}
+	 </if>
+    </select>
+    <select id="manage.scrollPic.selectList" parameterType="net.jeeshop.services.common.ScrollPic" resultType="net.jeeshop.services.common.ScrollPic">
+    	select * from t_scrollPic where 1=1 
+    	<if test="floor !=null and floor !=''">
+	 	and floor=#{floor}
+	 </if>
+    	order by id
+    </select>
+    <select id="manage.scrollPic.selectOne" parameterType="net.jeeshop.services.common.ScrollPic" resultType="net.jeeshop.services.common.ScrollPic">
+    	select * from t_scrollPic where 1=1 and id=#{id}
+    </select>
+    <select id="manage.scrollPic.selectById" parameterType="String" resultType="net.jeeshop.services.common.ScrollPic">
+    	select * from t_scrollPic where 1=1 and id=#{id}
+    </select>
+    <delete id="manage.scrollPic.deleteById" parameterType="Integer">
+    	delete from t_scrollPic where 1=1 and id=#{id}
+    </delete>
+    <delete id="manage.scrollPic.delete" parameterType="net.jeeshop.services.common.ScrollPic">
+    	delete from t_scrollPic where 1=1 and id=#{id}
+    </delete>
+    <insert id="manage.scrollPic.insert" parameterType="net.jeeshop.services.common.ScrollPic" useGeneratedKeys="true" keyProperty="id">
+    	insert into t_scrollPic(id
+        <if test="imgPath!=null and imgPath!=''">
+       		,imgPath
+       	</if>
+        <if test="orderNum!=null and orderNum!=''">
+        	,orderNum
+        </if>
+        <if test="srcPath!=null and srcPath!=''">
+        	,srcPath
+        </if>
+        <if test="tip!=null and tip!=''">
+        	,tip
+        </if>
+        <if test="floor !=null and floor !=''">
+        	,floor
+        </if>
+        )values(id
+        <if test="imgPath!=null and imgPath!=''">
+       		,#{imgPath}
+       	</if>
+        <if test="orderNum!=null and orderNum!=''">
+			,#{orderNum}
+        </if>
+        <if test="srcPath!=null and srcPath!=''">
+        	,#{srcPath}
+        </if>
+        <if test="tip!=null and tip!=''">
+        	,#{tip}</if>
+        <if test="floor !=null and floor !=''">
+        	,#{floor}
+        	</if>
+        )
+    </insert>
+    <update id="manage.scrollPic.update" parameterType="net.jeeshop.services.common.ScrollPic">
+    	update t_scrollPic set id=#{id} 
+        <if test="imgPath!=null and imgPath!=''">
+        	, imgPath=#{imgPath}
+        </if>
+        <if test="orderNum!=null and orderNum!=''">
+        	, orderNum=#{orderNum}
+        </if>
+        <if test="srcPath!=null and srcPath!=''">
+        	, srcPath=#{srcPath}
+        </if>
+        <if test="tip!=null and tip!=''">
+        	, tip=#{tip}
+        </if>
+        <if test="floor !=null and floor !=''">
+        	, floor=#{floor}
+        </if>
+        where 1=1 and id=#{id}
+    </update>
+</mapper>

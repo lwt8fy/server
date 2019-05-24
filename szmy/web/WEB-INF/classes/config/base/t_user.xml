@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	
+	<select id="user.selectPageList" parameterType="net.jeeshop.core.system.bean.User" resultType="hashMap">
+		SELECT t.id,t.account username,t.nickname,t.password,DATE_FORMAT(t.regeistDate,'%Y-%m-%d') createtime,t.email,
+		t.status,t.rid,(select r.role_name from t_role r where r.id=t.rid) role_name,t.nxbUserName,t.nxbPassword,t.source
+		,t.presenter FROM t_account t  where 1=1  
+		<if test="id!=null and id!=''">
+			and t.id=#{id}
+		</if>
+		<if test="username!=null and username!=''">
+			and t.account=#{username} 
+		</if>
+		<if test="password!=null and password!=''">
+			and t.password=#{password} 
+		</if>
+		<if test="status!=null and status!=''">
+			and t.status= #{status}
+		</if>
+		<if test="rid!=null and rid!=''">
+			and t.rid=#{rid}
+		</if> 
+		<if test="source!=null and source!=''">
+			and t.source=#{source}
+		</if> 
+		order by id desc 
+		limit #{offset},#{pageSize}
+<!-- 		<include refid="sqlWhere2"/> -->
+	</select>
+	<select id="user.selectPageCount" parameterType="net.jeeshop.core.system.bean.User" resultType="java.lang.Integer">
+		select count(a.id) from (
+				SELECT t.id
+				 FROM t_account t  where 1=1  
+				<if test="id!=null and id!=''">
+					and t.id=#{id}
+				</if>
+				<if test="username!=null and username!=''">
+					and t.account=#{username} 
+				</if>
+				<if test="password!=null and password!=''">
+					and t.password=#{password} 
+				</if>
+				<if test="status!=null and status!=''">
+					and t.status= #{status}
+				</if>
+				<if test="rid!=null and rid!=''">
+					and t.rid=#{rid}
+				</if>    
+				<if test="source!=null and source!=''">
+			and t.source=#{source}
+		</if> 
+		<!-- 		<include refid="sqlWhere2"/> -->
+		) a
+	</select>
+	
+	<select id="user.selectOne" parameterType="net.jeeshop.core.system.bean.User" resultType="net.jeeshop.core.system.bean.User">
+		SELECT t.id,t.account username,t.nickname,t.password,DATE_FORMAT(t.regeistDate,'%Y-%m-%d') createtime,t.email,t.mobile,
+		(select role_dbPrivilege from t_role r where r.id=t.rid) role_dbPrivilege,t.nxbUserName,t.nxbPassword,t.freeze,t.freezeStartdate,t.freezeEnddate,
+		t.status,t.rid ,t.presenter FROM t_account t  where 1=1  
+						<if test="id!=null and id!=''">
+					and t.id=#{id}
+				</if>
+				<if test="username!=null and username!=''">
+					and t.account=#{username} 
+				</if>
+				<if test="password!=null and password!=''">
+					and t.password=#{password} 
+				</if>
+				<if test="status!=null and status!=''">
+					and t.status= #{status}
+				</if>
+				<if test="rid!=null and rid!=''">
+					and t.rid=#{rid}
+				</if> 
+				<if test="nxbUserName !=null and nxbUserName !=''">
+		and t.nxbUserName=#{nxbUserName}
+		</if>   
+<!-- 		<include refid="sqlWhere"/> -->
+	</select>
+	
+	<select id="user.selectCount" parameterType="net.jeeshop.core.system.bean.User" resultType="int">
+		SELECT count(id) from t_account where 1=1 
+		<if test="username!=null and username!=''">
+			and account=#{username} 
+		</if>
+		<if test="nickname!=null and nickname!=''">
+			and nickname=#{nickname} 
+		</if>
+	</select>
+	
+	<select id="user.selectOneByCondition" parameterType="net.jeeshop.core.system.bean.User" resultType="net.jeeshop.core.system.bean.User">
+		SELECT * from t_account where 1=1 
+		<if test="nickname!=null and nickname!=''">
+			and nickname=#{nickname} 
+		</if>
+	</select>
+	
+	<insert id="user.insert" parameterType="net.jeeshop.core.system.bean.User" useGeneratedKeys="true" 
+		keyProperty="id">
+		insert into t_account (id,account,password,regeistDate,status,rid,nickname,email,emailIsActive,source,mobile,presenter,pastDue)
+		 values (id,#{username},#{password},now(),'y',#{rid},#{nickname},#{email},'y','2',#{mobile},#{presenter},#{pastDue})
+	</insert>
+	
+	<update id="user.update" parameterType="net.jeeshop.core.system.bean.User">
+		update t_account set id=#{id}
+		<if test="password!=null">
+			,password=#{password}
+		</if>
+		<if test="status!=null">
+			,status=#{status}
+		</if>
+		<if test="rid!=null">
+			,rid=#{rid}
+		</if>
+		<if test="nickname!=null and nickname!=''">
+			,nickname=#{nickname}
+		</if>
+		<if test="email!=null and email!=''">
+			,email=#{email}
+		</if>
+		<if test="nxbUserName !=null and nxbUserName !=''">
+		,nxbUserName=#{nxbUserName}
+		</if>
+		<if test="nxbPassword !=null and nxbPassword !=''">
+		,nxbPassword=#{nxbPassword}
+		</if>
+		<if test="presenter!=null and presenter!=''">
+		,presenter=#{presenter}
+		</if>
+		<if test="pastDue!=null and pastDue!=''">
+		,pastDue=#{pastDue}
+		</if>
+		where id=#{id}
+	</update>
+	
+ 	<delete id="user.delete" parameterType="net.jeeshop.core.system.bean.User"> 
+ 		delete from t_account where id=#{id} 
+	</delete> 
+</mapper>  

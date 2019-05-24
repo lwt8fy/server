@@ -1,0 +1,83 @@
+﻿@charset utf-8;
+/* 代码整理：懒人之家  www.lanrenzhijia.com */
+* {
+/* 	margin:0; */
+/* 	padding:0; */
+}
+body {
+/* 	text-align:left; */
+/* 	font-size:12px; */
+}
+
+img {
+/* 	border:none; */
+}
+a {
+/* 	text-decoration:none; */
+}
+.zhuanti_box {
+/* 	width:400px; */
+	height:auto;
+/* 	margin:20px auto; */
+	padding:7px;
+	border:1px solid #eae9ef;
+}
+.zhuanti_box ul,.zhuanti_box li {
+	list-style:none;
+	margin:0;
+	padding:0;
+	border:none;
+}
+#slideBox {
+/* 	width:500px; */
+	overflow:hidden;
+}
+#slideBox .J_slide_list {
+	width:3600px;
+}
+#slideBox .J_slide_list .J_slide_item {
+	width:630px;
+	height:210px;
+	float:left;
+}
+#slideBox .J_slide_list .J_slide_item img {
+	vertical-align:top;
+}
+#slideBox .J_slide_trigger {
+ 	width:300px;
+	height:5px;
+	background:#cccccc;
+	margin-top:1px;
+}
+
+#slideBox .J_slide_trigger li {
+	float:left;
+	height:5px;
+	line-height:5px;
+	text-align:center;
+	_display:inline;
+	overflow:hidden;
+}
+#slideBox .J_slide_trigger li a {
+	display:block;
+	height:32px;
+	color:#fff;
+	font-family:"Microsoft Yahei", "微软雅黑";
+}
+#slideBox .J_slide_trigger li.cur a, .J_slide_trigger li a:hover {
+	color:#FFF;
+	background:#FF6600;
+	text-decoration:none;
+}
+.J_slide_advance {
+	width:600px;
+	float:left;
+	height:148px;
+	margin-top:1px;
+}
+.J_slide_advance p {
+	width:199px;
+	margin-right:1px;
+	float:left;
+}
+/* 代码整理：懒人之家  www.lanrenzhijia.com */

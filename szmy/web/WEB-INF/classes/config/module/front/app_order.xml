@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.appOrder"> 
+	<select id="front.appOrder.selectPageList" parameterType="net.jeeshop.services.common.AppOrder" resultType="net.jeeshop.services.common.AppOrder">
+	 select * from app_order t where 1=1 
+	 <if test="id !=null and id !=''">
+		 and id=#{id}
+	</if>
+	 <if test="title !=null and title !=''">
+	 and title like CONCAT('%','${title}','%' ) 
+	</if>
+	<if test="userID !=null and userID !=''">
+		 and userID=#{userID}
+	</if>
+	<if test="userName !=null and userName !=''">
+		 and userName like CONCAT('%','${userName}','%')
+	</if>
+	<if test="orderType !=null and orderType !=''">
+		 and orderType=#{orderType}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+		 and orderStatus=#{orderStatus}
+	</if>
+	<if test="purchaserID !=null and purchaserID !=''">
+		 and purchaserID=#{purchaserID}
+	</if>
+	<if test="startDate!=null and startDate!=''">
+		and createTime &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createTime &lt;= #{endDate}
+	  </if>
+		<if test="province !=null and province !=''">
+		and province like CONCAT('${province}','%' ) 
+		</if>
+		<if test="city !=null and city !=''">
+		and city=#{city}
+		</if>
+		<if test="area !=null and area !=''">
+		and area=#{area}
+		</if>
+		<if test="pigType !=null and pigType !=''">
+		and pigType=#{pigType}
+		</if>
+		
+		
+	  <if test="startPrice!=null and startPrice!=''">
+		and price &gt;= #{startPrice}
+	  </if>
+	 <if test="endPrice!=null and endPrice!=''">
+		and price &lt;= #{endPrice}
+	  </if>
+	  
+	 <if test="startWeight!=null and startWeight!=''">
+		and weight &gt;= #{startWeight}
+	  </if>
+	 <if test="endWeight!=null and endWeight!=''">
+		and weight &lt;= #{endWeight}
+	  </if>
+	  <if test="startNumber!=null and startNumber!=''">
+		and number &gt;= #{startNumber}
+	  </if>
+	 <if test="endNumber!=null and endNumber!=''">
+		and number &lt;= #{endNumber}
+	  </if>
+		<if test="orderBy !=null and orderBy !=''">
+		order by ${orderBy}
+		</if>
+		<if test="orderBy ==null or orderBy ==''">
+		order by createTime desc 
+		</if>
+ 
+ 	limit #{offset},#{pageSize} 
+	</select>
+ 
+	<select id="front.appOrder.selectPageCount" parameterType="net.jeeshop.services.common.AppOrder" resultType="java.lang.Integer">
+	 select count(*) from (select 1 	 from app_order t where 1=1 
+	  <if test="title !=null and title !=''">
+	 and title like CONCAT('%','${title}','%' ) 
+	</if>
+	<if test="id !=null and id !=''">
+		 and id=#{id}
+	</if>
+	<if test="userID !=null and userID !=''">
+		 and userID=#{userID}
+	</if>
+	<if test="userName !=null and userName !=''">
+		 and userName like CONCAT('%','${userName}','%')
+	</if>
+	<if test="orderType !=null and orderType !=''">
+		 and orderType=#{orderType}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+		 and orderStatus=#{orderStatus}
+	</if>
+	<if test="purchaserID !=null and purchaserID !=''">
+		 and purchaserID=#{purchaserID}
+	</if>
+	<if test="province !=null and province !=''">
+		and province like CONCAT('${province}','%' ) 
+		</if>
+		<if test="city !=null and city !=''">
+		and city=#{city}
+		</if>
+		<if test="area !=null and area !=''">
+		and area=#{area}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+		and createTime &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createTime &lt;= #{endDate}
+	  </if>
+		<if test="pigType !=null and pigType !=''">
+		and pigType=#{pigType}
+		</if>
+		
+	  <if test="startPrice!=null and startPrice!=''">
+		and price &gt;= #{startPrice}
+	  </if>
+	 <if test="endPrice!=null and endPrice!=''">
+		and price &lt;= #{endPrice}
+	  </if>
+	  
+	 <if test="startWeight!=null and startWeight!=''">
+		and weight &gt;= #{startWeight}
+	  </if>
+	 <if test="endWeight!=null and endWeight!=''">
+		and weight &lt;= #{endWeight}
+	  </if>
+	  
+	  <if test="startNumber!=null and startNumber!=''">
+		and number &gt;= #{startNumber}
+	  </if>
+	 <if test="endNumber!=null and endNumber!=''">
+		and number &lt;= #{endNumber}
+	  </if>
+	 ) a 
+	</select>
+	
+	<select id="front.appOrder.countAppOrderJye" parameterType="net.jeeshop.services.common.AppOrder" resultType="java.lang.Double">
+	 select sum(finalPrice) 
+	 from app_order t where 1=1  
+	 
+	 <if test="id !=null and id !=''">
+		 and id=#{id}
+	</if>
+	 <if test="title !=null and title !=''">
+	 and title like CONCAT('%','${title}','%' ) 
+	</if>
+	<if test="userID !=null and userID !=''">
+		 and userID=#{userID}
+	</if>
+	<if test="userName !=null and userName !=''">
+		 and userName like CONCAT('%','${userName}','%')
+	</if>
+	<if test="orderType !=null and orderType !=''">
+		 and orderType=#{orderType}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+		 and orderStatus=#{orderStatus}
+	</if>
+	<if test="purchaserID !=null and purchaserID !=''">
+		 and purchaserID=#{purchaserID}
+	</if>
+	<if test="startDate!=null and startDate!=''">
+		and createTime &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createTime &lt;= #{endDate}
+	  </if>
+		<if test="province !=null and province !=''">
+		and province like CONCAT('${province}','%' ) 
+		</if>
+		<if test="city !=null and city !=''">
+		and city=#{city}
+		</if>
+		<if test="area !=null and area !=''">
+		and area=#{area}
+		</if>
+		<if test="pigType !=null and pigType !=''">
+		and pigType=#{pigType}
+		</if>
+		
+	  <if test="startPrice!=null and startPrice!=''">
+		and price &gt;= #{startPrice}
+	  </if>
+	 <if test="endPrice!=null and endPrice!=''">
+		and price &lt;= #{endPrice}
+	  </if>
+	 <if test="startWeight!=null and startWeight!=''">
+		and weight &gt;= #{startWeight}
+	  </if>
+	 <if test="endWeight!=null and endWeight!=''">
+		and weight &lt;= #{endWeight}
+	  </if>
+	  <if test="startNumber!=null and startNumber!=''">
+		and number &gt;= #{startNumber}
+	  </if>
+	 <if test="endNumber!=null and endNumber!=''">
+		and number &lt;= #{endNumber}
+	  </if>
+	</select>
+	
+	<select id="front.appOrder.selectList" parameterType="net.jeeshop.services.common.AppOrder" resultType="net.jeeshop.services.common.AppOrder">
+	 select * from app_order t where 1=1 
+	 <if test="startDate!=null and startDate!=''">
+		and createTime &gt;= #{startDate}
+	 </if>
+	 <if test="endDate!=null and endDate!=''">
+		and createTime &lt;= #{endDate}
+	  </if>
+	  <if test="orderStatus !=null and orderStatus !=''">
+		 and orderStatus=#{orderStatus}
+	</if>
+	<if test="userID !=null and userID !=''">
+		 and userID = #{userID}
+	</if>
+	<if test="isShow !=null and isShow !=''">
+		 and isShow = #{isShow}
+	</if>
+	<if test="orderType !=null and orderType !=''">
+		 and orderType=#{orderType}
+	</if>
+	<if test="whereSql !=null and whereSql !=''">
+		 and ${whereSql}
+	</if>
+	  
+	 order by id desc
+	</select>
+ 
+	<select id="front.appOrder.selectOne" parameterType="net.jeeshop.services.common.AppOrder" resultType="net.jeeshop.services.common.AppOrder">
+	 select * from app_order t where 1=1 and id=#{id}
+	</select>
+	<select id="front.appOrder.selectById" parameterType="string" resultType="net.jeeshop.services.common.AppOrder">
+	 select * from app_order t where 1=1 and id=#{id}
+	</select>
+	<delete id="front.appOrder.deleteById" parameterType="Integer">
+		delete from app_user where 1=1 and id=#{id}
+	</delete>
+	<delete id="front.appOrder.delete" parameterType="net.jeeshop.services.common.AppOrder">
+		delete from app_order where 1=1 and id=#{id}
+	</delete>
+	<insert id="front.appOrder.insert" parameterType="net.jeeshop.services.common.AppOrder" useGeneratedKeys="true" keyProperty="id">
+	insert into app_order
+		(
+		id,title,price,createTime
+		<if test="marketingTime !=null and marketingTime !=''">
+		,marketingTime
+		</if>
+		<if test="number !=null ">
+		,number
+		</if>
+		<if test="weight !=null ">
+		,weight
+		</if>
+		<if test="orderStatus !=null and orderStatus !=''">
+		,orderStatus
+		</if>
+		<if test="address !=null and address !=''">
+		,address
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark
+		</if>
+		<if test="userName !=null and userName !=''">
+		,userName
+		</if>
+		<if test="userID !=null and userID !=''">
+		,userID
+		</if>
+		<if test="picNumber !=null">
+		,picNumber
+		</if>
+		<if test="coverPicture !=null and coverPicture !=''">
+		,coverPicture
+		</if>
+		
+		<if test="lockTime !=null and lockTime !=''">
+		,lockTime
+		</if>
+		<if test="finishTime !=null and finishTime !=''">
+		,finishTime
+		</if>
+		<if test="finalPrice !=null">
+		,finalPrice
+		</if>
+		<if test="orderType !=null and orderType !=''">
+		,orderType
+		</if>
+		<if test="phone !=null and phone !=''">
+		,phone
+		</if>
+		<if test="province !=null and province !=''">
+		,province
+		</if>
+		<if test="city !=null and city !=''">
+		,city
+		</if>
+		<if test="area !=null and area !=''">
+		,area
+		</if>
+		<if test="pigType !=null and pigType !=''">
+		,pigType
+		</if>
+		<if test="color !=null and color !=''">
+		,color
+		</if>
+		<if test="subscription !=null and subscription !=''">
+		,subscription
+		</if>
+		<if test="purchaserSubscription !=null and purchaserSubscription !=''">
+		,purchaserSubscription
+		</if>
+		<if test="x !=null and x !=''">
+		,x
+		</if>
+		<if test="y !=null and y !=''">
+		,y
+		</if>
+		<if test="compName!=null and compName!=''">
+		,compName
+		</if>
+		<if test="compID!=null and compID!=''">
+		,compID
+		</if>
+		<if test="compType!=null and compType!=''">
+		,compType
+		</if>
+		<if test="isShow !=null and isShow !=''">
+		,isShow
+		</if>
+		<if test="sendType !=null and sendType !=''">
+		,sendType
+		</if>
+		<if test="payType !=null and payType !=''">
+		,payType
+		</if>
+		<if test="purchaserPhone !=null and purchaserPhone !=''">
+		,purchaserID,purchaserPhone,purchaserName
+		</if>
+		)
+		values
+		(
+		id,#{title},#{price},now()
+		<if test="marketingTime !=null and marketingTime !=''">
+		,#{marketingTime}
+		</if>
+		<if test="number !=null ">
+		,#{number}
+		</if>
+		<if test="weight !=null ">
+		,#{weight}
+		</if>
+		<if test="orderStatus !=null and orderStatus !=''">
+		,#{orderStatus}
+		</if>
+		<if test="address !=null and address !=''">
+		,#{address}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,#{remark}
+		</if>
+		<if test="userName !=null and userName !=''">
+		,#{userName}
+		</if>
+		<if test="userID !=null and userID !=''">
+		,#{userID}
+		</if>
+		<if test="coverPicture !=null and coverPicture !=''">
+		,#{coverPicture}
+		</if>
+		<if test="lockTime !=null and lockTime !=''">
+		,#{lockTime}
+		</if>
+		<if test="finishTime !=null and finishTime !=''">
+		,#{finishTime}
+		</if>
+		<if test="finalPrice !=null">
+		,#{finalPrice}
+		</if>
+		<if test="orderType !=null and orderType !=''">
+		,#{orderType}
+		</if>
+		<if test="phone !=null and phone !=''">
+		,#{phone}
+		</if>
+		<if test="province !=null and province !=''">
+		,#{province}
+		</if>
+		<if test="city !=null and city !=''">
+		,#{city}
+		</if>
+		<if test="area !=null and area !=''">
+		,#{area}
+		</if>
+		<if test="pigType !=null and pigType !=''">
+		,#{pigType}
+		</if>
+		<if test="color !=null and color !=''">
+		,#{color}
+		</if>
+		<if test="subscription !=null and subscription !=''">
+		,#{subscription}
+		</if>
+		<if test="purchaserSubscription !=null and purchaserSubscription !=''">
+		,#{purchaserSubscription}
+		</if>
+		<if test="x !=null and x !=''">
+		,#{x}
+		</if>
+		<if test="y !=null and y !=''">
+		,#{y}
+		</if>
+		<if test="compName!=null and compName!=''">
+,#{compName}
+</if>
+<if test="compID!=null and compID!=''">
+,#{compID}
+</if>
+<if test="compType!=null and compType!=''">
+,#{compType}
+</if>
+<if test="isShow !=null and isShow !=''">
+,#{isShow}
+</if>
+<if test="sendType !=null and sendType !=''">
+,#{sendType}
+</if>
+<if test="payType !=null and payType !=''">
+,#{payType}
+</if>
+
+		<if test="purchaserPhone !=null and purchaserPhone !=''">
+		,#{purchaserID},#{purchaserPhone},#{purchaserName}
+		</if>
+		)
+	</insert>
+	<update id="front.appOrder.updatePayStatus" parameterType="net.jeeshop.services.common.AppOrder">
+		update app_order
+		  set id=#{id}
+		<if test="orderStatus !=null and orderStatus !=''">
+		,orderStatus=#{orderStatus}
+		</if>
+		<if test="paymentTime !=null and paymentTime !=''">
+		,paymentTime=#{paymentTime}
+		</if>
+		where 1=1 and id=#{id}
+	</update>
+	<update id="front.appOrder.update" parameterType="net.jeeshop.services.common.AppOrder">
+		update app_order
+		  set id=#{id}
+		<if test="title !=null and title !=''">
+		,title=#{title}
+		</if>
+		<if test="price !=null">
+		,price=#{price}
+		</if>
+		<if test="marketingTime !=null and marketingTime !=''">
+		,marketingTime=#{marketingTime}
+		</if>
+		<if test="number !=null ">
+		,number=#{number}
+		</if>
+		<if test="weight !=null ">
+		,weight=#{weight}
+		</if>
+		<if test="orderStatus !=null and orderStatus !=''">
+		,orderStatus=#{orderStatus}
+		</if>
+		<if test="address !=null and address !=''">
+		,address=#{address}
+		</if>
+		<if test="remark !=null and remark !=''">
+		,remark=#{remark}
+		</if>
+		<if test="userID !=null and userID !=''">
+		,userID=#{userID}
+		</if>
+		<if test="coverPicture !=null and coverPicture !=''">
+		,coverPicture=#{coverPicture}
+		</if>
+		<if test="lockTime !=null and lockTime !=''">
+		,lockTime=#{lockTime}
+		</if>
+		<if test="finishTime !=null and finishTime !=''">
+		,finishTime=#{finishTime}
+		</if>
+		<if test="orderType !=null and orderType !=''">
+		,orderType=#{orderType}
+		</if>
+		<if test="phone !=null and phone !=''">
+		,phone=#{phone}
+		</if>
+		<if test="finalPrice !=null">
+		,finalPrice=#{finalPrice}
+		</if>
+		<if test="purchaserPhone !=null and purchaserPhone !=''">
+		,purchaserID=#{purchaserID},purchaserPhone=#{purchaserPhone},purchaserName=#{purchaserName}
+		</if>
+		<if test="province !=null and province !=''">
+		,province=#{province}
+		</if>
+		<if test="city !=null and city !=''">
+		,city=#{city}
+		</if>
+		<if test="area !=null and area !=''">
+		,area=#{area}
+		</if>
+		<if test="pigType !=null and pigType !=''">
+		,pigType=#{pigType}
+		</if>
+		<if test="color !=null and color !=''">
+		,color=#{color}
+		</if>
+		<if test="subscription !=null and subscription !=''">
+		,subscription=#{subscription}
+		</if>
+		
+		<if test="purchaserSubscription !=null and purchaserSubscription !=''">
+		,purchaserSubscription=#{purchaserSubscription}
+		</if>
+		<if test="qingKong !=null and qingKong !=''">
+			<if test="qingKong =='purchaser'">
+			,purchaserID=null,purchaserPhone=null,purchaserName=null
+			</if>
+		</if>
+		<if test="x !=null and x !=''">
+		,x=#{x}
+		</if>
+		<if test="y !=null and y !=''">
+		,y=#{y}
+		</if>
+		<if test="compName!=null and compName!=''">
+,compName=#{compName}
+</if>
+<if test="compID!=null and compID!=''">
+,compID=#{compID}
+</if>
+<if test="compType!=null and compType!=''">
+,compType=#{compType}
+</if>
+<if test="isShow !=null and isShow !=''">
+,isShow=#{isShow}
+</if>
+<if test="sendType !=null and sendType !=''">
+,sendType=#{sendType}
+</if>
+<if test="createTime !=null and createTime !=''">
+,createTime=#{createTime}
+</if>
+<if test="payType !=null and payType !=''">
+,payType=#{payType}
+</if>
+		where 1=1 and id=#{id}
+	</update>
+</mapper>

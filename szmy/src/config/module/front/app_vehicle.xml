@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.appVehicle">
+	<select id="front.appVehicle.selectPageList" parameterType="net.jeeshop.services.common.AppVehicle"
+		resultType="net.jeeshop.services.common.AppVehicle">
+		select * from app_vehicle t where 1=1
+		<if test="type !=null and type !=''">
+			and type like CONCAT('%','${type}','%' ) 
+		 </if>
+		 <if test="createAccount !=null and createAccount !=''">
+			and t.createAccount =#{createAccount}
+		 </if>
+		<if test="startTime !=null and startTime !=''">
+			and t.startTime &gt;=#{startTime}
+		 </if>
+		<if test="endTime !=null and endTime !=''">
+			and t.endTime &lt;=#{endTime}
+		 </if>
+		<if test="province !=null and province !=''">
+			and province=#{province}
+		</if>
+		<if test="city !=null and city !=''">
+			and city=#{city}
+		</if>
+		<if test="area !=null and area !=''">
+			and area=#{area}
+		</if>
+		 <if test="startPrice!=null and startPrice!=''">
+		and price &gt;= #{startPrice}
+	  </if>
+	 <if test="endPrice!=null and endPrice!=''">
+		and price &lt;= #{endPrice}
+	  </if>
+	 <if test="startCapacity!=null and startCapacity!=''">
+		and capacity &gt;= #{startCapacity}
+	  </if>
+	 <if test="endCapacity!=null and endCapacity!=''">
+		and capacity &lt;= #{endCapacity}
+	  </if>
+	   <if test="purchaserID!=null and purchaserID!=''">
+		and purchaserID = #{purchaserID}
+	  </if>
+	  <if test="companyId!=null and companyId!=''">
+		and companyId = #{companyId}
+	  </if>
+	  <if test="orderBy!=null and orderBy!=''">
+	  	order by ${orderBy}
+	  </if>
+	  <if test="orderBy==null or orderBy==''">
+		order by id desc
+	  </if>
+		limit #{offset},#{pageSize}
+	</select>
+
+	<select id="front.appVehicle.selectPageCount" parameterType="net.jeeshop.services.common.AppVehicle"
+		resultType="java.lang.Integer">
+		select count(1) from app_vehicle t where 1=1
+		<if test="type !=null and type !=''">
+			and type like CONCAT('%','${type}','%' ) 
+		 </if>
+		 <if test="createAccount !=null and createAccount !=''">
+			and t.createAccount =#{createAccount}
+		 </if>
+		<if test="startTime !=null and startTime !=''">
+			and t.startTime &gt;=#{startTime}
+		 </if>
+		<if test="endTime !=null and endTime !=''">
+			and t.endTime &lt;=#{endTime}
+		 </if>
+		<if test="province !=null and province !=''">
+			and province=#{province}
+		</if>
+		<if test="city !=null and city !=''">
+			and city=#{city}
+		</if>
+		<if test="area !=null and area !=''">
+			and area=#{area}
+		</if>
+	  <if test="companyId!=null and companyId!=''">
+		and companyId = #{companyId}
+	  </if>
+		 <if test="startPrice!=null and startPrice!=''">
+		and price &gt;= #{startPrice}
+	  </if>
+	 <if test="endPrice!=null and endPrice!=''">
+		and price &lt;= #{endPrice}
+	  </if>
+	  <if test="startCapacity!=null and startCapacity!=''">
+		and capacity &gt;= #{startCapacity}
+	  </if>
+	 <if test="endCapacity!=null and endCapacity!=''">
+		and capacity &lt;= #{endCapacity}
+	  </if>
+	   <if test="purchaserID!=null and purchaserID!=''">
+		and purchaserID = #{purchaserID}
+	  </if>
+	</select>
+
+	<select id="front.appVehicle.selectList" parameterType="net.jeeshop.services.common.AppVehicle"
+		resultType="net.jeeshop.services.common.AppVehicle">
+		select t.*,c.address,c.name,c.phone as companyTel from app_vehicle t left join app_vehiclecompany c on t.companyId=c.id 
+		
+		where t.status='1'
+		
+	</select>
+	<select id="front.appVehicle.selectOne" parameterType="net.jeeshop.services.common.AppVehicle"
+		resultType="net.jeeshop.services.common.AppVehicle">
+		select t.*,c.address,c.name,c.phone as companyTel from app_vehicle t left join app_vehiclecompany c 
+		on t.companyId=c.id   where 
+		t.id=#{id}
+	</select>
+	<select id="front.appVehicle.selectById" parameterType="string"
+		resultType="net.jeeshop.services.common.AppVehicle">
+		select t.*,c.address,c.name,c.phone as companyTel from app_vehicle t left join app_vehiclecompany c 
+		on t.companyId=c.id   where 
+		t.id=#{id}
+	</select>
+	<update id="front.appVehicle.delete" parameterType="net.jeeshop.services.common.AppVehicle">
+		update app_vehicle t set t.dingjin=null ,t.purchaserID = null ,t.purchaserName=null,t.purchaserPhone =null ,t.status=1  where t.id=#{id}
+	</update>
+	<delete id="front.appVehicle.deleteById" parameterType="net.jeeshop.services.common.AppVehicle" >
+		delete from  app_vehicle  where id=#{id}
+	</delete>
+	<insert id="front.appVehicle.insert" parameterType="net.jeeshop.services.common.AppVehicle"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into app_vehicle (
+		id
+		,price
+		,startTime
+		,createAccount
+		,type
+		,createTime
+		<if test="endTime !=null and endTime !=''">
+			,endTime
+			 </if>
+		<if test="icon !=null and icon !=''">
+			,icon
+			 </if>
+		<if test="carNum !=null and carNum !=''">
+			,carNum
+			 </if>
+		<if test="capacity !=null and capacity !=''">
+			,capacity
+			 </if>
+		<if test="companyId !=null and companyId !=''">
+			,companyId
+			 </if>
+		<if test="linkman !=null and linkman !=''">
+			,linkman
+			 </if>
+		<if test="phone !=null and phone !=''">
+			,phone
+			 </if>
+		<if test="province !=null and province !=''">
+			,province
+			 </if>
+		<if test="city !=null and city !=''">
+			,city
+			 </if>
+		<if test="area !=null and area !=''">
+			,area
+		</if>
+		<if test="remark !=null and remark !=''">
+			,remark
+		</if>
+		<if test="x !=null and x !=''">
+		,x
+		</if>
+		<if test="y !=null and y !=''">
+		,y
+		</if>
+		<if test="status !=null and status !=''">
+		,status
+		</if>
+		<if test="finalPrice !=null and finalPrice !=''">
+		,finalPrice
+		</if>
+		<if test="dingjin !=null and dingjin !=''">
+		,dingjin
+		</if>
+		<if test="purchaserName !=null and purchaserName !=''">
+		,purchaserName
+		</if>
+		<if test="purchaserID !=null and purchaserID !=''">
+		,purchaserID
+		</if>
+		<if test="purchaserPhone !=null and purchaserPhone !=''">
+		,purchaserPhone
+		</if>
+		)values(
+		id
+		,#{price}
+		,#{startTime}
+		,#{createAccount}
+		,#{type}
+		,now()
+		<if test="endTime !=null and endTime !=''">
+			,#{endTime}
+			 </if>
+		<if test="icon !=null and icon !=''">
+			,#{icon}
+			 </if>
+		<if test="carNum !=null and carNum !=''">
+			,#{carNum}
+			 </if>
+		<if test="capacity !=null and capacity !=''">
+			,#{capacity}
+			 </if>
+		<if test="companyId !=null and companyId !=''">
+			,#{companyId}
+			 </if>
+		<if test="linkman !=null and linkman !=''">
+			,#{linkman}
+			 </if>
+		<if test="phone !=null and phone !=''">
+			,#{phone}
+			 </if>
+		<if test="province !=null and province !=''">
+			,#{province}
+			 </if>
+		<if test="city !=null and city !=''">
+			,#{city}
+			 </if>
+		<if test="area !=null and area !=''">
+			,#{area}
+		</if>
+		<if test="remark !=null and remark !=''">
+			,#{remark}
+		</if>
+		<if test="x !=null and x !=''">
+		,#{x}
+		</if>
+		<if test="y !=null and y !=''">
+		,#{y}
+		</if>
+		<if test="status !=null and status !=''">
+		,#{status}
+		</if>
+		<if test="finalPrice !=null and finalPrice !=''">
+		,#{finalPrice}
+		</if>
+		<if test="dingjin !=null and dingjin !=''">
+		,#{dingjin}
+		</if>
+		<if test="purchaserName !=null and purchaserName !=''">
+		,#{purchaserName}
+		</if>
+		<if test="purchaserID !=null and purchaserID !=''">
+		,#{purchaserID}
+		</if>
+		<if test="purchaserPhone !=null and purchaserPhone !=''">
+		,#{purchaserPhone}
+		</if>
+		)
+	</insert>
+	<update id="front.appVehicle.update" parameterType="net.jeeshop.services.common.AppVehicle">
+		update app_vehicle set id=#{id}
+		<if test="price !=null and price !=''">
+		,price =#{price}
+		</if>
+		<if test="icon !=null and icon !=''">
+			,icon=#{icon}
+		 </if>
+		 <if test="startTime !=null and startTime !=''">
+		,startTime=#{startTime}
+		</if>
+		<if test="endTime !=null and endTime !=''">
+			,endTime=#{endTime}
+		</if>
+		 <if test="type !=null and type !=''">
+		,type=#{type}
+		</if>
+		<if test="carNum !=null and carNum !=''">
+			,carNum=#{carNum}
+		</if>
+		<if test="capacity !=null and capacity !=''">
+			,capacity=#{capacity}
+			 </if>
+		<if test="companyId !=null and companyId !=''">
+			,companyId=#{companyId}
+			 </if>
+		<if test="linkman !=null and linkman !=''">
+			,linkman=#{linkman}
+			 </if>
+		<if test="phone !=null and phone !=''">
+			,phone=#{phone}
+			 </if>
+		<if test="createAccount !=null and createAccount !=''">
+		,createAccount=#{createAccount}
+		</if>
+		<if test="province !=null and province !=''">
+			,province=#{province}
+			 </if>
+		<if test="city !=null and city !=''">
+			,city=#{city}
+			 </if>
+		<if test="area !=null and area !=''">
+			,area=#{area}
+	    </if>
+	    <if test="remark !=null and remark !=''">
+			,remark=#{remark}
+		</if>
+	    <if test="x !=null and x !=''">
+		,x=#{x}
+		</if>
+		<if test="y !=null and y !=''">
+		,y=#{y}
+		</if>
+		<if test="status !=null and status !=''">
+		,status=#{status}
+		</if>
+		<if test="finalPrice !=null and finalPrice !=''">
+		,finalPrice=#{finalPrice}
+		</if>
+		<if test="dingjin !=null and dingjin !=''">
+		,dingjin=#{dingjin}
+		</if>
+		<if test="purchaserName !=null and purchaserName !=''">
+		,purchaserName=#{purchaserName}
+		</if>
+		<if test="purchaserID !=null and purchaserID !=''">
+		,purchaserID=#{purchaserID}
+		</if>
+		<if test="purchaserPhone !=null and purchaserPhone !=''">
+		,purchaserPhone=#{purchaserPhone}
+		</if>
+			 where id=#{id}
+	</update>
+</mapper>

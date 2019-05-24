@@ -1,0 +1,14 @@
+/* CSS Document */
+
+body, ul, li, h1, h2, h3, h4, h5, h6, p, form, dl, dt, dd { margin: 0px; padding: 0px; font-size: 12px;}
+body{ background:#fffeef}
+ul{ list-style: none; }
+img{ border-style: none; }
+a{ text-decoration:none; color:#0A0A0A}
+a:hover{ text-decoration:none; color:#FF0000}
+.fl{ float:left}
+.fr{ float:right}
+.border{ border:1px solid #E2E2E2}
+.warpper{ width:100%; height:auto; background:url(img/bg.png) repeat-x}
+.main{ width:1024px; height:618px; margin:0 auto; background:url(img/mainbg.png) top center no-repeat}
+.mainr{ padding-left:238px; padding-top:245px; width:550px; height:290px; line-height:24px; text-indent:2em; color:#000; font-size:14px;}

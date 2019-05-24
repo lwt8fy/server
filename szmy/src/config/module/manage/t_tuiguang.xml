@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- create by autoCode,v1.0.0 -->
+<mapper namespace="front.tuiGuang">
+	<select id="front.tuiGuang.selectPageList" parameterType="net.jeeshop.services.common.TuiGuang"
+		resultType="net.jeeshop.services.common.TuiGuang">
+		select t.*,u.authentication ,u.type,
+				CONCAT((select count(1) from app_vehicle v where v.createAccount=t.userName),',',
+			(select count(1) from app_order o where  o.userName=t.userName and  o.orderType =1),',',
+			(select count(1) from app_order a where  a.userName=t.userName and  a.orderType =2))  as scount
+			 from t_tuiguang t,t_account u where t.userID=u.id
+		<if test="isLogin =='1'.toString()">
+			and isLogin='n'
+	 	</if>
+	 	<if test="isLogin =='2'.toString()">
+			and isLogin='y'
+			and (authentication =0 or authentication is null)
+	 	</if>
+	 	<if test="isLogin =='3'.toString()">
+			and isLogin='y'
+			and authentication=1
+	 	</if>
+	 	<if test="isLogin =='4'.toString()">
+			and isLogin='y'
+			and authentication=2 
+	 	</if>
+	 	<if test="isLogin =='5'.toString()">
+			and isLogin='y'
+			and authentication = 3
+	 	</if>
+		<if test="isJiLian=='n'.toString()">
+			<if test="pName !=null and pName !=''">
+				and pName=#{pName}
+			</if>
+		</if>
+		<if test="isJiLian=='y'.toString() and bPnames!=null">
+			and userName in 
+			 <foreach collection="bPnames" index="index" item="tag" open="("
+			    separator="," close=")">
+			    	#{tag}
+			  </foreach>
+		</if>
+		<if test="userName !=null and userName !=''">
+			and userName=#{userName}
+		</if>
+		<if test="pID !=null and pID !=''">
+			and pID=#{pID}
+		</if>
+		<if test="type!=null and type!=''">
+			and type = #{type}
+		 </if>
+		<if test="startDate!=null and startDate!=''">
+			and createTime &gt;= #{startDate}
+		 </if>
+		<if test="endDate!=null and endDate!=''">
+			and createTime &lt;= #{endDate}
+	 	</if>
+	 	<if test="pnames !=null and pnames !=''">
+			and pName in (${pnames})
+		 </if>
+		<if test="orderBySql !=null and orderBySql !=''">
+			order by ${orderBySql}
+		 </if>
+		<if test="orderBySql ==null or orderBySql ==''">
+	  order by createTime desc
+	  </if>
+		limit #{offset},#{pageSize}
+	</select>
+
+	<select id="front.tuiGuang.selectPageCount" parameterType="net.jeeshop.services.common.TuiGuang"
+		resultType="java.lang.Integer">
+		select count(1) from t_tuiguang t,t_account u where t.userID=u.id
+		<if test="isLogin =='1'.toString()">
+			and isLogin='n'
+	 	</if>
+	 	<if test="isLogin =='2'.toString()">
+			and isLogin='y'
+			and (authentication =0 or authentication is null)
+	 	</if>
+	 	<if test="isLogin =='3'.toString()">
+			and isLogin='y'
+			and authentication=1
+	 	</if>
+	 	<if test="isLogin =='4'.toString()">
+			and isLogin='y'
+			and authentication=2 
+	 	</if>
+	 	<if test="isLogin =='5'.toString()">
+			and isLogin='y'
+			and authentication = 3
+	 	</if>
+	    <if test="pnames !=null and pnames !=''">
+			and pName in (${pnames})
+		 </if>
+	 	<if test="isJiLian=='n'.toString()">
+			<if test="pName !=null and pName !=''">
+				and pName=#{pName}
+			</if>
+		</if>
+		<if test="isJiLian=='y'.toString() and bPnames!=null">
+			and userName in 
+			 <foreach collection="bPnames" index="index" item="tag" open="("
+			    separator="," close=")">
+			    	#{tag}
+			  </foreach>
+		</if>
+		<if test="userName !=null and userName !=''">
+			and userName=#{userName}
+		</if>
+		<if test="pID !=null and pID !=''">
+			and pID=#{pID}
+		</if>
+		<if test="type!=null and type!=''">
+			and type = #{type}
+		 </if>
+		<if test="startDate!=null and startDate!=''">
+			and createTime &gt;= #{startDate}
+		 </if>
+		<if test="endDate!=null and endDate!=''">
+			and createTime &lt;= #{endDate}
+		 </if>
+
+	</select>
+
+	<select id="front.tuiGuang.selectList" parameterType="net.jeeshop.services.common.TuiGuang"
+		resultType="net.jeeshop.services.common.TuiGuang">
+		select t.*,u.authentication  ,u.type,
+				CONCAT((select count(1) from app_vehicle v where v.createAccount=t.userName),',',
+			(select count(1) from app_order o where  o.userName=t.userName and  o.orderType =1),',',
+			(select count(1) from app_order a where  a.userName=t.userName and  a.orderType =2))  as scount
+			 from t_tuiguang t,t_account u where t.userID=u.id
+		<if test="isLogin =='1'.toString()">
+			and isLogin='n'
+	 	</if>
+	 	<if test="isLogin =='2'.toString()">
+			and isLogin='y'
+			and (authentication =0 or authentication is null)
+	 	</if>
+	 	<if test="isLogin =='3'.toString()">
+			and isLogin='y'
+			and authentication=1
+	 	</if>
+	 	<if test="isLogin =='4'.toString()">
+			and isLogin='y'
+			and authentication=2 
+	 	</if>
+	 	<if test="isLogin =='5'.toString()">
+			and isLogin='y'
+			and authentication = 3
+	 	</if>
+	 	<if test="isJiLian=='n'.toString() or isJiLian == null ">
+			<if test="pName !=null and pName !=''">
+				and pName=#{pName}
+			</if>
+		</if>
+		<if test="isJiLian=='y'.toString() and bPnames!=null">
+			and userName in 
+			 <foreach collection="bPnames" index="index" item="tag" open="("
+			    separator="," close=")">
+			    	#{tag}
+			  </foreach>
+		</if>
+		<if test="userName !=null and userName !=''">
+			and userName=#{userName}
+		</if>
+		<if test="pID !=null and pID !=''">
+			and pID=#{pID}
+		</if>
+		<if test="type!=null and type!=''">
+			and type = #{type}
+		 </if>
+		<if test="startDate!=null and startDate!=''">
+			and createTime &gt;= #{startDate}
+		 </if>
+		<if test="endDate!=null and endDate!=''">
+			and createTime &lt;= #{endDate}
+		 </if>
+		<if test="equipmentNumber!=null and equipmentNumber!=''">
+			and equipmentNumber=#{equipmentNumber}
+		</if>
+		order by pName asc,isLogin desc
+	</select>
+
+	<select id="front.tuiGuang.selectOne" parameterType="net.jeeshop.services.common.TuiGuang"
+		resultType="net.jeeshop.services.common.TuiGuang">
+		select * from t_tuiguang t where 1=1 and id=#{id}
+	</select>
+
+	<delete id="front.tuiGuang.deleteById" parameterType="Integer">
+		delete from
+		t_tuiguang where 1=1 and id=#{id}
+	</delete>
+	<delete id="front.tuiGuang.delete" parameterType="net.jeeshop.services.common.TuiGuang">
+		delete from
+		t_tuiguang where 1=1 and id=#{id}
+	</delete>
+
+	<insert id="front.tuiGuang.insert" parameterType="net.jeeshop.services.common.TuiGuang"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into t_tuiguang
+		(
+		id,createTime
+		<if test="userName !=null and userName !=''">
+			,userName
+		</if>
+		<if test="userID !=null and userID !=''">
+			,userID
+		</if>
+		<if test="userPhone !=null and userPhone !=''">
+			,userPhone
+		</if>
+		<if test="pID !=null and pID !=''">
+			,pID
+		</if>
+		<if test="pName !=null and pName !=''">
+			,pName
+		</if>
+		<if test="pPhone !=null and pPhone !=''">
+			,pPhone
+		</if>
+		<if test="isLogin !=null and isLogin !=''">
+			,isLogin
+		</if>
+		<if test="loginTime !=null and loginTime !=''">
+			,loginTime
+		</if>
+		<if test="phoneModel!=null and phoneModel!=''">
+			,phoneModel
+		</if>
+		<if test="equipmentNumber!=null and equipmentNumber!=''">
+			,equipmentNumber
+		</if>
+		<if test="remark !=null and remark !=''">
+			,remark
+		</if>
+
+		)
+		values
+		(
+		id,now()
+
+		<if test="userName !=null and userName !=''">
+			,#{userName}
+		</if>
+		<if test="userID !=null and userID !=''">
+			,#{userID}
+		</if>
+		<if test="userPhone !=null and userPhone !=''">
+			,#{userPhone}
+		</if>
+		<if test="pID !=null and pID !=''">
+			,#{pID}
+		</if>
+		<if test="pName !=null and pName !=''">
+			,#{pName}
+		</if>
+		<if test="pPhone !=null and pPhone !=''">
+			,#{pPhone}
+		</if>
+		<if test="isLogin !=null and isLogin !=''">
+			,#{isLogin}
+		</if>
+		<if test="loginTime !=null and loginTime !=''">
+			,#{loginTime}
+		</if>
+		<if test="phoneModel!=null and phoneModel!=''">
+			,#{phoneModel}
+		</if>
+		<if test="equipmentNumber!=null and equipmentNumber!=''">
+			,#{equipmentNumber}
+		</if>
+		<if test="remark !=null and remark !=''">
+			,#{remark}
+		</if>
+		)
+	</insert>
+	<update id="front.tuiGuang.update" parameterType="net.jeeshop.services.common.TuiGuang">
+		update t_tuiguang set isLogin=#{isLogin}
+
+		<if test="loginTime !=null and loginTime !=''">
+			,loginTime=#{loginTime}
+		</if>
+		<if test="phoneModel!=null and phoneModel!=''">
+			,phoneModel=#{phoneModel}
+		</if>
+		<if test="integral !=null">
+			,integral=#{integral}
+		</if>
+		<if test="equipmentNumber!=null and equipmentNumber!=''">
+			,equipmentNumber=#{equipmentNumber}
+		</if>
+		<if test="remark !=null and remark !=''">
+			,remark=#{remark}
+		</if>
+		where
+		<if test="userID !=null and userID !=''">
+			userID=#{userID}
+		</if>
+		<if test="userName !=null and userName !=''">
+			userName=#{userName}
+		</if>
+
+	</update>
+</mapper>

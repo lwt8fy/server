@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++ action +++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+ <bean id="appDjAction" class="net.jeeshop.web.action.front.appDj.AppDjAction" scope="prototype">
+	 <property name="server" ref="appUserService"></property>
+	 <property name="appUserService" ref="appUserService"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+		<property name="myCommonDao" ref="myCommonDao"></property>
+		<property name="areaService" ref="areaServiceManage"></property>
+   </bean>
+ <bean id="appJyyAction" class="net.jeeshop.web.action.front.appJyy.AppJyyAction" scope="prototype">
+	 <property name="server" ref="appJyyService"></property>
+	 <property name="appJyyService" ref="appJyyService"></property>
+	 <property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+   </bean>
+ <bean id="appJdyAction" class="net.jeeshop.web.action.front.appJdy.AppJdyAction" scope="prototype">
+	 <property name="server" ref="appJdyService"></property>
+	 <property name="appJdyService" ref="appJdyService"></property>
+	 <property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+   </bean>
+    <bean id="appFyyAction" class="net.jeeshop.web.action.front.appFyy.AppFyyAction" scope="prototype">
+	 <property name="server" ref="appFyyService"></property>
+	 <property name="appFyyService" ref="appFyyService"></property>
+	 <property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+   </bean>
+
+
+<!--生猪交易app订单管理 -->
+	<bean id="appTuiGuangAction" class="net.jeeshop.web.action.front.tuiGuang.AppTuiGuangAction" scope="prototype">
+		<property name="server" ref="tuiGuangServiceManage"></property>
+		<property name="tuiGuangService" ref="tuiGuangServiceManage"></property>
+		<property name="appUserService" ref="appUserService"></property> 
+		<property name="myCommonDao" ref="myCommonDao"></property>
+	</bean>
+	<bean id="appOrderAction" class="net.jeeshop.web.action.front.appOrder.AppOrderAction" scope="prototype">
+		<property name="server" ref="appOrderService"></property>
+		<property name="appOrderService" ref="appOrderService"></property>
+		<property name="appUserService" ref="appUserService"></property> 
+		<property name="orderpayService" ref="orderpayServiceFront"></property> 
+		<property name="appPictureService" ref="appPictureService"></property>
+		<property name="appSdOrderService" ref="appSdOrderService"></property>
+		<property name="appPigFarmService" ref="appPigFarmService"></property>
+		<property name="appBrokerService" ref="appBrokerService"></property>
+		<property name="appSlaughterService" ref="appSlaughterService"></property>
+		<property name="appVehicleCompanyService" ref="appVehicleCompanyService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="myCommonDao" ref="myCommonDao"></property>
+		
+	</bean>
+	<!--生猪交易车辆管理 -->
+	<bean id="appVehicleAction" class="net.jeeshop.web.action.front.appVehicle.AppVehicleAction" scope="prototype">
+		<property name="server" ref="appVehicleService"></property>
+		<property name="appVehicleService" ref="appVehicleService"></property>
+		<property name="appVehicleCompanyService" ref="appVehicleCompanyService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="orderpayService" ref="orderpayServiceFront"></property>
+		<property name="orderlogService" ref="orderlogServiceFront"></property>
+		<property name="appPictureService" ref="appPictureService"></property>
+	</bean>
+	
+	<!--生猪交易车辆所属公司管理 -->
+	<bean id="appVehicleCompanyAction" class="net.jeeshop.web.action.front.appVehicleCompany.AppVehicleCompanyAction" scope="prototype">
+		<property name="server" ref="appVehicleCompanyService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="appPictureService" ref="appPictureService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+	</bean>
+	
+		<!--生猪交易车辆订单管理 
+	<bean id="appVehicleOrderAction" class="net.jeeshop.web.action.front.appVehicleOrder.AppVehicleOrderAction" scope="prototype">
+		<property name="server" ref="appVehicleOrderService"></property>
+		<property name="appVehicleOrderService" ref="appVehicleOrderService"></property>
+		<property name="appVehicleService" ref="appVehicleService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="orderpayService" ref="orderpayServiceFront"></property>
+		<property name="orderlogService" ref="orderlogServiceFront"></property>
+	</bean>-->
+	
+	<!--生猪交易app用户管理 -->
+	<bean id="appUserAction" class="net.jeeshop.web.action.front.appUser.AppUserAction" scope="prototype">
+	<property name="server" ref="appUserService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="appOrderService" ref="appOrderService"></property>
+		<property name="myCommonDao" ref="myCommonDao"></property>
+		<property name="tuiGuangService" ref="tuiGuangServiceManage"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="scrollPicService" ref="scrollPicService"></property>
+		<property name="signInService" ref="signInService"></property>
+		<property name="areaService" ref="areaServiceManage"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+	</bean>
+	<!--生猪交易app版本管理 -->
+	<bean id="appVersionsAction" class="net.jeeshop.web.action.front.appVersions.AppVersionsAction" scope="prototype">
+	<property name="server" ref="appVersionsService"></property>
+		<property name="appVersionsService" ref="appVersionsService"></property>
+	</bean>
+	<!--生猪交易app猪场管理 -->
+	<bean id="appPigFarmAction" class="net.jeeshop.web.action.front.AppPigFarm.AppPigFarmAction" scope="prototype">
+	<property name="server" ref="appPigFarmService"></property>
+		<property name="appPigFarmService" ref="appPigFarmService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+		
+	</bean>
+	
+	<!--生猪交易app经纪人管理 -->
+	<bean id="appBrokerAction" class="net.jeeshop.web.action.front.appBroker.AppBrokerAction" scope="prototype">
+	<property name="server" ref="appBrokerService"></property>
+		<property name="appBrokerService" ref="appBrokerService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+	</bean>
+	<!--生猪交易app屠宰场管理 -->
+	<bean id="appSlaughterAction" class="net.jeeshop.web.action.front.appSlaughter.AppSlaughterAction" scope="prototype">
+	<property name="server" ref="appSlaughterService"></property>
+		<property name="appSlaughterService" ref="appSlaughterService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitServiceManage"></property>
+		<property name="connectUserService" ref="connectUserService"></property>
+	</bean>
+	<!--位置信息记录 -->
+	 <bean id="appLocationAction" class="net.jeeshop.web.action.front.appLocation.AppLocationAction" scope="prototype">
+	 <property name="server" ref="appLocationService"></property>
+	 <property name="appLocationService" ref="appLocationService"></property>
+	 <property name="appUserService" ref="appUserService"></property>
+   </bean>
+
+ <bean id="appNaturalAction" class="net.jeeshop.web.action.front.appNatural.AppNaturalAction" scope="prototype">
+	 <property name="server" ref="appNaturalService"></property>
+	 <property name="appNaturalService" ref="appNaturalService"></property>
+	 <property name="appUserService" ref="appUserService"></property> 
+	 <property name="profitService" ref="profitServiceManage"></property>
+	 <property name="connectUserService" ref="connectUserService"></property>
+   </bean>
+ <!-- 报价管理 -->
+	 <bean id="appQuoteAction" class="net.jeeshop.web.action.front.quote.AppQuoteAction" scope="prototype">
+	 <property name="server" ref="quoteService"></property>
+	 <property name="quoteService" ref="quoteService"></property>
+	  <property name="appUserService" ref="appUserService"></property> 
+   </bean>
+ <!-- 收益记录管理 -->
+	 <bean id="appProfitAction" class="net.jeeshop.web.action.front.profit.AppProfitAction" scope="prototype">
+	 <property name="server" ref="profitServiceManage"></property>
+	 <property name="profitService" ref="profitServiceManage"></property>
+	  <property name="appUserService" ref="appUserService"></property> 
+   </bean>
+
+
+<!-- 后台管理-->
+
+<!--生猪交易app猪场管理  神州牧易平台 --> 
+	<bean id="appPigFarmActionManage" class="net.jeeshop.web.action.manage.appPigFarm.AppPigFarmAction" scope="prototype">
+	<property name="server" ref="appPigFarmService"></property>
+		<property name="appPigFarmService" ref="appPigFarmService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitService"></property>
+	</bean>
+	<!-- 生猪交易app经纪人管理  神州牧易平台 -->
+	  <bean id="appBrokerActionManage" class="net.jeeshop.web.action.manage.appBroker.AppBrokerAction" scope="prototype">
+	    <property name="server" ref="appBrokerService"></property>
+	    <property name="appBrokerService" ref="appBrokerService"></property>
+	    <property name="appUserService" ref="appUserService"></property>
+	    <property name="profitService" ref="profitService"></property>
+	</bean>
+	<!--  -->
+	<bean id="appNaturalActionManage" class="net.jeeshop.web.action.manage.appNatural.AppNaturalAction" scope="prototype">
+	    <property name="server" ref="appNaturalService"></property>
+	    <property name="appNaturalService" ref="appNaturalService"></property>
+	    <property name="appUserService" ref="appUserService"></property>
+	    <property name="profitService" ref="profitService"></property>
+	    </bean>
+	<!-- 生猪交易app屠宰场管理  神州牧易平台 -->
+	  <bean id="appSlaughterActionManage" class="net.jeeshop.web.action.manage.appSlaughter.AppSlaughterAction" scope="prototype">
+	    <property name="server" ref="appSlaughterService"></property>
+	    <property name="appSlaughterService" ref="appSlaughterService"></property>
+	    <property name="appUserService" ref="appUserService"></property>
+	    <property name="profitService" ref="profitService"></property>
+	</bean>
+	<!--app物流企业管理 -->
+	<bean id="appVehicleCompanyActionManage" class="net.jeeshop.web.action.manage.appVehicleCompany.AppVehicleCompanyAction" scope="prototype">
+	<property name="server" ref="appVehicleCompanyService"></property>
+		<property name="appVehicleCompanyService" ref="appVehicleCompanyService"></property>
+		<property name="appUserService" ref="appUserService"></property>
+		<property name="profitService" ref="profitService"></property>
+	</bean>
+
+
+
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++service/dao+++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	<!--生猪交易app订单管理 -->
+	<bean id="appOrderDao" class="net.jeeshop.services.front.appOrder.dao.AppOrderDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appOrderService" class="net.jeeshop.services.front.appOrder.service.AppOrderServiceImpl">
+		<property name="dao" ref="appOrderDao"></property>
+		<property name="appOrderDao" ref="appOrderDao"></property>
+	</bean>
+	<!--生猪交易app用户管理 -->
+	<bean id="appUserDao" class="net.jeeshop.services.front.appUser.dao.AppUserDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appUserService" class="net.jeeshop.services.front.appUser.service.AppUserServiceImpl">
+		<property name="dao" ref="appUserDao"></property>
+		<property name="appUserDao" ref="appUserDao"></property>
+	</bean>
+	<!--生猪交易app图片管理 -->
+	<bean id="appPictureDao" class="net.jeeshop.services.front.appPicture.dao.AppPictureDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appPictureService" class="net.jeeshop.services.front.appPicture.service.AppPictureServiceImpl">
+		<property name="dao" ref="appPictureDao"></property>
+		<property name="appPictureDao" ref="appPictureDao"></property>
+	</bean>
+	
+	<!--生猪交物流车辆管理 -->
+	<bean id="appVehicleDao" class="net.jeeshop.services.front.appVehicle.dao.AppVehicleDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appVehicleService" class="net.jeeshop.services.front.appVehicle.service.AppVehicleServiceImpl">
+		<property name="dao" ref="appVehicleDao"></property>
+		<property name="appVehicleDao" ref="appVehicleDao"></property>
+	</bean>
+	
+		<!--生猪交物流车辆所属公司管理 -->
+	<bean id="appVehicleCompanyDao" class="net.jeeshop.services.front.appVehicleCompany.dao.AppVehicleCompanyDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appVehicleCompanyService" class="net.jeeshop.services.front.appVehicleCompany.service.AppVehicleCompanyServiceImpl">
+		<property name="dao" ref="appVehicleCompanyDao"></property>
+		<property name="appVehicleCompanyDao" ref="appVehicleCompanyDao"></property>
+	</bean>
+	
+	
+		<!--生猪交物流车辆订单管理 
+	<bean id="appVehicleOrderDao" class="net.jeeshop.services.front.appVehicleOrder.dao.AppVehicleOrderDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appVehicleOrderService" class="net.jeeshop.services.front.appVehicleOrder.service.AppVehicleOrderServiceImpl">
+		<property name="dao" ref="appVehicleOrderDao"></property>
+	</bean>-->
+	
+	<!--生猪交易版本管理 -->
+	<bean id="appVersionsDao" class="net.jeeshop.services.front.appVersions.dao.AppVersionsDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appVersionsService" class="net.jeeshop.services.front.appVersions.service.AppVersionsServiceImpl">
+		<property name="dao" ref="appVersionsDao"></property>
+		<property name="appVersionsDao" ref="appVersionsDao"></property>
+	</bean>
+	<!--生猪交易猪场管理 -->
+	<bean id="appPigFarmDao" class="net.jeeshop.services.front.appPigFarm.dao.AppPigFarmDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appPigFarmService" class="net.jeeshop.services.front.appPigFarm.service.AppPigFarmServiceImpl">
+		<property name="dao" ref="appPigFarmDao"></property>
+		<property name="appPigFarmDao" ref="appPigFarmDao"></property>
+	</bean>
+	<!--生猪交易经纪人管理 -->
+	<bean id="appBrokerDao" class="net.jeeshop.services.front.appBroker.dao.AppBrokerDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appBrokerService" class="net.jeeshop.services.front.appBroker.service.AppBrokerServiceImpl">
+		<property name="dao" ref="appBrokerDao"></property>
+		<property name="appBrokerDao" ref="appBrokerDao"></property>
+	</bean>
+	<!--生猪交易屠宰场管理 -->
+	<bean id="appSlaughterDao" class="net.jeeshop.services.front.appSlaughter.dao.AppSlaughterDaoImpl">
+		<property name="dao" ref="baseDao"></property>
+	</bean>
+	<bean id="appSlaughterService" class="net.jeeshop.services.front.appSlaughter.service.AppSlaughterServiceImpl">
+		<property name="dao" ref="appSlaughterDao"></property>
+		<property name="appSlaughterDao" ref="appSlaughterDao"></property>
+	</bean>
+	<!-- 刷单管理 -->
+	 <bean id="appSdOrderDao" class="net.jeeshop.services.front.appSdOrder.dao.AppSdOrderDaoImpl">
+	 <property name="dao" ref="baseDao"></property>
+   </bean>
+ <bean id="appSdOrderService" class="net.jeeshop.services.front.appSdOrder.service.AppSdOrderServiceImpl">
+	 <property name="dao" ref="appSdOrderDao"></property>
+	 <property name="appSdOrderDao" ref="appSdOrderDao"></property>
+   </bean>
+   <!--生猪位置信息 -->
+    <bean id="appLocationDao" class="net.jeeshop.services.front.appLocation.dao.AppLocationDaoImpl">
+	 <property name="dao" ref="baseDao"></property>
+   </bean>
+ <bean id="appLocationService" class="net.jeeshop.services.front.appLocation.service.AppLocationServiceImpl">
+	 <property name="dao" ref="appLocationDao"></property>
+	 <property name="appLocationDao" ref="appLocationDao"></property>
+   </bean>
+    <bean id="appNaturalDao" class="net.jeeshop.services.front.appNatural.dao.AppNaturalDaoImpl">
+	 <property name="dao" ref="baseDao"></property>
+   </bean>
+ <bean id="appNaturalService" class="net.jeeshop.services.front.appNatural.service.AppNaturalServiceImpl">
+	 <property name="dao" ref="appNaturalDao"></property>
+	 <property name="appNaturalDao" ref="appNaturalDao"></property>
+   </bean>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++service/dao+++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- 聊天数据库管理 
+	<bean id="chatCon" class="net.jeeshop.chat.database.DBCon">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	-->
+	 <bean id="appFyyDao" class="net.jeeshop.services.front.appFyy.dao.AppFyyDaoImpl">
+	 <property name="dao" ref="baseDao"></property>
+   </bean>
+ <bean id="appFyyService" class="net.jeeshop.services.front.appFyy.service.AppFyyServiceImpl">
+	 <property name="dao" ref="appFyyDao"></property>
+	 <property name="appFyyDao" ref="appFyyDao"></property>
+   </bean>
+    <bean id="appJdyDao" class="net.jeeshop.services.front.appJdy.dao.AppJdyDaoImpl">
+	 <property name="dao" ref="baseDao"></property>
+   </bean>
+ <bean id="appJdyService" class="net.jeeshop.services.front.appJdy.service.AppJdyServiceImpl">
+	 <property name="dao" ref="appJdyDao"></property>
+	 <property name="appJdyDao" ref="appJdyDao"></property>
+   </bean>
+    <bean id="appJyyDao" class="net.jeeshop.services.front.appJyy.dao.AppJyyDaoImpl">
+	 <property name="dao" ref="baseDao"></property>
+   </bean>
+ <bean id="appJyyService" class="net.jeeshop.services.front.appJyy.service.AppJyyServiceImpl">
+	 <property name="dao" ref="appJyyDao"></property>
+	 <property name="appJyyDao" ref="appJyyDao"></property>
+   </bean>
+	
+</beans>
